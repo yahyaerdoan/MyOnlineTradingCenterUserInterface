@@ -22,19 +22,19 @@ const routes: Routes = [
       {
         path: "orders", loadChildren: () => import("./admin-interface/components/orders/orders.module")
           .then(module => module.OrdersModule)
-      },
-      {
-        path: "", component: HomesComponent
-      },
-      {
-        path: "products", loadChildren: () => import("./user-interface/components/products/products.module")
-        .then(module => module.ProductsModule)
-      },
-      {
-        path: "baskets", loadChildren: () => import("./user-interface/components/baskets/baskets.module")
-        .then(module => module.BasketsModule)
       }
     ]
+  },
+  {
+    path: "", component: HomesComponent
+  },
+  {
+    path: "products", loadChildren: () => import("./user-interface/components/products/products.module")
+      .then(module => module.ProductsModule)
+  },
+  {
+    path: "baskets", loadChildren: () => import("./user-interface/components/baskets/baskets.module")
+      .then(module => module.BasketsModule)
   }
 ];
 
