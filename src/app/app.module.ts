@@ -14,7 +14,7 @@ import { AdminInterfaceModule } from './admin-interface/admin-interface.module';
     BrowserModule,
     AppRoutingModule,   
     UserInterfaceModule,
-   AdminInterfaceModule
+    AdminInterfaceModule
   ],
   providers: [],
   bootstrap: [AppComponent]
