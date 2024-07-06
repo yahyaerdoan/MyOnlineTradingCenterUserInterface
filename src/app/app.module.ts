@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { UserInterfaceModule } from './user-interface/user-interface.module';
 import { AdminInterfaceModule } from './admin-interface/admin-interface.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     AdminInterfaceModule,
     BrowserAnimationsModule
   ],
-  providers: [],
+  providers: [
+    provideAnimationsAsync()
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
