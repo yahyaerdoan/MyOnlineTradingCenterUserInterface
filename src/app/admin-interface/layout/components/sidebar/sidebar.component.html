@@ -1,7 +1,22 @@
-<ul>
-    <li><a routerLink="/admin-interface">Dashboards</a></li>
-    <li><a routerLink="">Go to Website</a></li>
-    <li><a routerLink="customers">Customers</a></li>
-    <li><a routerLink="products">Products</a></li>
-    <li><a routerLink="orders">Orders</a></li>
-</ul>
+<mat-nav-list class="mat-nav-list">
+  <a mat-list-item routerLink="">
+    <mat-icon class="mat-list-icon">home</mat-icon>
+    <span class="mat-list-text">Home</span>
+  </a>
+  <a mat-list-item routerLink="/admin-interface">
+    <mat-icon class="mat-list-icon">dashboard</mat-icon>
+    <span class="mat-list-text">Dashboards</span>
+  </a>
+  <a mat-list-item routerLink="customers">
+    <mat-icon class="mat-list-icon">people</mat-icon>
+    <span class="mat-list-text">Customers</span>
+  </a>
+  <a mat-list-item routerLink="products">
+    <mat-icon class="mat-list-icon">storefront</mat-icon>
+    <span class="mat-list-text">Products</span>
+  </a>
+  <a mat-list-item routerLink="orders">
+    <mat-icon class="mat-list-icon">shopping_cart</mat-icon>
+    <span class="mat-list-text">Orders</span>
+  </a>
+</mat-nav-list>

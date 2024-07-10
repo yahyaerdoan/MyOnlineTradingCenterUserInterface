@@ -4,6 +4,14 @@ import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { RouterModule } from '@angular/router';
+import { MatListModule } from '@angular/material/list';
+import { MatIconModule } from '@angular/material/icon';
+import { MatToolbarModule } from '@angular/material/toolbar';
+
+
+
+
+
 
 
 
@@ -15,11 +23,15 @@ import { RouterModule } from '@angular/router';
   ],
   imports: [
     CommonModule,
-    RouterModule
+    RouterModule,
+    MatListModule,
+    MatIconModule,
+    MatToolbarModule
   ],
   exports:[
     HeaderComponent, 
     FooterComponent, 
-    SidebarComponent]
+    SidebarComponent,
+    ]
 })
 export class ComponentsModule { }

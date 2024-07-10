@@ -1,0 +1,18 @@
+.admin-container {
+  margin-top: 64px; /* header yüksekliği */
+  margin-bottom: 64px; /* footer yüksekliği */
+  height: calc(100vh - 128px); /* 64px header + 64px footer */
+}
+
+.mat-drawer-container {
+  height: calc(100vh - 128px); /* 64px header + 64px footer */
+}
+
+.mat-drawer-content {
+  padding: 20px;
+}
+
+.main-content {
+  padding: 20px;
+}
+
