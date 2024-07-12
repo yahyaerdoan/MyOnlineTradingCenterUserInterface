@@ -7,6 +7,9 @@ import { UserInterfaceModule } from './user-interface/user-interface.module';
 import { AdminInterfaceModule } from './admin-interface/admin-interface.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import { MatCardModule } from '@angular/material/card';
+import { MatGridListModule } from '@angular/material/grid-list';
+import { MatButtonModule } from '@angular/material/button';
 
 @NgModule({
   declarations: [
@@ -17,7 +20,10 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
     AppRoutingModule,   
     UserInterfaceModule,
     AdminInterfaceModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    MatCardModule,
+    MatGridListModule,
+    MatButtonModule,
   ],
   providers: [
     provideAnimationsAsync()

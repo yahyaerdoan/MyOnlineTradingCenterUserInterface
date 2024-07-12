@@ -5,6 +5,9 @@ import { ComponentsModule } from './components/components.module';
 import { RouterModule } from '@angular/router';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+
 
 
 
@@ -17,7 +20,10 @@ import { MatToolbarModule } from '@angular/material/toolbar';
     ComponentsModule,
     RouterModule,
     MatSidenavModule,
-    MatToolbarModule
+    MatToolbarModule,
+    MatButtonModule,
+    MatIconModule,
+
         
   ],
   exports:[LayoutComponent]
