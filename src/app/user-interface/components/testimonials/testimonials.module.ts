@@ -10,6 +10,7 @@ import { TestimonialsComponent } from './testimonials.component';
   ],
   imports: [
     CommonModule
-  ]
+  ],
+  exports:[TestimonialsComponent]
 })
 export class TestimonialsModule { }

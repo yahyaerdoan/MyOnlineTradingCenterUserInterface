@@ -10,7 +10,7 @@ import { HomesModule } from './components/homes/homes.module';
   imports: [
     CommonModule,
     ComponentsModule,
-    HomesModule
+   /*  HomesModule */
   ]
 })
 export class UserInterfaceModule { }

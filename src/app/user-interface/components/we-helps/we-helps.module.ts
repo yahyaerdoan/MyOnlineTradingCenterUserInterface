@@ -10,6 +10,7 @@ import { WeHelpsComponent } from './we-helps.component';
   ],
   imports: [
     CommonModule
-  ]
+  ],
+  exports:[WeHelpsComponent]
 })
 export class WeHelpsModule { }

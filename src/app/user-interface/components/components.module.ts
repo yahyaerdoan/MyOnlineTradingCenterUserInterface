@@ -10,6 +10,7 @@ import { PopularsModule } from './populars/populars.module';
 import { TestimonialsModule } from './testimonials/testimonials.module';
 import { WeHelpsModule } from './we-helps/we-helps.module';
 import { WhyChoosesModule } from './why-chooses/why-chooses.module';
+import { HomesModule } from './homes/homes.module';
 
 
 
@@ -26,10 +27,13 @@ import { WhyChoosesModule } from './why-chooses/why-chooses.module';
     ProductsModule,
     TestimonialsModule,
     WeHelpsModule,
-    WhyChoosesModule
+    WhyChoosesModule,
+    HomesModule
   ],
-  exports: [
-    HeadersModule
-  ]
+  /* buraya bak neden bu eklendi veya eklenmedi */
+/*   exports: [
+    HeadersModule,
+    HerosModule,
+  ] */
 })
 export class ComponentsModule { }

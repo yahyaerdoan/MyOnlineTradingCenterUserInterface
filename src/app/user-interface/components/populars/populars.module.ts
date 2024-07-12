@@ -10,6 +10,7 @@ import { PopularsComponent } from './populars.component';
   ],
   imports: [
     CommonModule
-  ]
+  ],
+  exports:[PopularsComponent]
 })
 export class PopularsModule { }

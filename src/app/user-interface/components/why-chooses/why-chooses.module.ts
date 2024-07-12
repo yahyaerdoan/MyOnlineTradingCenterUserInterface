@@ -10,6 +10,7 @@ import { WhyChoosesComponent } from './why-chooses.component';
   ],
   imports: [
     CommonModule
-  ]
+  ],
+  exports:[WhyChoosesComponent]
 })
 export class WhyChoosesModule { }

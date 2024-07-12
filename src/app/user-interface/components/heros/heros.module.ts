@@ -10,6 +10,7 @@ import { HerosComponent } from './heros.component';
   ],
   imports: [
     CommonModule
-  ]
+  ],
+ exports: [HerosComponent]
 })
 export class HerosModule { }
