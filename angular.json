@@ -51,7 +51,9 @@
               "src/assets/meterial_admin/assets/vendors/css/vendor.bundle.base.css",
               "src/assets/meterial_admin/assets/vendors/flag-icon-css/css/flag-icon.min.css",
               "src/assets/meterial_admin/assets/vendors/jvectormap/jquery-jvectormap.css",
-              "src/assets/meterial_admin/assets/css/demo/style.css"
+              "src/assets/meterial_admin/assets/css/demo/style.css",
+              
+              "node_modules/ngx-toastr/toastr.css"
             ],
             "scripts": [
                "node_modules/bootstrap/dist/js/bootstrap.min.js",
