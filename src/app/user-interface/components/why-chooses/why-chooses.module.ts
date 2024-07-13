@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { WhyChoosesComponent } from './why-chooses.component';
+import { RouterModule } from '@angular/router';
 
 
 
@@ -9,7 +10,12 @@ import { WhyChoosesComponent } from './why-chooses.component';
     WhyChoosesComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    RouterModule.forChild([
+      {path: "", component: WhyChoosesComponent
+        
+      }
+    ])
   ],
   exports:[WhyChoosesComponent]
 })

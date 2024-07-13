@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { WeHelpsComponent } from './we-helps.component';
+import { RouterModule } from '@angular/router';
 
 
 
@@ -9,7 +10,10 @@ import { WeHelpsComponent } from './we-helps.component';
     WeHelpsComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    RouterModule.forChild([
+      {path: "", component: WeHelpsComponent}
+    ])
   ],
   exports:[WeHelpsComponent]
 })

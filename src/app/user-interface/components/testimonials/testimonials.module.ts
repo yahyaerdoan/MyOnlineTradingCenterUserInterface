@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TestimonialsComponent } from './testimonials.component';
+import { RouterModule } from '@angular/router';
 
 
 
@@ -9,7 +10,10 @@ import { TestimonialsComponent } from './testimonials.component';
     TestimonialsComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    RouterModule.forChild([
+      {path: "", component: TestimonialsComponent}
+    ])
   ],
   exports:[TestimonialsComponent]
 })
