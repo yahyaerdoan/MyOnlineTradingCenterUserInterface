@@ -11,10 +11,13 @@ import { MatCardModule } from '@angular/material/card';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatButtonModule } from '@angular/material/button';
 import { ToastrModule } from 'ngx-toastr';
+import { NgxSpinnerModule } from "ngx-spinner";
+import { BasesComponent } from './bases/bases.component';
+
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,    
   ],
   imports: [
     BrowserModule,
@@ -26,6 +29,7 @@ import { ToastrModule } from 'ngx-toastr';
     MatGridListModule,
     MatButtonModule,
     ToastrModule.forRoot(),
+    NgxSpinnerModule,
   ],
   providers: [
     provideAnimationsAsync()
