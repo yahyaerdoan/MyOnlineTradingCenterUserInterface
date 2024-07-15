@@ -1,0 +1,54 @@
+<div class="mdc-layout-grid">
+  <div class="mdc-layout-grid__inner">
+    <div class="mdc-layout-grid__cell--span-12">
+      <div class="mdc-card">
+        <h6 class="card-title">Create New Product</h6>
+        <div class="template-demo">
+          <div class="mdc-layout-grid__inner">
+
+            <div class="mdc-layout-grid__cell stretch-card mdc-layout-grid__cell--span-6-desktop">
+              <mat-form-field appearance="outline" style="width: 100%;">
+                <mat-label>Product ID</mat-label>
+                <input matInput id="product-id" style="height: 1.5em; padding: 0.25em 0.5em; font-size: 0.875em;">
+              </mat-form-field>
+            </div>      
+
+            <div class="mdc-layout-grid__cell stretch-card mdc-layout-grid__cell--span-6-desktop">
+              <mat-form-field appearance="outline" style="width: 100%;">
+                <mat-label>Product Name</mat-label>
+                <input matInput id="product-name" style="height: 1.5em; padding: 0.25em 0.5em; font-size: 0.875em;">
+              </mat-form-field>
+            </div>
+
+            <div class="mdc-layout-grid__cell stretch-card mdc-layout-grid__cell--span-12-desktop">
+              <mat-form-field appearance="outline" style="width: 100%;">
+                <mat-label>Product Description</mat-label>
+                <textarea matInput id="product-description" rows="3" style="height: 3em; padding: 0.25em 0.5em; font-size: 0.875em;"></textarea>
+              </mat-form-field>
+            </div>
+
+            <div class="mdc-layout-grid__cell stretch-card mdc-layout-grid__cell--span-6-desktop">
+              <mat-form-field appearance="outline" style="width: 100%;">
+                <mat-label>Stock</mat-label>
+                <input matInput type="number" min="0" value="0" id="product-stock" style="height: 1.5em; padding: 0.25em 0.5em; font-size: 0.875em;">
+              </mat-form-field>
+            </div>
+
+            <div class="mdc-layout-grid__cell stretch-card mdc-layout-grid__cell--span-6-desktop">
+              <mat-form-field appearance="outline" style="width: 100%;">
+                <mat-label>Price</mat-label>
+                <input matInput type="number"  min="0" value="0" id="product-price" style="height: 1.5em; padding: 0.25em 0.5em; font-size: 0.875em;">
+              </mat-form-field>
+            </div>
+
+            <div class="mdc-layout-grid__cell stretch-card mdc-layout-grid__cell--span-12-desktop" style="text-align: right;">
+              <button mat-raised-button color="primary" style="margin-right: 10px;">Create Product</button>
+              <button mat-raised-button color="accent">Update Product</button>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
