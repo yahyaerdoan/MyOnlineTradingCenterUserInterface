@@ -1,5 +1,4 @@
-export class Product {
-    Id: string = '';
+export class CreateProduct {
     Name: string = '';
     Description: string = '';
     Stock: number = 0;
