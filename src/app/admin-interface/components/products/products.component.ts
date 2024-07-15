@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { BasesComponent, SpinnerType } from '../../../bases/bases.component';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { HttpClientService } from '../../../services/common/http-client.service';
+import { Product } from '../../../contracts/product';
 
 @Component({
   selector: 'app-products',
@@ -16,7 +17,7 @@ export class ProductsComponent extends BasesComponent implements OnInit {
 
   ngOnInit(): void {
     this.showSpinner(SpinnerType.BallScaleMultiple)
-    this.httpClientService.get({
+    this.httpClientService.get<Product[]>({
       controller: "products"
     }).subscribe(data => console.log(data));
 
@@ -39,8 +40,13 @@ export class ProductsComponent extends BasesComponent implements OnInit {
       Price: "45",
     }).subscribe(); */
 
-    this.httpClientService.delete({
+  /*   this.httpClientService.delete({
       controller: "products"
-    }, "5d1c37e4-aeb8-474f-be9f-af74600c0bf9").subscribe();
+    }, "5d1c37e4-aeb8-474f-be9f-af74600c0bf9").subscribe(); */
+
+    this.httpClientService.get({
+      fullEndPoint: "https://jsonplaceholder.typicode.com/posts"
+
+    }).subscribe(data => console.log(data) )
   }
 }
