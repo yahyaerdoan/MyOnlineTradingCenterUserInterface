@@ -41,15 +41,7 @@ export class CreateProductComponent extends BasesComponent implements OnInit {
           position: Position.TopRight
         });
         this.router.navigate(['/admin-interface/products']);
-      },
-      (errorMessage: string) => {
-        this.hideSpinner(SpinnerType.BallScaleMultiple);
-        this.alertify.message(errorMessage, {
-          dismissOthers: true,
-          messageType: MessageType.Error,
-          position: Position.TopRight
-        });
-      }
+      }      
     );
   }
 }

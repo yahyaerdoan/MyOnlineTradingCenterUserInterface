@@ -4,4 +4,3 @@ export class CreateProduct {
     Stock: number = 0;
     Price: number = 0;
 }
-

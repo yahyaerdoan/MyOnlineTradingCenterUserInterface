@@ -12,6 +12,10 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { ProductsRoutingModule } from './products-routing.module';
 import { ListProductComponent } from './list-product/list-product.component';
 
+import {AfterViewInit, Component, ViewChild} from '@angular/core';
+import {MatPaginator, MatPaginatorModule} from '@angular/material/paginator';
+import {MatTableDataSource, MatTableModule} from '@angular/material/table';
+
 
 
 @NgModule({
@@ -31,6 +35,8 @@ import { ListProductComponent } from './list-product/list-product.component';
     MatInputModule,
     MatFormFieldModule,
     ProductsRoutingModule,
+    MatPaginator, MatPaginatorModule,
+    MatTableModule
   ]
 })
 export class ProductsModule { }
