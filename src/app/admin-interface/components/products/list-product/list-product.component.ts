@@ -29,8 +29,7 @@ export class ListProductComponent
     'createdDate',
     'updatedDate',
   ];
-  dataSource: MatTableDataSource<ListProduct> =
-    new MatTableDataSource<ListProduct>();
+  dataSource: MatTableDataSource<ListProduct> | null = null;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   constructor(
@@ -41,11 +40,11 @@ export class ListProductComponent
     super(spinner);
   }
 
+
   async ngOnInit() {
     this.showSpinner(SpinnerType.BallScaleMultiple);
-    await this.productService
-      .read(
-        () => this.hideSpinner(SpinnerType.BallScaleMultiple),
+    await this.productService.read(() => 
+      this.hideSpinner(SpinnerType.BallScaleMultiple),
         (errorMessage) =>
           this.alertifyService.message(errorMessage, {
             dismissOthers: true,
@@ -53,11 +52,13 @@ export class ListProductComponent
             position: Position.TopRight,
           })
       )
-      .then((data) => {
-        this.dataSource.data = data;
+      .then((data: ListProduct[] ) => {
+        this.dataSource = new MatTableDataSource<ListProduct>(data);
+       this.dataSource.paginator = this.paginator;
       });
   }
   ngAfterViewInit() {
+    if(this.dataSource)
     this.dataSource.paginator = this.paginator;
   }
 }
