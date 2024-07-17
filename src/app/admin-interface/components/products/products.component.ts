@@ -28,7 +28,7 @@ export class ProductsComponent extends BasesComponent implements OnInit {
        Description: "new pc",
        Stock: "23",
        Price: "45",
-     }).subscribe(); */
+     }).subscribe();
 
 /*     this.httpClientService.put({
       controller: "products"

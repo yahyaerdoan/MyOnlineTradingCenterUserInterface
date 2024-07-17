@@ -22,20 +22,34 @@ export class CreateProductComponent extends BasesComponent implements OnInit {
   }
   ngOnInit(): void {   
   } 
-  create(name:HTMLInputElement, description:HTMLTextAreaElement, stock:HTMLInputElement, price:HTMLInputElement){
+ 
+  create(name: HTMLInputElement, description: HTMLTextAreaElement, stock: HTMLInputElement, price: HTMLInputElement) {
     this.showSpinner(SpinnerType.BallScaleMultiple);
+
     const createProduct: CreateProduct = new CreateProduct();
     createProduct.Name = name.value;
     createProduct.Description = description.value;
-    createProduct.Stock = parseInt(stock.value);
-    createProduct.Price = parseFloat(price.value)
+    createProduct.Stock = parseInt(stock.value, 10);
+    createProduct.Price = parseFloat(price.value);
 
-    this.productService.create(createProduct,()=> this.hideSpinner(SpinnerType.BallScaleMultiple) );
-    this.alertify.message("Product created.",{
-      dismissOthers: true,
-      messageType: MessageType.Success,
-      position: Position.TopRight
-    });
-    this.router.navigate(['/admin-interface/products']);
-  };    
+    this.productService.create(createProduct, 
+      () => {
+        this.hideSpinner(SpinnerType.BallScaleMultiple);
+        this.alertify.message("Product created.", {
+          dismissOthers: true,
+          messageType: MessageType.Success,
+          position: Position.TopRight
+        });
+        this.router.navigate(['/admin-interface/products']);
+      },
+      (errorMessage: string) => {
+        this.hideSpinner(SpinnerType.BallScaleMultiple);
+        this.alertify.message(errorMessage, {
+          dismissOthers: true,
+          messageType: MessageType.Error,
+          position: Position.TopRight
+        });
+      }
+    );
+  }
 }
