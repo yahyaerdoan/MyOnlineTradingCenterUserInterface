@@ -10,13 +10,15 @@ import { CreateProductComponent } from './create-product/create-product.componen
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { ProductsRoutingModule } from './products-routing.module';
+import { ListProductComponent } from './list-product/list-product.component';
 
 
 
 @NgModule({
   declarations: [
     ProductsComponent,
-    CreateProductComponent
+    CreateProductComponent,
+    ListProductComponent
   ],
   imports: [
     CommonModule,
