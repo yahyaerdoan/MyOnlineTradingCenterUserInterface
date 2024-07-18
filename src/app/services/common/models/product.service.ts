@@ -6,42 +6,56 @@ import { ListProduct } from '../../../contracts/listproduct';
 import { firstValueFrom } from 'rxjs';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ProductService {
-
-  constructor(private httpClientService: HttpClientService) { }
-  create(product: CreateProduct, succesCallBack?: any,  errorCallBack?: (errorMessage?: string) => void ){
-    this.httpClientService.post({
-      controller: "products"
-    }, product).subscribe(result => {
-      succesCallBack();
-    }, (errorResponse: HttpErrorResponse) => {
-      const _error: Array<{key: string, value: Array<string>}> = errorResponse.error;
-      let message = "";
-      _error.forEach((values, index) => {
-        values.value.forEach((_value, _index) => {
-          message += `${_value}<br>`;
-        })
+  constructor(private httpClientService: HttpClientService) {}
+  async create(
+    product: CreateProduct,
+    successCallBack?: () => void,
+    errorCallBack?: (errorMessage?: string) => void
+  ): Promise<void> {
+    firstValueFrom(
+      this.httpClientService.post({ controller: 'products' }, product)
+    )
+      .then(() => {
+        if (successCallBack) {
+          successCallBack();
+        }
       })
-    });
+      .catch((errorResponse: HttpErrorResponse) => {
+        const _error: Array<{ key: string; value: Array<string> }> =
+          errorResponse.error;
+        let message = '';
+        _error.forEach((values) => {
+          values.value.forEach((_value) => {
+            message += `${_value}<br>`;
+          });
+        });
+        if (errorCallBack) {
+          errorCallBack(message);
+        }
+      });
   }
 
-  async read(successCallBack?: () => void, errorCallBack?: (errorMessage: string) => void): Promise<ListProduct[]> {
+  async read(
+    successCallBack?: () => void,
+    errorCallBack?: (errorMessage: string) => void
+  ): Promise<ListProduct[]> {
     const promisData: Promise<ListProduct[]> = firstValueFrom(
       this.httpClientService.get<ListProduct[]>({
-        controller: 'products'
+        controller: 'products',
       })
     );
-    
+
     promisData
-      .then(d => {
+      .then((data) => {
         if (successCallBack) successCallBack();
       })
       .catch((errorResponse: HttpErrorResponse) => {
         if (errorCallBack) errorCallBack(errorResponse.message);
       });
 
-    return promisData;
+    return await promisData;
   }
 }

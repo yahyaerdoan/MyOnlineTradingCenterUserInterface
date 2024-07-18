@@ -16,10 +16,7 @@ import { MatPaginator } from '@angular/material/paginator';
   templateUrl: './list-product.component.html',
   styleUrl: './list-product.component.scss',
 })
-export class ListProductComponent
-  extends BasesComponent
-  implements OnInit, AfterViewInit
-{
+export class ListProductComponent extends BasesComponent implements OnInit {
   displayedColumns: string[] = [
     'id',
     'name',
@@ -40,11 +37,15 @@ export class ListProductComponent
     super(spinner);
   }
 
-
   async ngOnInit() {
+    await this.getProducts();
+  }
+
+  async getProducts() {
     this.showSpinner(SpinnerType.BallScaleMultiple);
-    await this.productService.read(() => 
-      this.hideSpinner(SpinnerType.BallScaleMultiple),
+    await this.productService
+      .read(
+        () => this.hideSpinner(SpinnerType.BallScaleMultiple),
         (errorMessage) =>
           this.alertifyService.message(errorMessage, {
             dismissOthers: true,
@@ -52,13 +53,9 @@ export class ListProductComponent
             position: Position.TopRight,
           })
       )
-      .then((data: ListProduct[] ) => {
+      .then((data: ListProduct[]) => {
         this.dataSource = new MatTableDataSource<ListProduct>(data);
-       this.dataSource.paginator = this.paginator;
+        this.dataSource.paginator = this.paginator;
       });
-  }
-  ngAfterViewInit() {
-    if(this.dataSource)
-    this.dataSource.paginator = this.paginator;
   }
 }
