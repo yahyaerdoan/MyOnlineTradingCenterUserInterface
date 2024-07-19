@@ -10,6 +10,7 @@ import { firstValueFrom } from 'rxjs';
 })
 export class ProductService {
   constructor(private httpClientService: HttpClientService) {}
+
   async create(
     product: CreateProduct,
     successCallBack?: () => void,
@@ -39,12 +40,15 @@ export class ProductService {
   }
 
   async read(
+    page: number = 0, 
+    size: number = 5, 
     successCallBack?: () => void,
     errorCallBack?: (errorMessage: string) => void
-  ): Promise<ListProduct[]> {
-    const promisData: Promise<ListProduct[]> = firstValueFrom(
-      this.httpClientService.get<ListProduct[]>({
+  ): Promise<{totalDataCount: number; products: ListProduct[]}> {
+    const promisData: Promise<{totalDataCount: number; products: ListProduct[]}> = firstValueFrom(
+      this.httpClientService.get<{totalDataCount: number; products: ListProduct[]}>({
         controller: 'products',
+        queryString: `page=${page}&size${size}`
       })
     );
 

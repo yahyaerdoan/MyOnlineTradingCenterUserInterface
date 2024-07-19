@@ -36,6 +36,12 @@ export class ListProductComponent extends BasesComponent implements OnInit {
   ) {
     super(spinner);
   }
+ 
+  
+  async changePageAndData() {
+    await this.getProducts();
+    debugger;
+  }
 
   async ngOnInit() {
     await this.getProducts();
@@ -45,6 +51,8 @@ export class ListProductComponent extends BasesComponent implements OnInit {
     this.showSpinner(SpinnerType.BallScaleMultiple);
     await this.productService
       .read(
+        this.paginator ? this.paginator.pageIndex : 0,
+        this.paginator ? this.paginator.pageSize : 5,
         () => this.hideSpinner(SpinnerType.BallScaleMultiple),
         (errorMessage) =>
           this.alertifyService.message(errorMessage, {
@@ -53,9 +61,9 @@ export class ListProductComponent extends BasesComponent implements OnInit {
             position: Position.TopRight,
           })
       )
-      .then((data: ListProduct[]) => {
-        this.dataSource = new MatTableDataSource<ListProduct>(data);
-        this.dataSource.paginator = this.paginator;
+      .then((data: { totalDataCount: number; products: ListProduct[] }) => {
+        this.dataSource = new MatTableDataSource<ListProduct>(data.products);
+        this.paginator.length = data.totalDataCount;
       });
-  }
+  }  
 }
