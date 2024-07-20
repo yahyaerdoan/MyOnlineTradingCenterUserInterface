@@ -1,11 +1,22 @@
-import {Directive, ElementRef,  EventEmitter,  HostListener,  inject,  Input,  input,  OnInit,  Output,  Renderer2,} from '@angular/core';
+import {
+  Directive,
+  ElementRef,
+  EventEmitter,
+  HostListener,
+  Input,
+  OnInit,
+  Output,
+  Renderer2,
+} from '@angular/core';
 import { ProductService } from '../../services/common/models/product.service';
 import { SpinnerType } from '../../bases/bases.component';
 import { NgxSpinnerService } from 'ngx-spinner';
-import {MatDialog, MatDialogModule} from '@angular/material/dialog';
-import { DeleteDialogComponent, DeleteState } from '../../dialogs/delete-dialog/delete-dialog.component';
+import { MatDialog } from '@angular/material/dialog';
+import {
+  DeleteDialogComponent,
+  DeleteState,
+} from '../../dialogs/delete-dialog/delete-dialog.component';
 
-//declare var $: any;
 @Directive({
   selector: '[appDelete]',
 })
@@ -16,10 +27,10 @@ export class DeleteDirective implements OnInit {
     private productService: ProductService,
     private spinner: NgxSpinnerService,
     private dialog: MatDialog
-  ) { }
+  ) {}
 
   @Input() id!: string;
-  @Output() loadProductsBack: EventEmitter<void> = new EventEmitter<void>();  
+  @Output() loadProductsBack: EventEmitter<void> = new EventEmitter<void>();
 
   ngOnInit() {
     this.createButton();
@@ -72,16 +83,16 @@ export class DeleteDirective implements OnInit {
     this.renderer.addClass(matRipple, 'mat-mdc-button-ripple');
     this.renderer.appendChild(button, matRipple);
 
-   // this.renderer.listen(button, 'click', () => this.handleClick());
+    // this.renderer.listen(button, 'click', () => this.handleClick());
 
     this.renderer.appendChild(this.element.nativeElement, button);
   }
 
   @HostListener('click')
-async handleClick() { 
-  this.openDialog(async ()=>{
-    await  this.confirmAndDelete();
-  });  
+  async handleClick() {
+    this.openDialog(async () => {
+      await this.confirmAndDelete();
+    });
   }
 
   private async confirmAndDelete() {
@@ -93,7 +104,7 @@ async handleClick() {
       this.renderer.setStyle(tableRow, 'opacity', '0');
       setTimeout(() => {
         this.renderer.removeChild(tableRow.parentElement, tableRow);
-        this.loadProductsBack.emit(); 
+        this.loadProductsBack.emit();
       }, 1500);
     }
   }
@@ -104,13 +115,12 @@ async handleClick() {
 
   openDialog(afterClosed: any): void {
     const dialogRef = this.dialog.open(DeleteDialogComponent, {
-           panelClass: 'custom-dialog-container',
-      data: DeleteState.Yes
+      panelClass: 'custom-dialog-container',
+      data: DeleteState.Yes,
     });
 
-    dialogRef.afterClosed().subscribe(result => {
-      if (result === DeleteState.Yes)
-        afterClosed(); 
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result === DeleteState.Yes) afterClosed();
     });
   }
 }

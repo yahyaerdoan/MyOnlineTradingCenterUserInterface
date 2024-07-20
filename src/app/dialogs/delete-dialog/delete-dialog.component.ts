@@ -7,13 +7,11 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
   styleUrl: './delete-dialog.component.scss'
 })
 export class DeleteDialogComponent {
-  constructor(
-    @Inject(MAT_DIALOG_DATA) public any: {data: string}
-  ) { }
+  constructor(@Inject(MAT_DIALOG_DATA) public any: {data: string}) { }
 
   readonly dialogRef = inject(MatDialogRef<DeleteDialogComponent>);
   readonly data = inject<DeleteState>(MAT_DIALOG_DATA);
-
+  
   closeDialog(): void {
     this.dialogRef.close();
   }
