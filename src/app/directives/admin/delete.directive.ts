@@ -24,6 +24,7 @@ export class DeleteDirective implements OnInit {
   ngOnInit() {
     this.createButton();
   }
+
   createButton() {
     const button = this.renderer.createElement('button');
     this.renderer.setAttribute(button, 'mat-raised-button', '');
@@ -71,15 +72,13 @@ export class DeleteDirective implements OnInit {
     this.renderer.addClass(matRipple, 'mat-mdc-button-ripple');
     this.renderer.appendChild(button, matRipple);
 
-    this.renderer.listen(button, 'click', () => this.handleClick());
+   // this.renderer.listen(button, 'click', () => this.handleClick());
 
     this.renderer.appendChild(this.element.nativeElement, button);
   }
 
   @HostListener('click')
- handleClick() {
-  debugger;
-
+async handleClick() { 
   this.openDialog(async ()=>{
     await  this.confirmAndDelete();
   });  
@@ -90,7 +89,7 @@ export class DeleteDirective implements OnInit {
     await this.deleteProduct(this.id);
     const tableRow = this.element.nativeElement.closest('tr');
     if (tableRow) {
-      this.renderer.setStyle(tableRow, 'transition', 'opacity 1s');
+      this.renderer.setStyle(tableRow, 'transition', 'opacity 2s');
       this.renderer.setStyle(tableRow, 'opacity', '0');
       setTimeout(() => {
         this.renderer.removeChild(tableRow.parentElement, tableRow);
@@ -111,7 +110,7 @@ export class DeleteDirective implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       if (result === DeleteState.Yes)
-        afterClosed();      
+        afterClosed(); 
     });
   }
 }
