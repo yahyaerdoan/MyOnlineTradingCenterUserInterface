@@ -12,9 +12,11 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { ProductsRoutingModule } from './products-routing.module';
 import { ListProductComponent } from './list-product/list-product.component';
 
-import {AfterViewInit, Component, ViewChild} from '@angular/core';
 import {MatPaginator, MatPaginatorModule} from '@angular/material/paginator';
-import {MatTableDataSource, MatTableModule} from '@angular/material/table';
+import {MatTableModule} from '@angular/material/table';
+import { MatIconModule } from '@angular/material/icon';
+import { DeleteDirective } from '../../../directives/admin/delete.directive';
+
 
 
 
@@ -22,7 +24,9 @@ import {MatTableDataSource, MatTableModule} from '@angular/material/table';
   declarations: [
     ProductsComponent,
     CreateProductComponent,
-    ListProductComponent
+    ListProductComponent,
+    DeleteDirective,    
+
   ],
   imports: [
     CommonModule,
@@ -36,7 +40,8 @@ import {MatTableDataSource, MatTableModule} from '@angular/material/table';
     MatFormFieldModule,
     ProductsRoutingModule,
     MatPaginator, MatPaginatorModule,
-    MatTableModule
+    MatTableModule,
+    MatIconModule
   ]
 })
 export class ProductsModule { }

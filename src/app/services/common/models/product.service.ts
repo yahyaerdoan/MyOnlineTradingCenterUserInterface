@@ -62,4 +62,11 @@ export class ProductService {
 
     return await promisData;
   }
+
+ async delete(id: string){
+  const deleteProduct =this.httpClientService.delete({
+      controller: "products"
+    }, id)
+    await firstValueFrom(deleteProduct)
+  }
 }

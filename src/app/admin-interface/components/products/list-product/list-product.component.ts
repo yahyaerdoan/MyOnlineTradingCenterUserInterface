@@ -25,6 +25,7 @@ export class ListProductComponent extends BasesComponent implements OnInit {
     'price',
     'createdDate',
     'updatedDate',
+    'actions',
   ];
   dataSource: MatTableDataSource<ListProduct> | null = null;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -37,16 +38,13 @@ export class ListProductComponent extends BasesComponent implements OnInit {
     super(spinner);
   }
  
-  
+  async ngOnInit() {
+    await this.getProducts();
+  }
   async changePageAndData() {
     await this.getProducts();
     debugger;
   }
-
-  async ngOnInit() {
-    await this.getProducts();
-  }
-
   async getProducts() {
     this.showSpinner(SpinnerType.BallScaleMultiple);
     await this.productService
@@ -65,5 +63,9 @@ export class ListProductComponent extends BasesComponent implements OnInit {
         this.dataSource = new MatTableDataSource<ListProduct>(data.products);
         this.paginator.length = data.totalDataCount;
       });
-  }  
+  }
+
+  updateProduct(product: any) {
+    // Navigate to the update product page or open a dialog
+  }
 }

@@ -37,7 +37,7 @@ export class CreateProductComponent extends BasesComponent implements OnInit {
 
     this.showSpinner(SpinnerType.BallScaleMultiple);
 
-    this.productService.create(createProduct, () => {
+  await  this.productService.create(createProduct, () => {
       this.hideSpinner(SpinnerType.BallScaleMultiple);
       this.alertify.message('Product created.', {        
         dismissOthers: true,
