@@ -44,7 +44,7 @@ export class CreateProductComponent extends BasesComponent implements OnInit {
         messageType: MessageType.Success,
         position: Position.TopRight,
       });
-      this.router.navigate(['/admin-interface/products']);
+      //this.router.navigate(['/admin-interface/products']);
     });
 
     this.hideSpinner(SpinnerType.BallScaleMultiple);

@@ -1,9 +1,11 @@
-import {Directive, ElementRef,  EventEmitter,  HostListener,  Input,  input,  OnInit,  Output,  Renderer2,} from '@angular/core';
+import {Directive, ElementRef,  EventEmitter,  HostListener,  inject,  Input,  input,  OnInit,  Output,  Renderer2,} from '@angular/core';
 import { ProductService } from '../../services/common/models/product.service';
 import { SpinnerType } from '../../bases/bases.component';
 import { NgxSpinnerService } from 'ngx-spinner';
+import {MatDialog, MatDialogModule} from '@angular/material/dialog';
+import { DeleteDialogComponent, DeleteState } from '../../dialogs/delete-dialog/delete-dialog.component';
 
-declare var $: any;
+//declare var $: any;
 @Directive({
   selector: '[appDelete]',
 })
@@ -12,7 +14,8 @@ export class DeleteDirective implements OnInit {
     private element: ElementRef,
     private renderer: Renderer2,
     private productService: ProductService,
-    private spinner: NgxSpinnerService
+    private spinner: NgxSpinnerService,
+    private dialog: MatDialog
   ) { }
 
   @Input() id!: string;
@@ -74,8 +77,12 @@ export class DeleteDirective implements OnInit {
   }
 
   @HostListener('click')
-  handleClick() {
-    this.confirmAndDelete();
+ handleClick() {
+  debugger;
+
+  this.openDialog(async ()=>{
+    await  this.confirmAndDelete();
+  });  
   }
 
   private async confirmAndDelete() {
@@ -87,12 +94,24 @@ export class DeleteDirective implements OnInit {
       this.renderer.setStyle(tableRow, 'opacity', '0');
       setTimeout(() => {
         this.renderer.removeChild(tableRow.parentElement, tableRow);
-        this.loadProductsBack.emit(); // Ensure this is correctly called
+        this.loadProductsBack.emit(); 
       }, 1500);
     }
   }
 
   private async deleteProduct(id: string): Promise<void> {
     await this.productService.delete(id);
+  }
+
+  openDialog(afterClosed: any): void {
+    const dialogRef = this.dialog.open(DeleteDialogComponent, {
+           panelClass: 'custom-dialog-container',
+      data: DeleteState.Yes
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result === DeleteState.Yes)
+        afterClosed();      
+    });
   }
 }
