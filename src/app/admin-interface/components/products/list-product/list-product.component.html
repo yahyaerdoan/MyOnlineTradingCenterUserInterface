@@ -53,7 +53,7 @@
                   <mat-icon>edit</mat-icon> Update
                 </button>
                
-                <span appDelete [id]="element.id" (loadProductsBack)="getProducts()" ></span>
+                <span appDelete [id]="element.id" controller="products" (loadProductsBack)="getProducts()" ></span>
               </td>
             </ng-container>
 

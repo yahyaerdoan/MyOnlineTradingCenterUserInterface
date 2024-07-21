@@ -1,35 +1,28 @@
-import {
-  Directive,
-  ElementRef,
-  EventEmitter,
-  HostListener,
-  Input,
-  OnInit,
-  Output,
-  Renderer2,
-} from '@angular/core';
+import { Directive,  ElementRef,  EventEmitter,  HostListener,  Input,  OnInit,  Output,  Renderer2,} from '@angular/core';
 import { ProductService } from '../../services/common/models/product.service';
 import { SpinnerType } from '../../bases/bases.component';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { MatDialog } from '@angular/material/dialog';
-import {
-  DeleteDialogComponent,
-  DeleteState,
-} from '../../dialogs/delete-dialog/delete-dialog.component';
+import { DeleteDialogComponent,  DeleteState,} from '../../dialogs/delete-dialog/delete-dialog.component';
+import { HttpClientService } from '../../services/common/http-client.service';
+import { AlertifyService, MessageType, Position } from '../../services/admin/alertify.service';
+import { HttpErrorResponse } from '@angular/common/http';
+import { Observable } from 'rxjs';
 
 @Directive({
   selector: '[appDelete]',
 })
 export class DeleteDirective implements OnInit {
-  constructor(
-    private element: ElementRef,
+  constructor( private element: ElementRef,
     private renderer: Renderer2,
-    private productService: ProductService,
+    private httpClientService: HttpClientService,
     private spinner: NgxSpinnerService,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private alertify: AlertifyService
   ) {}
 
   @Input() id!: string;
+  @Input() controller!: string;
   @Output() loadProductsBack: EventEmitter<void> = new EventEmitter<void>();
 
   ngOnInit() {
@@ -90,27 +83,48 @@ export class DeleteDirective implements OnInit {
 
   @HostListener('click')
   async handleClick() {
-    this.openDialog(async () => {
-      await this.confirmAndDelete();
+    this.openDialog(() => {
+      this.confirmAndDelete();
     });
   }
 
-  private async confirmAndDelete() {
+  private confirmAndDelete() {
     this.spinner.show(SpinnerType.BallScaleMultiple);
-    await this.deleteProduct(this.id);
-    const tableRow = this.element.nativeElement.closest('tr');
-    if (tableRow) {
-      this.renderer.setStyle(tableRow, 'transition', 'opacity 2s');
-      this.renderer.setStyle(tableRow, 'opacity', '0');
-      setTimeout(() => {
-        this.renderer.removeChild(tableRow.parentElement, tableRow);
-        this.loadProductsBack.emit();
-      }, 1500);
-    }
+  
+    this.deleteProduct().subscribe({
+      next: () => {
+        const tableRow = this.element.nativeElement.closest('tr');
+        if (tableRow) {
+          this.renderer.setStyle(tableRow, 'transition', 'opacity 2s');
+          this.renderer.setStyle(tableRow, 'opacity', '0');
+          setTimeout(() => {
+            this.renderer.removeChild(tableRow.parentElement, tableRow);
+            this.loadProductsBack.emit();
+            this.alertify.message('Product deleted.', {
+              dismissOthers: true,
+              messageType: MessageType.Success,
+              position: Position.TopRight
+            });
+          }, 1500);
+        }
+      },
+      error: (errorResponse: HttpErrorResponse) => {
+        this.spinner.hide(SpinnerType.BallScaleMultiple);
+        this.alertify.message('Error!', {
+          dismissOthers: true,
+          messageType: MessageType.Error,
+          position: Position.TopRight
+        });
+      }
+    });
   }
+  
+  
 
-  private async deleteProduct(id: string): Promise<void> {
-    await this.productService.delete(id);
+  private deleteProduct(): Observable<any>{
+     return this.httpClientService.delete({      
+      controller: this.controller
+    },this.id);
   }
 
   openDialog(afterClosed: any): void {
