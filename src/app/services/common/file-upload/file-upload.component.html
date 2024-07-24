@@ -1,0 +1,39 @@
+<div class="center" style="text-align: center; margin-top: 20px;">
+  <ngx-file-drop 
+    dropZoneLabel="Drop files here"
+    (onFileDrop)="slectedFiles($event)"
+    [accept]="options.accept || '*/*'"
+  >
+    <ng-template
+      ngx-file-drop-content-tmp cont class="drop-zone"
+      let-openFileSelector="openFileSelector"
+    >
+      <span style="margin-right: 1rem; color: brown; font-size: larger;" > {{ options.explanation }} </span>
+      <button
+        class="btn btn-outline-button"
+        type="button"
+        (click)="openFileSelector()"
+      >
+        Browse Files
+      </button>
+    </ng-template>
+  </ngx-file-drop>
+  <div class="upload-table" style="margin-top: 1rem;" *ngIf="files">
+    <table class="table table table-hover">
+      <thead>
+        <tr>
+          <th style="text-align: center; color: red;">Name</th>
+        </tr>
+      </thead>
+      <tbody class="upload-name-style">
+        <tr *ngFor="let item of files; let i = index">
+          <td style="text-align: center">
+            <strong>{{ item.relativePath }}</strong>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- (onFileOver)="fileOver($event)" (onFileLeave)="fileLeave($event)" -->

@@ -4,7 +4,7 @@
       <div class="mdc-card">
         <h6 class="card-title">Create New Product</h6>
         <div class="template-demo">
-          <div class="mdc-layout-grid__inner">
+          <div class="mdc-layout-grid__inner" style="margin-bottom: 1rem;">
 
             <div class="mdc-layout-grid__cell stretch-card mdc-layout-grid__cell--span-6-desktop">
               <mat-form-field appearance="outline" style="width: 100%;">
@@ -42,11 +42,16 @@
             </div>
 
             <div class="mdc-layout-grid__cell stretch-card mdc-layout-grid__cell--span-12-desktop" style="text-align: right;">
-              <button mat-raised-button color="primary" style="margin-right: 10px;" (click)="createProduct(txtName, txtDescription, txtStock, txtPrice)" >Create Product</button>
-              <button mat-raised-button color="accent">Update Product</button>
+              <button mat-raised-button color="primary" style="margin-right: 10px;" (click)="createProduct(txtName, txtDescription, txtStock, txtPrice)">Create Product</button>
+              <button mat-raised-button color="accent" style="margin-right: 10px;">Update Product</button>           
+
             </div>
 
+
+
           </div>
+          <app-file-upload [options]="fileUploadOptions"></app-file-upload>
+
         </div>
       </div>
     </div>

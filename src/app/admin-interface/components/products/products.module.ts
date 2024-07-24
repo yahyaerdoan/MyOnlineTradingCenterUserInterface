@@ -18,6 +18,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { DeleteDirective } from '../../../directives/admin/delete.directive';
 import { MatDialogModule } from '@angular/material/dialog';
 import { DeleteDialogComponent } from '../../../dialogs/delete-dialog/delete-dialog.component';
+import { FileUploadModule } from '../../../services/common/file-upload/file-upload.module';
 
 
 
@@ -46,7 +47,8 @@ import { DeleteDialogComponent } from '../../../dialogs/delete-dialog/delete-dia
     MatPaginator, MatPaginatorModule,
     MatTableModule,
     MatIconModule,
-    MatDialogModule,    
+    MatDialogModule,
+    FileUploadModule    
 
   ]
 })

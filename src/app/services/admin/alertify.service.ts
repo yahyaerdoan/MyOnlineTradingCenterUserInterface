@@ -28,7 +28,7 @@ export class AlertifyService {
   }
 }
 export class AlertifyOptions {
-  messageType?: MessageType = MessageType.Info; // Example: default value
+  messageType?: MessageType = MessageType.Success; // Example: default value
   position?: Position = Position.TopRight; // Example: default value
   delay?: number = 5000;
   dismissOthers?: boolean = false;

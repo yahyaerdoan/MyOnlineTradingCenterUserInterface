@@ -1,15 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output } from '@angular/core';
 import { CreateProduct } from '../../../../contracts/createproduct';
 import { ProductService } from '../../../../services/common/models/product.service';
 import { BasesComponent, SpinnerType } from '../../../../bases/bases.component';
 import { NgxSpinnerService } from 'ngx-spinner';
-import {
-  AlertifyService,
-  MessageType,
-  Position,
-} from '../../../../services/admin/alertify.service';
+import { AlertifyService,  MessageType,  Position } from '../../../../services/admin/alertify.service';
 import { Router } from '@angular/router';
-import { delay } from 'rxjs';
+import { FileUploadOptions } from '../../../../services/common/file-upload/file-upload.component';
 
 @Component({
   selector: 'app-create-product',
@@ -25,6 +21,15 @@ export class CreateProductComponent extends BasesComponent implements OnInit {
 
   ngOnInit(): void {
   }
+
+  @Output() fileUploadOptions: Partial<FileUploadOptions> = {
+    action : "upload",
+    controller: "products",
+    explanation: "Choose your file",
+    accept : '.png, .jpeg',
+    isAdminPage: true
+  }
+
 
   async createProduct(name: HTMLInputElement, description: HTMLTextAreaElement, stock: HTMLInputElement, price: HTMLInputElement) {
 
