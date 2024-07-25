@@ -12,8 +12,9 @@ import {
   MessageType as ToastrfyMessageType,
   Position as ToastrfyPosition,
 } from '../../user-i/toastrfy.service';
-import { FileUploadDialogComponent, FileUploadState } from '../../../dialogs/file-upload-dialog/file-upload-dialog.component';
+import { FileUploadDialogComponent, FileUploadDialogState } from '../../../dialogs/file-upload-dialog/file-upload-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
+import { DialogService } from '../dialog.service';
 @Component({
   selector: 'app-file-upload',
   templateUrl: './file-upload.component.html',
@@ -24,7 +25,8 @@ export class FileUploadComponent {
     private httpClientService: HttpClientService,
     private alertfyService: AlertifyService,
     private toastrfyService: ToastrfyService,
-    private dialog: MatDialog    
+    //private dialog: MatDialog,
+    private dialogService: DialogService    
   ) {}
 
   @Input() options!: Partial<FileUploadOptions>;
@@ -40,25 +42,29 @@ export class FileUploadComponent {
       });
     }
 
-    this.openDialog( ()=>{
-      this.httpClientService
-      .post(
-        {
-          controller: this.options.controller,
-          action: this.options.action,
-          queryString: this.options.queryString,
-          headers: new HttpHeaders({ responseType: 'blob' }),
-        },
-        fileData
-      )
-      .subscribe({
-        next: (data: any) => this.handleUploadSuccessMessage(),
-        error: (errorResponse: HttpErrorResponse) =>
-          this.handleUploadErrorMessage(),
-        complete: () => {
-          console.log('Upload process completed.');
-        },
-      });
+    this.dialogService.openDialog( {
+      componentType: FileUploadDialogComponent,
+      data: FileUploadDialogState.Yes,
+      afterClosed : ()=>{
+        this.httpClientService
+        .post(
+          {
+            controller: this.options.controller,
+            action: this.options.action,
+            queryString: this.options.queryString,
+            headers: new HttpHeaders({ responseType: 'blob' }),
+          },
+          fileData
+        )
+        .subscribe({
+          next: (data: any) => this.handleUploadSuccessMessage(),
+          error: (errorResponse: HttpErrorResponse) =>
+            this.handleUploadErrorMessage(),
+          complete: () => {
+            console.log('Upload process completed.');
+          },
+        });
+      }
     })
   }
   
@@ -97,7 +103,7 @@ export class FileUploadComponent {
     }
   }
 
-  openDialog(afterClosed: any): void {
+/*   openDialog(afterClosed: any): void {
     const dialogRef = this.dialog.open(FileUploadDialogComponent, {
      panelClass: 'custom-dialog-container',
       data: FileUploadState.Yes,
@@ -106,7 +112,7 @@ export class FileUploadComponent {
     dialogRef.afterClosed().subscribe((result) => {
       if (result === FileUploadState.Yes) afterClosed();
     });
-  }
+  } */
 }
 
 export class FileUploadOptions {

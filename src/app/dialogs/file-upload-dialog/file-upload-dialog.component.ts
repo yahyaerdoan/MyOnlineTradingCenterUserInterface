@@ -9,10 +9,10 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 })
 export class FileUploadDialogComponent extends BaseDialogModel<FileUploadDialogComponent> {
 
-  constructor(@Inject(MAT_DIALOG_DATA) public data: FileUploadState, 
+  constructor(@Inject(MAT_DIALOG_DATA) public data: FileUploadDialogState, 
   dialogRef: MatDialogRef<FileUploadDialogComponent>){ super(dialogRef) }
 }
-export enum FileUploadState {
+export enum FileUploadDialogState {
   Yes = 'Yes', 
   No = 'No'
  }
