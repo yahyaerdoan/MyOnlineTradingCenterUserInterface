@@ -18,7 +18,6 @@ import {  HttpClientModule, provideHttpClient, withInterceptorsFromDi } from '@a
 @NgModule({
   declarations: [
     AppComponent,    
-    
   ],
   imports: [
     BrowserModule,
@@ -30,7 +29,7 @@ import {  HttpClientModule, provideHttpClient, withInterceptorsFromDi } from '@a
     MatGridListModule,
     MatButtonModule,
     ToastrModule.forRoot(),
-    NgxSpinnerModule,
+    NgxSpinnerModule,    
   ],
   providers: [
     provideAnimationsAsync(),

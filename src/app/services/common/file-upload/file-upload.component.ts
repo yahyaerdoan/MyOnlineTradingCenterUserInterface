@@ -12,6 +12,8 @@ import {
   MessageType as ToastrfyMessageType,
   Position as ToastrfyPosition,
 } from '../../user-i/toastrfy.service';
+import { FileUploadDialogComponent, FileUploadState } from '../../../dialogs/file-upload-dialog/file-upload-dialog.component';
+import { MatDialog } from '@angular/material/dialog';
 @Component({
   selector: 'app-file-upload',
   templateUrl: './file-upload.component.html',
@@ -21,13 +23,14 @@ export class FileUploadComponent {
   constructor(
     private httpClientService: HttpClientService,
     private alertfyService: AlertifyService,
-    private toastrfyService: ToastrfyService
+    private toastrfyService: ToastrfyService,
+    private dialog: MatDialog    
   ) {}
 
   @Input() options!: Partial<FileUploadOptions>;
   public files!: NgxFileDropEntry[];
 
-  public slectedFiles(files: NgxFileDropEntry[]) {
+  public selectedFiles(files: NgxFileDropEntry[]) {
     this.files = files;
     const fileData: FormData = new FormData();
 
@@ -37,7 +40,8 @@ export class FileUploadComponent {
       });
     }
 
-    this.httpClientService
+    this.openDialog( ()=>{
+      this.httpClientService
       .post(
         {
           controller: this.options.controller,
@@ -55,7 +59,9 @@ export class FileUploadComponent {
           console.log('Upload process completed.');
         },
       });
+    })
   }
+  
 
   private handleUploadSuccessMessage() {
     const successMessage: string = 'File uploaded.';
@@ -89,6 +95,17 @@ export class FileUploadComponent {
         position: ToastrfyPosition.TopRight,
       });
     }
+  }
+
+  openDialog(afterClosed: any): void {
+    const dialogRef = this.dialog.open(FileUploadDialogComponent, {
+     panelClass: 'custom-dialog-container',
+      data: FileUploadState.Yes,
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result === FileUploadState.Yes) afterClosed();
+    });
   }
 }
 

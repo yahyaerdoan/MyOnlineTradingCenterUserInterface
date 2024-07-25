@@ -1,25 +1,20 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FileUploadComponent } from './file-upload.component';
 import { NgxFileDropModule } from 'ngx-file-drop';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { DialogModule } from '../../../dialogs/dialog.module';
-
-
+import { DialogModule } from '../dialog.module';
 
 
 @NgModule({
   declarations: [
-    FileUploadComponent,
+    FileUploadModule
   ],
   imports: [
     CommonModule,
     NgxFileDropModule,
-    MatFormFieldModule,
     DialogModule
   ],
   exports:[
-    FileUploadComponent
+    FileUploadModule
   ]
 })
 export class FileUploadModule { }
