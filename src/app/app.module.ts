@@ -33,7 +33,7 @@ import {  HttpClientModule, provideHttpClient, withInterceptorsFromDi } from '@a
   ],
   providers: [
     provideAnimationsAsync(),
-    {provide: 'baseUrl', useValue:'https://localhost:44341/api', multi: true},
+    {provide: 'baseUrl', useValue:'https://localhost:7241/api', multi: true},
     provideHttpClient(withInterceptorsFromDi())
   ],
   bootstrap: [AppComponent]

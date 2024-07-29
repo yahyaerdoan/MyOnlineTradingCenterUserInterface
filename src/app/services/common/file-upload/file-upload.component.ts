@@ -15,6 +15,8 @@ import {
 import { FileUploadDialogComponent, FileUploadDialogState } from '../../../dialogs/file-upload-dialog/file-upload-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogService } from '../dialog.service';
+import { NgxSpinnerService } from 'ngx-spinner';
+import { SpinnerType } from '../../../bases/bases.component';
 @Component({
   selector: 'app-file-upload',
   templateUrl: './file-upload.component.html',
@@ -26,7 +28,8 @@ export class FileUploadComponent {
     private alertfyService: AlertifyService,
     private toastrfyService: ToastrfyService,
     //private dialog: MatDialog,
-    private dialogService: DialogService    
+    private dialogService: DialogService,
+    private spinner: NgxSpinnerService   
   ) {}
 
   @Input() options!: Partial<FileUploadOptions>;
@@ -46,6 +49,7 @@ export class FileUploadComponent {
       componentType: FileUploadDialogComponent,
       data: FileUploadDialogState.Yes,
       afterClosed : ()=>{
+        this.spinner.show(SpinnerType.BallScaleMultiple)
         this.httpClientService
         .post(
           {
@@ -70,8 +74,10 @@ export class FileUploadComponent {
   
 
   private handleUploadSuccessMessage() {
-    const successMessage: string = 'File uploaded.';
 
+    const successMessage: string = 'File uploaded.';
+    this.spinner.show(SpinnerType.BallScaleMultiple)
+    
     if (this.options.isAdminPage) {
       this.alertfyService.message(successMessage, {
         dismissOthers: true,
@@ -84,10 +90,14 @@ export class FileUploadComponent {
         position: ToastrfyPosition.TopRight,
       });
     }
+
+    this.spinner.hide(SpinnerType.BallScaleMultiple)
   }
 
   private handleUploadErrorMessage() {
+
     const errorMessage: string = 'File not uploaded.';
+    this.spinner.hide(SpinnerType.BallScaleMultiple)
 
     if (this.options.isAdminPage) {
       this.alertfyService.message(errorMessage, {
