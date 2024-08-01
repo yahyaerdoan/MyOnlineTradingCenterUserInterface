@@ -45,14 +45,18 @@
               <td mat-cell *matCellDef="let element">{{ element.updatedDate | date }}</td>
             </ng-container>
 
-        
             <ng-container matColumnDef="actions">
               <th mat-header-cell *matHeaderCellDef>Actions</th>
               <td mat-cell *matCellDef="let element">
+
+                <button mat-raised-button color="primary"  style="margin-right: 10px;" (click)="addProductImage(element.id)">
+                  <mat-icon>image</mat-icon> Add Image
+                </button>
+
                 <button mat-raised-button color="success" (click)="updateProduct(element.id)" style="margin-right: 10px;">
                   <mat-icon>edit</mat-icon> Update
-                </button>
-               
+                </button>  
+
                 <span appDelete [id]="element.id" controller="products" (loadProductsBack)="getProducts()" ></span>
               </td>
             </ng-container>

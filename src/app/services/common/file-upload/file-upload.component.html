@@ -8,11 +8,12 @@
       ngx-file-drop-content-tmp cont class="drop-zone"
       let-openFileSelector="openFileSelector"
     >
-      <span style="margin-right: 1rem; color: brown; font-size: larger;" > {{ options.explanation }} </span>
+      <span style="margin-right: 1rem; color: brown; font-size: larger; margin-left: 1rem;"> {{ options.explanation }} </span>
       <button
         class="btn btn-outline-button"
         type="button"
         (click)="openFileSelector()"
+        style="margin-right: 1rem;"
       >
         Browse Files
       </button>

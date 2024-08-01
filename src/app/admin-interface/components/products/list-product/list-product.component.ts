@@ -10,6 +10,8 @@ import {
   Position,
 } from '../../../../services/admin/alertify.service';
 import { MatPaginator } from '@angular/material/paginator';
+import { DialogService } from '../../../../services/common/dialog.service';
+import { AddProductImageDialogComponent } from '../../../../dialogs/add-product-image-dialog/add-product-image-dialog.component';
 
 @Component({
   selector: 'app-list-product',
@@ -33,7 +35,8 @@ export class ListProductComponent extends BasesComponent implements OnInit {
   constructor(
     spinner: NgxSpinnerService,
     private productService: ProductService,
-    private alertifyService: AlertifyService
+    private alertifyService: AlertifyService,
+    private dialogService: DialogService
   ) {
     super(spinner);
   }
@@ -67,5 +70,14 @@ export class ListProductComponent extends BasesComponent implements OnInit {
 
   updateProduct(product: any) {
     // Navigate to the update product page or open a dialog
+  }
+
+  addProductImage(id: string){
+    this.dialogService.openDialog({
+      componentType: AddProductImageDialogComponent,
+      data: id,
+      //options:{ width: '400px'}      
+    })
+
   }
 }
