@@ -7,6 +7,8 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { SpinnerType } from '../../bases/bases.component';
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { ListProductImage } from '../../contracts/listproductimage';
+import { DialogService } from '../../services/common/dialog.service';
+import { DeleteDialogComponent, DeleteState } from '../delete-dialog/delete-dialog.component';
 
 @Component({
   selector: 'app-add-product-image-dialog',
@@ -27,6 +29,7 @@ export class AddProductImageDialogComponent extends BaseDialogModel<AddProductIm
     @Inject(MAT_DIALOG_DATA) public data: AddProductImageDialogState | string,
     private productService: ProductService,
     private spinnerService: NgxSpinnerService,
+    private dialogService: DialogService,
     dialogRef: MatDialogRef<AddProductImageDialogComponent>) { super(dialogRef); }
 
     @Output() options: Partial<FileUploadOptions> ={
@@ -49,9 +52,22 @@ export class AddProductImageDialogComponent extends BaseDialogModel<AddProductIm
   }
 
  async deleteImage(imageId: string ){
-    this.spinnerService.show(SpinnerType.BallScaleMultiple)
-    await this.productService.deleteImage(this.data as string, imageId, ()=> this.spinnerService.hide(SpinnerType.BallScaleMultiple))
-    this.images = this.images.filter(image => image.id !== imageId);
+
+  this.dialogService.openDialog({
+    componentType: DeleteDialogComponent,
+    data: DeleteState.Yes,
+    afterClosed: async () =>{
+      this.spinnerService.show(SpinnerType.BallScaleMultiple)
+      await this.productService.deleteImage(this.data as string, imageId, ()=> this.spinnerService.hide(SpinnerType.BallScaleMultiple))
+      this.images = this.images.filter(image => image.id !== imageId);
+      
+    },
+  
+
+  })
+
+
+  
   }
   
 }
