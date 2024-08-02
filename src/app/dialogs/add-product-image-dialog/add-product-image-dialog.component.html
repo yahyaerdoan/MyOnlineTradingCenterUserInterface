@@ -1,14 +1,23 @@
-
-
-
-  
-        <h2 mat-dialog-title>Upload Product Image</h2>
+<h2 mat-dialog-title>Upload Product Image</h2>
 <mat-dialog-content class="mat-typography">
- <app-file-upload [options]="options"></app-file-upload>
+    <app-file-upload [options]="options"></app-file-upload>
+
+    <div style="display: flex; flex-wrap: wrap; gap: 15px; justify-content: center; margin-top: 15px;">
+        <mat-card *ngFor="let image of images" class="example-card" appearance="outlined"
+            style="border: 1px solid #ddd; max-width: 225px;" [@fadeOut]>
+
+            <img mat-card-image src={{image.path}} style="width: 100%;">
+            <p>{{image.name}}</p>
+            
+            <mat-card-actions style="margin-top: 2px; ">
+                <button mat-raised-button style="color: #1976d2; margin-right: 15px;">Deactive</button>
+                <button mat-raised-button style="color: hsl(0, 79%, 46%);" (click)="deleteImage(image.id)">Delete</button>
+            </mat-card-actions>
+        </mat-card>
+    </div>
+
 </mat-dialog-content>
-<mat-dialog-actions align="end">
+<mat-dialog-actions>
     <button mat-raised-button (click)="closeDialog()">No</button>
     <button mat-raised-button color="warn" [mat-dialog-close]="data">Yes</button>
 </mat-dialog-actions>
-   
- 
