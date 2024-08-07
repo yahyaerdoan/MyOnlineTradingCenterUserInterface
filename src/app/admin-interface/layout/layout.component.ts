@@ -11,10 +11,10 @@ export class LayoutComponent implements OnInit {
 
   constructor(private alertify: AlertifyService ){}
   ngOnInit(): void {
-    this.alertify.message("Hello", {
+   /*  this.alertify.message("Hello", {
       messageType : MessageType.Success,
       delay : 5,
       position : Position.TopRight
-    } )
+    } ) */
   }
 }

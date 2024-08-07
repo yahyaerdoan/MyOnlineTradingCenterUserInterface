@@ -49,7 +49,7 @@ export class ProductService {
     const promisData: Promise<{totalDataCount: number; products: ListProduct[]}> = firstValueFrom(
       this.httpClientService.get<{totalDataCount: number; products: ListProduct[]}>({
         controller: 'products',
-        queryString: `page=${page}&size${size}`
+        queryString: `page=${page}&size=${size}`
       })
     );
 

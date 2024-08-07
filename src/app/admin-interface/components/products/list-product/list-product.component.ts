@@ -46,7 +46,6 @@ export class ListProductComponent extends BasesComponent implements OnInit {
   }
   async changePageAndData() {
     await this.getProducts();
-    debugger;
   }
   async getProducts() {
     this.showSpinner(SpinnerType.BallScaleMultiple);
