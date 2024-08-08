@@ -11,6 +11,6 @@ declare var $: any
 export class AppComponent {
   title = 'MyOnlineTradingCenterUserInterface';
   constructor(private toastr:  ToastrfyService){
-    toastr.message("Have to be cereful", "Info",{messageType: MessageType.Success, position: Position.TopRight})
+    //toastr.message("Have to be cereful", "Info",{messageType: MessageType.Success, position: Position.TopRight})
     }
 }

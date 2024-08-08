@@ -58,12 +58,14 @@ export class ListProductComponent extends BasesComponent implements OnInit {
           this.alertifyService.message(errorMessage, {
             dismissOthers: true,
             messageType: MessageType.Error,
-            position: Position.TopRight,
+            position: Position.TopRight,            
           })
       )
       .then((data: { totalDataCount: number; products: ListProduct[] }) => {
         this.dataSource = new MatTableDataSource<ListProduct>(data.products);
         this.paginator.length = data.totalDataCount;
+      }) .finally(() => {
+        this.hideSpinner(SpinnerType.BallScaleMultiple);
       });
   }
 
