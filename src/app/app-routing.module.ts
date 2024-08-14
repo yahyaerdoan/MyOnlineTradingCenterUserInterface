@@ -107,14 +107,7 @@ const routes: Routes = [
       import('./user-interface/components/why-chooses/why-chooses.module').then(
         (module) => module.WhyChoosesModule
       ),
-  },
-  {
-    path: 'registers',
-    loadChildren: () =>
-      import('./user-interface/components/registers/registers.module').then(
-        (module) => module.RegistersModule
-      ),
-  },
+  }
 ];
 
 @NgModule({
