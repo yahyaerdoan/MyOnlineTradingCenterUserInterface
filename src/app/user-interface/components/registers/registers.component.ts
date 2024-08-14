@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
+import { User } from '../../../entities/user';
 
 @Component({
   selector: 'app-registers',
@@ -29,12 +30,12 @@ export class RegistersComponent implements OnInit {
       validator: mustMatch('password', 'confirmPassword')
     });
   }
-  
+
   get validate(){
     return this.formGroup.controls;
   }
 
-  onSubmit(data: any){
+  onSubmit(data: User){
     this.submitted = true;
     if(this.formGroup.invalid)
       return;
