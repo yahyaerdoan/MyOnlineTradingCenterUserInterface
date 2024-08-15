@@ -1,5 +1,5 @@
 import { Component, OnInit, Output } from '@angular/core';
-import { CreateProduct } from '../../../../contracts/createproduct';
+import { CreateProduct } from '../../../../contracts/products/createproduct';
 import { ProductService } from '../../../../services/common/models/product.service';
 import { BasesComponent, SpinnerType } from '../../../../bases/bases.component';
 import { NgxSpinnerService } from 'ngx-spinner';

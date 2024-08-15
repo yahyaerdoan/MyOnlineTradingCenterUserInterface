@@ -6,7 +6,7 @@ import { ProductService } from '../../services/common/models/product.service';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { SpinnerType } from '../../bases/bases.component';
 import { animate, state, style, transition, trigger } from '@angular/animations';
-import { ListProductImage } from '../../contracts/listproductimage';
+import { ListProductImage } from '../../contracts/products/listproductimage';
 import { DialogService } from '../../services/common/dialog.service';
 import { DeleteDialogComponent, DeleteState } from '../delete-dialog/delete-dialog.component';
 

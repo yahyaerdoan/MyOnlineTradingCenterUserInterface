@@ -1,6 +1,6 @@
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
-import { ListProduct } from '../../../../contracts/listproduct';
+import { ListProduct } from '../../../../contracts/products/listproduct';
 import { ProductService } from '../../../../services/common/models/product.service';
 import { BasesComponent, SpinnerType } from '../../../../bases/bases.component';
 import { NgxSpinnerService } from 'ngx-spinner';
