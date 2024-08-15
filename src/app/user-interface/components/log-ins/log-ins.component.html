@@ -1,0 +1,38 @@
+<app-headers></app-headers>
+<div class="container mt-5 mb-5">
+    <div class="row">
+        <div class="col-md-4 offset-md-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title text-center mb-4">Log In</h5>
+                    <form [formGroup]="formGroup" (ngSubmit)="onSubmit(formGroup.value)">
+                    
+                  
+                        <div class="mb-3">
+                            <label for="userName" class="form-label">User Name</label>
+                            <input formControlName="userName"
+                                [ngClass]="{'is-invalid': submitted && validate.userName.errors}" type="text"
+                                class="form-control" id="userName" placeholder="Enter a userName">
+                            <div *ngIf="submitted && validate.userName.errors" class="invalid-feedback">
+                                <div *ngIf="validate.userName.errors.required">User name is required.</div>                              
+                            </div>
+                        </div>
+                    
+                        <div class="mb-3">
+                            <label for="password" class="form-label">Password</label>
+                            <input formControlName="password"
+                                [ngClass]="{'is-invalid': submitted && validate.password.errors}" type="password"
+                                class="form-control" id="password" placeholder="Enter your password">
+                            <div *ngIf="submitted && validate.password.errors" class="invalid-feedback">
+                                <div *ngIf="validate.password.errors.required">Password is required.</div>
+                            </div>
+                        </div>
+                   
+                        <button type="submit" class="btn btn-primary w-100">Log In</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<app-footers></app-footers>

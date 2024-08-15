@@ -12,6 +12,7 @@ import { WeHelpsModule } from './we-helps/we-helps.module';
 import { WhyChoosesModule } from './why-chooses/why-chooses.module';
 import { HomesModule } from './homes/homes.module';
 import { RegistersModule } from './registers/registers.module';
+import { LogInsModule } from './log-ins/log-ins.module';
 
 
 
@@ -30,12 +31,8 @@ import { RegistersModule } from './registers/registers.module';
     WeHelpsModule,
     WhyChoosesModule,
     HomesModule,
-    RegistersModule
-  ],
-  /* buraya bak neden bu eklendi veya eklenmedi */
-/*   exports: [
-    HeadersModule,
-    HerosModule,
-  ] */
+    RegistersModule,
+    LogInsModule
+  ]
 })
 export class ComponentsModule { }
