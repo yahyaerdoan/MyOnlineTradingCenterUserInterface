@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { User } from '../../../entities/user';
+import { User } from '../../../entities/users/user';
 
 @Component({
   selector: 'app-log-ins',
@@ -24,7 +24,7 @@ export class LogInsComponent implements OnInit{
       password: ["", Validators.required]
     })
   }
-  
+
   get validate(){
     return this.formGroup.controls;
   }

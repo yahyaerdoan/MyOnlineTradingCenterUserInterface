@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
-import { User } from '../../../entities/user';
+import { User } from '../../../entities/users/user';
 import { UserService } from '../../../services/common/models/user.service';
-import { CreateUser } from '../../../contracts/users/createuser';
 import { MessageType, Position, ToastrfyService } from '../../../services/user-i/toastrfy.service';
+import { CreateUserResponse } from '../../../contracts/users/createuserresponse';
 
 @Component({
   selector: 'app-registers',
@@ -42,7 +42,7 @@ export class RegistersComponent implements OnInit {
     this.submitted = true;
     if(this.formGroup.invalid)
       return;
-    const result: CreateUser =  await this.userService.create(user);
+    const result: CreateUserResponse =  await this.userService.create(user);
     if(result.succeeded)
       this.toastifyService.message(result.message, "Success!", {
         messageType: MessageType.Success,
