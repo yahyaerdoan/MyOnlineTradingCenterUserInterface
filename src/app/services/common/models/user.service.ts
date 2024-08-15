@@ -5,6 +5,8 @@ import { firstValueFrom, Observable } from 'rxjs';
 import { CreateUserResponse } from '../../../contracts/users/createuserresponse';
 import { LogInUser } from '../../../entities/users/loginuser';
 import { LogInUserResponse } from '../../../contracts/users/loginuserresponse';
+import { Token } from '../../../contracts/tokens/token';
+import { TokenResponse } from '../../../contracts/tokens/tokenResponse';
 
 @Injectable({
   providedIn: 'root'
@@ -21,11 +23,13 @@ export class UserService {
   }
 
  async logIn(logInUser: LogInUser, callBackFunction?: ()=> void): Promise<LogInUserResponse>{
-   const observable: Observable<LogInUserResponse | LogInUser> = this.httpClientService.post<LogInUserResponse | LogInUser>({
+   const observable: Observable<LogInUserResponse | LogInUser | TokenResponse> = this.httpClientService.post<LogInUserResponse | LogInUser | TokenResponse>({
       controller: "users",
-      action: "LogIn"
+      action: "login"
     }, logInUser);
-   const result = await firstValueFrom(observable) as LogInUserResponse;
+   const result = await firstValueFrom(observable) as LogInUserResponse & TokenResponse;
+   if(result.token.expiration)
+      localStorage.setItem("accessToken", result.token.accessToken);
    if(callBackFunction)
       callBackFunction();
     return result;
