@@ -13,6 +13,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { ToastrModule } from 'ngx-toastr';
 import { NgxSpinnerModule } from "ngx-spinner";
 import {  HttpClientModule, provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
+import { JwtModule } from '@auth0/angular-jwt'
+
 
 
 @NgModule({
@@ -29,7 +31,13 @@ import {  HttpClientModule, provideHttpClient, withInterceptorsFromDi } from '@a
     MatGridListModule,
     MatButtonModule,
     ToastrModule.forRoot(),
-    NgxSpinnerModule,    
+    NgxSpinnerModule,
+    JwtModule.forRoot({ config: {
+      tokenGetter: ()=> localStorage.getItem("accessToken"),
+      allowedDomains: ["localhost:7241"],      
+    }
+
+    })   
   ],
   providers: [
     provideAnimationsAsync(),
