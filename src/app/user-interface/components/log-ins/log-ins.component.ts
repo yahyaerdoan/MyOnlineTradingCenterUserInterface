@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { User } from '../../../entities/user';
 
 @Component({
@@ -20,11 +20,11 @@ export class LogInsComponent implements OnInit{
 
   initializeForm(){
     this.formGroup = this.formBuilder.group({
-      userName: ["", Validators.required],
+      userNameOrEmail: ["", Validators.required],
       password: ["", Validators.required]
     })
   }
-
+  
   get validate(){
     return this.formGroup.controls;
   }
@@ -33,5 +33,8 @@ export class LogInsComponent implements OnInit{
     this.submitted = true;
     if(this.formGroup.invalid)
       return;
+
+    // Continue with your form submission logic
+    console.log('Form Submitted:', this.formGroup.value);
   }
 }

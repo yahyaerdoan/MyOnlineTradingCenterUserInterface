@@ -7,14 +7,13 @@
                     <h5 class="card-title text-center mb-4">Log In</h5>
                     <form [formGroup]="formGroup" (ngSubmit)="onSubmit(formGroup.value)">
                     
-                  
                         <div class="mb-3">
-                            <label for="userName" class="form-label">User Name</label>
-                            <input formControlName="userName"
-                                [ngClass]="{'is-invalid': submitted && validate.userName.errors}" type="text"
-                                class="form-control" id="userName" placeholder="Enter a userName">
-                            <div *ngIf="submitted && validate.userName.errors" class="invalid-feedback">
-                                <div *ngIf="validate.userName.errors.required">User name is required.</div>                              
+                            <label for="userNameOrEmail" class="form-label">User Name or Email</label>
+                            <input formControlName="userNameOrEmail"
+                                [ngClass]="{'is-invalid': submitted && validate.userNameOrEmail.errors}" type="text"
+                                class="form-control" id="userNameOrEmail" placeholder="Enter your user name or email">
+                            <div *ngIf="submitted && validate.userNameOrEmail.errors" class="invalid-feedback">
+                                <div *ngIf="validate.userNameOrEmail.errors.required">User name or email is required.</div> 
                             </div>
                         </div>
                     
