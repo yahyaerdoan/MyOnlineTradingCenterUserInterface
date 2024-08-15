@@ -1,5 +1,4 @@
 export class LogInUser{ 
-    userName!: string; 
-    password!: string; 
-
+    userNameOrEmail!: string; 
+    password!: string;
 }
