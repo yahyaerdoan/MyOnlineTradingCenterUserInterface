@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { MessageType, Position, ToastrfyService } from './services/features/user/services/toastrfy.service';
+import { AuthService } from './services/core/services/auth.service';
 declare var $: any
 
 @Component({
@@ -10,7 +11,8 @@ declare var $: any
 })
 export class AppComponent {
   title = 'MyOnlineTradingCenterUserInterface';
-  constructor(private toastr:  ToastrfyService){
+  constructor(private toastr:  ToastrfyService, public authService: AuthService){
     //toastr.message("Have to be cereful", "Info",{messageType: MessageType.Success, position: Position.TopRight})
+    authService.identityCheck();
     }
 }

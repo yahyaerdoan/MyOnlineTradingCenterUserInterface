@@ -13,18 +13,46 @@
                 <li class="nav-item active">
                     <a class="nav-link" routerLink="">Home</a>
                 </li>
-                <li><a class="nav-link" routerLink="/registers">Shop</a></li>
-                <li><a class="nav-link" routerLink="/logins">About us</a></li>
-                <li><a class="nav-link" href="services.html">Services</a></li>
-                <li><a class="nav-link" routerLink="blogs">Blog</a></li>
-                <li><a class="nav-link" href="contact.html">Contact us</a></li>
+                <li><a class="nav-link" routerLink="/shop">Shop</a></li>
+                <li><a class="nav-link" routerLink="/about">About us</a></li>
+                <li><a class="nav-link" routerLink="/service">Services</a></li>
+                <li><a class="nav-link" routerLink="blog">Blog</a></li>
+                <li><a class="nav-link" routerLink="contact">Contact us</a></li>
+            </ul>
+            <ul class="custom-navbar-nav navbar-nav ms-auto mb-2 mb-md-0">
+                <li class="nav-item"><a class="nav-link" routerLink="/cart">Cart</a></li>
+                <li *ngIf="!authService.isAuthenticated" class="nav-item"><a class="nav-link" routerLink="/logins">Log In</a></li>
+                <li *ngIf="authService.isAuthenticated" class="nav-item"><a class="nav-link" routerLink="" (click)="logOut()">Log Out</a></li>
+                <li *ngIf="authService.isAuthenticated" class="nav-item"><a class="nav-link" routerLink="/admin-interface">Admin</a></li>               
             </ul>
 
-            <ul class="custom-navbar-cta navbar-nav mb-2 mb-md-0 ms-5">
-                <li><a class="nav-link" routerLink="/admin-interface"><img
-                            src="../../assets/furniture/images/user.svg"></a></li>
-                <li><a class="nav-link" href="cart.html"><img src="../assets/furniture/images/cart.svg"></a></li>
-            </ul>
+           <!--  <ul class="custom-navbar-cta navbar-nav mb-2 mb-md-0 ms-5">
+                <ul class="custom-navbar-cta navbar-nav mb-2 mb-md-0 ms-5">
+                    <li *ngIf="!authService.isAuthenticated">
+                        <a class="nav-link" routerLink="/logins">
+                            <i class="bi bi-person-check-fill fs-3"></i>
+                        </a>
+                    </li>
+                
+                    <li *ngIf="authService.isAuthenticated">
+                        <a class="nav-link" routerLink="" (click)="logOut()">
+                            <i class="bi bi-person-x fs-3"></i>
+                        </a>
+                    </li>
+                
+                    <li *ngIf="authService.isAuthenticated">
+                        <a class="nav-link" routerLink="/admin-interface">
+                            <i bu class="bi bi-universal-access fs-3"></i>
+                        </a>
+                    </li>
+                </ul>
+                
+                <li>
+                    <a class="nav-link" href="cart.html">
+                        <img src="../assets/furniture/images/cart.svg">
+                    </a>
+                </li>
+            </ul> -->
         </div>
     </div>
 

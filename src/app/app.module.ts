@@ -39,7 +39,11 @@ import { SharedModule } from './services/shared/shared.module';
     JwtModule.forRoot({ config: {
       tokenGetter: ()=> localStorage.getItem("accessToken"),
       allowedDomains: ["localhost:7241"],      
-    }})
+    }}),
+    /*   CoreModule,
+      AdminModule,
+      UserModule,
+      SharedModule */
   ],
   providers: [
     provideAnimationsAsync(),

@@ -6,6 +6,7 @@ import { BasesComponent, SpinnerType } from '../../../bases/bases.component';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { MessageType, Position, ToastrfyService } from '../../../services/features/user/services/toastrfy.service';
 import { LogInUserResponse } from '../../../contracts/users/loginuserresponse';
+import { AuthService } from '../../../services/core/services/auth.service';
 
 @Component({
   selector: 'app-log-ins',
@@ -15,7 +16,8 @@ import { LogInUserResponse } from '../../../contracts/users/loginuserresponse';
 export class LogInsComponent extends BasesComponent implements OnInit{
 
   constructor(private formBuilder: FormBuilder, private userService: UserService,
-    spinner: NgxSpinnerService, private toastfyService: ToastrfyService){super(spinner)}
+    spinner: NgxSpinnerService, private toastfyService: ToastrfyService,
+    private authService: AuthService){super(spinner)}
 
   formGroup!: FormGroup;
   submitted: boolean = false;
@@ -40,7 +42,10 @@ export class LogInsComponent extends BasesComponent implements OnInit{
     if(this.formGroup.invalid)
       return;
     this.showSpinner(SpinnerType.BallScaleMultiple);
-    const result: LogInUserResponse = await this.userService.logIn(logInUser, () => this.hideSpinner(SpinnerType.BallScaleMultiple));
+    const result: LogInUserResponse = await this.userService.logIn(logInUser, () => {
+      this.authService.identityCheck();
+      this.hideSpinner(SpinnerType.BallScaleMultiple)
+    });
     if(result.succeeded)
       this.toastfyService.message(result.message, "Success!",{
       messageType: MessageType.Success,
