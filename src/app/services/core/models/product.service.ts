@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClientService } from '../http-client.service';
+import { HttpClientService } from '../services/http-client.service';
 import { CreateProduct } from '../../../contracts/products/createproduct';
 import { HttpErrorResponse } from '@angular/common/http';
 import { ListProduct } from '../../../contracts/products/listproduct';

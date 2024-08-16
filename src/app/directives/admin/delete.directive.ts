@@ -3,8 +3,8 @@ import { SpinnerType } from '../../bases/bases.component';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { MatDialog } from '@angular/material/dialog';
 import { DeleteDialogComponent,  DeleteState,} from '../../dialogs/delete-dialog/delete-dialog.component';
-import { HttpClientService } from '../../services/common/http-client.service';
-import { AlertifyService, MessageType, Position } from '../../services/admin/alertify.service';
+import { HttpClientService } from '../../services/core/services/http-client.service';
+import { AlertifyService, MessageType, Position } from '../../services/features/admin/services/alertify.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
 

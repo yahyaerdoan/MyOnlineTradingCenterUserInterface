@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { MessageType, Position, ToastrfyService } from './services/user-i/toastrfy.service';
+import { MessageType, Position, ToastrfyService } from './services/features/user/services/toastrfy.service';
 declare var $: any
 
 @Component({

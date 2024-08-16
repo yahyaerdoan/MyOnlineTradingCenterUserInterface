@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 import { User } from '../../../entities/users/user';
-import { UserService } from '../../../services/common/models/user.service';
-import { MessageType, Position, ToastrfyService } from '../../../services/user-i/toastrfy.service';
+import { UserService } from '../../../services/core/models/user.service';
+import { MessageType, Position, ToastrfyService } from '../../../services/features/user/services/toastrfy.service';
 import { CreateUserResponse } from '../../../contracts/users/createuserresponse';
 
 @Component({

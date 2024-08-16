@@ -1,22 +1,22 @@
 import { Component, Input, input, Output } from '@angular/core';
 import { NgxFileDropEntry } from 'ngx-file-drop';
-import { HttpClientService } from '../http-client.service';
 import { HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import {
   AlertifyService,
   MessageType as AlertifyMessageType,
   Position as AlertifyPosition,
-} from '../../admin/alertify.service';
+} from '../../../features/admin/services/alertify.service';
 import {
   ToastrfyService,
   MessageType as ToastrfyMessageType,
   Position as ToastrfyPosition,
-} from '../../user-i/toastrfy.service';
-import { FileUploadDialogComponent, FileUploadDialogState } from '../../../dialogs/file-upload-dialog/file-upload-dialog.component';
+} from '../../../features/user/services/toastrfy.service';
 import { MatDialog } from '@angular/material/dialog';
-import { DialogService } from '../dialog.service';
 import { NgxSpinnerService } from 'ngx-spinner';
-import { SpinnerType } from '../../../bases/bases.component';
+import { HttpClientService } from '../../../core/services/http-client.service';
+import { DialogService } from '../../services/dialog.service';
+import { FileUploadDialogComponent, FileUploadDialogState } from '../../../../dialogs/file-upload-dialog/file-upload-dialog.component';
+import { SpinnerType } from '../../../../bases/bases.component';
 @Component({
   selector: 'app-file-upload',
   templateUrl: './file-upload.component.html',

@@ -1,14 +1,14 @@
 import { Component, Inject, OnInit, Output } from '@angular/core';
 import { BaseDialogModel } from '../bases/base-dialog-model';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { FileUploadOptions } from '../../services/common/file-upload/file-upload.component';
-import { ProductService } from '../../services/common/models/product.service';
+import { ProductService } from '../../services/core/models/product.service';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { SpinnerType } from '../../bases/bases.component';
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { ListProductImage } from '../../contracts/products/listproductimage';
-import { DialogService } from '../../services/common/dialog.service';
+import { DialogService } from '../../services/shared/services/dialog.service';
 import { DeleteDialogComponent, DeleteState } from '../delete-dialog/delete-dialog.component';
+import { FileUploadOptions } from '../../services/shared/components/file-upload/file-upload.component';
 
 @Component({
   selector: 'app-add-product-image-dialog',

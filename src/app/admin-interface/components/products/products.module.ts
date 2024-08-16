@@ -18,8 +18,8 @@ import { MatIconModule } from '@angular/material/icon';
 import { DeleteDirective } from '../../../directives/admin/delete.directive';
 import { MatDialogModule } from '@angular/material/dialog';
 import { DeleteDialogComponent } from '../../../dialogs/delete-dialog/delete-dialog.component';
-import { FileUploadModule } from '../../../services/common/file-upload/file-upload.module';
 import { DialogModule } from '../../../dialogs/dialog.module';
+import { FileUploadModule } from '../../../services/shared/components/file-upload/file-upload.module';
 
 
 

@@ -1,11 +1,11 @@
 import { Component, OnInit, Output } from '@angular/core';
 import { CreateProduct } from '../../../../contracts/products/createproduct';
-import { ProductService } from '../../../../services/common/models/product.service';
+import { ProductService } from '../../../../services/core/models/product.service';
 import { BasesComponent, SpinnerType } from '../../../../bases/bases.component';
 import { NgxSpinnerService } from 'ngx-spinner';
-import { AlertifyService,  MessageType,  Position } from '../../../../services/admin/alertify.service';
+import { AlertifyService,  MessageType,  Position } from '../../../../services/features/admin/services/alertify.service';
 import { Router } from '@angular/router';
-import { FileUploadOptions } from '../../../../services/common/file-upload/file-upload.component';
+import { FileUploadOptions } from '../../../../services/shared/components/file-upload/file-upload.component';
 
 @Component({
   selector: 'app-create-product',

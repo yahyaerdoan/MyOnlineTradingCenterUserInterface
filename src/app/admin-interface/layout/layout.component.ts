@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AlertifyService, MessageType, Position } from '../../services/admin/alertify.service';
+import { AlertifyService, MessageType, Position } from '../../services/features/admin/services/alertify.service';
 import { delay } from 'rxjs';
 
 @Component({

@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { LogInUser } from '../../../entities/users/loginuser';
-import { UserService } from '../../../services/common/models/user.service';
+import { UserService } from '../../../services/core/models/user.service';
 import { BasesComponent, SpinnerType } from '../../../bases/bases.component';
 import { NgxSpinnerService } from 'ngx-spinner';
-import { MessageType, Position, ToastrfyService } from '../../../services/user-i/toastrfy.service';
+import { MessageType, Position, ToastrfyService } from '../../../services/features/user/services/toastrfy.service';
 import { LogInUserResponse } from '../../../contracts/users/loginuserresponse';
 
 @Component({

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClientService } from '../http-client.service';
+import { HttpClientService } from '../services/http-client.service';
 import { User } from '../../../entities/users/user';
 import { firstValueFrom, Observable } from 'rxjs';
 import { CreateUserResponse } from '../../../contracts/users/createuserresponse';

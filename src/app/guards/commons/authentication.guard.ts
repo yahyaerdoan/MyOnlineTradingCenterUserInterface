@@ -1,7 +1,7 @@
 import { inject } from '@angular/core';
 import { CanActivateFn, Router } from '@angular/router';
 import { JwtHelperService } from '@auth0/angular-jwt';
-import { MessageType, Position, ToastrfyService } from '../../services/user-i/toastrfy.service';
+import { MessageType, Position, ToastrfyService } from '../../services/features/user/services/toastrfy.service';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { SpinnerType } from '../../bases/bases.component';
 
