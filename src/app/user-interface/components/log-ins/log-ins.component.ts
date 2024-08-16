@@ -7,6 +7,7 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { MessageType, Position, ToastrfyService } from '../../../services/features/user/services/toastrfy.service';
 import { LogInUserResponse } from '../../../contracts/users/loginuserresponse';
 import { AuthService } from '../../../services/core/services/auth.service';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-log-ins',
@@ -17,7 +18,7 @@ export class LogInsComponent extends BasesComponent implements OnInit{
 
   constructor(private formBuilder: FormBuilder, private userService: UserService,
     spinner: NgxSpinnerService, private toastfyService: ToastrfyService,
-    private authService: AuthService){super(spinner)}
+    private authService: AuthService, private activatedRoute: ActivatedRoute, private router: Router){super(spinner)}
 
   formGroup!: FormGroup;
   submitted: boolean = false;
@@ -44,6 +45,11 @@ export class LogInsComponent extends BasesComponent implements OnInit{
     this.showSpinner(SpinnerType.BallScaleMultiple);
     const result: LogInUserResponse = await this.userService.logIn(logInUser, () => {
       this.authService.identityCheck();
+      this.activatedRoute.queryParams.subscribe(params =>{
+       const returnUrl: string = params["returnUrl"];
+       if (returnUrl) 
+        this.router.navigate([returnUrl])
+      })
       this.hideSpinner(SpinnerType.BallScaleMultiple)
     });
     if(result.succeeded)
