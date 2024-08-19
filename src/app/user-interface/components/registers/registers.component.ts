@@ -4,6 +4,7 @@ import { User } from '../../../entities/users/user';
 import { UserService } from '../../../services/core/models/user.service';
 import { MessageType, Position, ToastrfyService } from '../../../services/features/user/services/toastrfy.service';
 import { CreateUserResponse } from '../../../contracts/users/createuserresponse';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-registers',
@@ -12,7 +13,8 @@ import { CreateUserResponse } from '../../../contracts/users/createuserresponse'
 })
 export class RegistersComponent implements OnInit {
 
-  constructor(private formBuilder: FormBuilder, private userService: UserService, private toastifyService: ToastrfyService){}
+  constructor(private formBuilder: FormBuilder, private userService: UserService, 
+    private toastifyService: ToastrfyService, private router: Router){}
 
   formGroup!: FormGroup;
   submitted: boolean = false;
@@ -43,6 +45,10 @@ export class RegistersComponent implements OnInit {
     if(this.formGroup.invalid)
       return;
     const result: CreateUserResponse =  await this.userService.create(user);
+    if (result) {
+      this.router.navigate(["/logins"])
+    }
+
     if(result.succeeded)
       this.toastifyService.message(result.message, "Success!", {
         messageType: MessageType.Success,

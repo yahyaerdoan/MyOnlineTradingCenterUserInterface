@@ -8,65 +8,83 @@ import { MessageType, Position, ToastrfyService } from '../../../services/featur
 import { LogInUserResponse } from '../../../contracts/users/loginuserresponse';
 import { AuthService } from '../../../services/core/services/auth.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { SocialAuthService, SocialUser } from '@abacritt/angularx-social-login';
 
 @Component({
   selector: 'app-log-ins',
   templateUrl: './log-ins.component.html',
   styleUrl: './log-ins.component.scss'
 })
-export class LogInsComponent extends BasesComponent implements OnInit{
+export class LogInsComponent extends BasesComponent implements OnInit {
 
   constructor(private formBuilder: FormBuilder, private userService: UserService,
     spinner: NgxSpinnerService, private toastfyService: ToastrfyService,
-    private authService: AuthService, private activatedRoute: ActivatedRoute, private router: Router){super(spinner)}
+    private authService: AuthService, private activatedRoute: ActivatedRoute, private router: Router,
+    private socialAuthService: SocialAuthService) { super(spinner) }
 
   formGroup!: FormGroup;
   submitted: boolean = false;
 
-  ngOnInit(): void {
+  async ngOnInit(): Promise<void> {
     this.initializeForm();
+    await this.signInWithGoogle();
   }
 
-  initializeForm(){
+  initializeForm() {
     this.formGroup = this.formBuilder.group({
       userNameOrEmail: ["", Validators.required],
       password: ["", Validators.required]
     })
   }
 
-  get validate(){
+  get validate() {
     return this.formGroup.controls;
   }
 
- async onSubmit(logInUser: LogInUser){
+  async onSubmit(logInUser: LogInUser) {
     this.submitted = true;
-    if(this.formGroup.invalid)
+    if (this.formGroup.invalid)
       return;
     this.showSpinner(SpinnerType.BallScaleMultiple);
     const result: LogInUserResponse = await this.userService.logIn(logInUser, () => {
       this.authService.identityCheck();
-      this.activatedRoute.queryParams.subscribe(params =>{
-       const returnUrl: string = params["returnUrl"];
-       if (returnUrl) 
-        this.router.navigate([returnUrl])
-       else
-       this.router.navigate([""])
-      })
+      this.handleNagigationAfterLogin();     
       this.hideSpinner(SpinnerType.BallScaleMultiple)
     });
-    if(result.succeeded)
-      this.toastfyService.message(result.message, "Success!",{
-      messageType: MessageType.Success,
+    this.showToastMessage(result.succeeded, result.message);
+    console.log('Form Submitted:', this.formGroup.value);
+  }
+
+  async signInWithGoogle() {
+    this.socialAuthService.authState.subscribe(async (user: SocialUser) => {
+      this.showSpinner(SpinnerType.BallScaleMultiple);
+      const result = await this.userService.logInWithGoogle(user, () =>{       
+        this.authService.identityCheck();
+        this.hideSpinner(SpinnerType.BallScaleMultiple)})
+      this.showToastMessage(result.succeeded, result.message);
+      this.handleNagigationAfterLogin();
+      console.log('Form Submitted:', user)
+    });
+  }
+
+  private handleNagigationAfterLogin(){
+    this.activatedRoute.queryParams.subscribe(params => {
+      const returnUrl: string = params["returnUrl"];
+      Promise.resolve().then(()=>{
+        if (returnUrl)
+          this.router.navigate([returnUrl])
+        else
+          this.router.navigate([""])
+      });
+    });
+  }
+  private showToastMessage(success: boolean, message: string) {
+    const messageType = success ? MessageType.Success : MessageType.Error;
+    const title = success ? "Success!" : "Error!";
+
+    this.toastfyService.message(message, title, {
+      messageType: messageType,
       position: Position.TopRight
     })
-    else
-    this.toastfyService.message(result.message, "Error!",{
-      messageType: MessageType.Error,
-      position: Position.TopRight
-  })
- 
-
-    // Continue with your form submission logic
-    console.log('Form Submitted:', this.formGroup.value);
   }
 }
