@@ -48,8 +48,8 @@ export class RegistersComponent implements OnInit {
     if (result) {
       this.router.navigate(["/logins"])
     }
-
-    if(result.succeeded)
+debugger;
+    if(result.isSuccessful)
       this.toastifyService.message(result.message, "Success!", {
         messageType: MessageType.Success,
         position: Position.TopRight

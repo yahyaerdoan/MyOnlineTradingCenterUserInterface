@@ -1,4 +1,4 @@
 export class CreateUserResponse {
-    succeeded!: boolean;
+    isSuccessful!: boolean;
     message!: string;
 }
