@@ -55,7 +55,7 @@ debugger;
         position: Position.TopRight
     })
     else
-    this.toastifyService.message(result.message, "Error!", {
+    this.toastifyService.message(result.errors, "Error!", {
       messageType: MessageType.Error,
       position: Position.TopRight
   })
