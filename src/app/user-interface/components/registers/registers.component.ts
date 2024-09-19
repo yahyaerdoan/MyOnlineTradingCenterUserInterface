@@ -45,20 +45,18 @@ export class RegistersComponent implements OnInit {
     if(this.formGroup.invalid)
       return;
     const result: CreateUserResponse =  await this.userService.create(user);
-    if (result) {
-      this.router.navigate(["/logins"])
-    }
-debugger;
-    if(result.isSuccessful)
+    if (result.isSuccessful) {
       this.toastifyService.message(result.message, "Success!", {
         messageType: MessageType.Success,
+        position: Position.TopRight});
+      this.router.navigate(["/logIns"])
+    }else{
+      const errorMessages =  result.errors;
+      this.toastifyService.message(errorMessages, "Error!", {
+        messageType: MessageType.Error,
         position: Position.TopRight
-    })
-    else
-    this.toastifyService.message(result.errors, "Error!", {
-      messageType: MessageType.Error,
-      position: Position.TopRight
-  })
+      });
+    }
   }
 }
 

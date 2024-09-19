@@ -48,11 +48,16 @@ export class LogInsComponent extends BasesComponent implements OnInit {
     this.showSpinner(SpinnerType.BallScaleMultiple);
     const result: LogInUserResponse = await this.userAuthService.logIn(logInUser, () => {
       this.authService.identityCheck();
-      this.handleNagigationAfterLogin();     
       this.hideSpinner(SpinnerType.BallScaleMultiple)
     });
-    debugger;
-    this.showToastMessage(result.isSuccessful, result.message, result.errors);
+    if (result.isSuccessful) {
+      this.showToastMessage(result.isSuccessful, result.message);
+      this.handleNagigationAfterLogin();
+    } else {
+      this.showToastMessage(result.isSuccessful, result.message, result.errors);
+      this.hideSpinner(SpinnerType.BallScaleMultiple);
+    }
+    //this.showToastMessage(result.isSuccessful, result.message, result.errors);
     console.log('Form Submitted:', this.formGroup.value);
   }
 
@@ -62,8 +67,13 @@ export class LogInsComponent extends BasesComponent implements OnInit {
       const result = await this.userAuthService.logInWithGoogle(user, () =>{       
         this.authService.identityCheck();
         this.hideSpinner(SpinnerType.BallScaleMultiple)})
-      this.showToastMessage(result.succeeded, result.message);
-      this.handleNagigationAfterLogin();
+        if (result.isSuccessful) {
+          this.showToastMessage(result.isSuccessful, result.message);
+          this.handleNagigationAfterLogin();
+        } else {
+          this.showToastMessage(result.isSuccessful, result.message, result.errors);
+          this.hideSpinner(SpinnerType.BallScaleMultiple);
+        }
       console.log('Form Submitted:', user)
     });
   }

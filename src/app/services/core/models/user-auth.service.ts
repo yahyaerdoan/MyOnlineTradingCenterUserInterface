@@ -3,7 +3,6 @@ import { HttpClientService } from '../services/http-client.service';
 import { firstValueFrom, Observable } from 'rxjs';
 import { LogInUser } from '../../../entities/users/loginuser';
 import { LogInUserResponse } from '../../../contracts/users/loginuserresponse';
-import { TokenResponse } from '../../../contracts/tokens/tokenResponse';
 import { SocialUser } from '@abacritt/angularx-social-login';
 
 @Injectable({
@@ -18,22 +17,21 @@ export class UserAuthService {
        action: "logIn"
      }, logInUser);
     const result = await firstValueFrom(observable) as LogInUserResponse;
-    if(result.isSuccessful && result.data && result.data.token && result.data.token.expiration)
+    if(result.isSuccessful && result.data && result.data.token.accessToken && result.data.token.expiration)
        localStorage.setItem("accessToken", result.data.token.accessToken);
-      debugger;
     if(callBackFunction)
        callBackFunction();
      return result;
    }
  
-   async logInWithGoogle(user: SocialUser, callBackFunction?: ()=> void): Promise<any>{
-    const observable: Observable<SocialUser | TokenResponse> = this.httpClientService.post<SocialUser | TokenResponse>({
+   async logInWithGoogle(socialUser: SocialUser, callBackFunction?: ()=> void): Promise<LogInUserResponse>{
+    const observable: Observable<LogInUserResponse | SocialUser> = this.httpClientService.post<LogInUserResponse | SocialUser>({
        controller: "auths",
        action: "googleLogIn"
-     }, user);
-     const result = await firstValueFrom(observable) as TokenResponse;
-     if(result.token)
-       localStorage.setItem("accessToken", result.token.accessToken);
+     }, socialUser);
+     const result = await firstValueFrom(observable) as LogInUserResponse;
+     if(result.isSuccessful && result.data && result.data.token.accessToken && result.data.token.expiration)
+       localStorage.setItem("accessToken",  result.data.token.accessToken);
     if(callBackFunction)
        callBackFunction();
      return result;
