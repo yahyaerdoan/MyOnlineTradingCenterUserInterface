@@ -1,4 +1,9 @@
+import { TokenResponse } from "../tokens/tokenResponse";
+
 export class LogInUserResponse {
-    succeeded!: boolean;
+    isSuccessful!: boolean;
     message!: string;
+    statusCode!: number;
+    data?: TokenResponse | null;
+    errors?: string[];
 }

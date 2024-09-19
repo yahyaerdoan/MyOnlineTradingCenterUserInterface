@@ -21,30 +21,4 @@ export class UserService {
     }, user);
     return await firstValueFrom(observable) as CreateUserResponse;
   }
-
- async logIn(logInUser: LogInUser, callBackFunction?: ()=> void): Promise<LogInUserResponse>{
-   const observable: Observable<LogInUserResponse | LogInUser | TokenResponse> = this.httpClientService.post<LogInUserResponse | LogInUser | TokenResponse>({
-      controller: "users",
-      action: "login"
-    }, logInUser);
-   const result = await firstValueFrom(observable) as LogInUserResponse & TokenResponse;
-   if(result.token.expiration)
-      localStorage.setItem("accessToken", result.token.accessToken);
-   if(callBackFunction)
-      callBackFunction();
-    return result;
-  }
-
-  async logInWithGoogle(user: SocialUser, callBackFunction?: ()=> void): Promise<any>{
-   const observable: Observable<SocialUser | TokenResponse> = this.httpClientService.post<SocialUser | TokenResponse>({
-      controller: "users",
-      action: "googleLogIn"
-    }, user);
-    const result = await firstValueFrom(observable) as TokenResponse;
-    if(result.token)
-      localStorage.setItem("accessToken", result.token.accessToken);
-   if(callBackFunction)
-      callBackFunction();
-    return result;
-  }
 }
