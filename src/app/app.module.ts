@@ -12,12 +12,13 @@ import { MatGridListModule } from '@angular/material/grid-list';
 import { MatButtonModule } from '@angular/material/button';
 import { ToastrModule } from 'ngx-toastr';
 import { NgxSpinnerModule } from "ngx-spinner";
-import {  HttpClientModule, provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
+import {  HTTP_INTERCEPTORS, HttpClientModule, provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { JwtModule } from '@auth0/angular-jwt'
 import { CoreModule } from './services/core/core.module';
 import { AdminModule } from './services/features/admin/admin.module';
 import { UserModule } from './services/features/user/user.module';
 import { SharedModule } from './services/shared/shared.module';
+import { HttpErrorHandlerInterceptorService } from './services/core/services/http-error-handler-interceptor.service';
 
 
 
@@ -48,7 +49,8 @@ import { SharedModule } from './services/shared/shared.module';
   providers: [
     provideAnimationsAsync(),
     {provide: 'baseUrl', useValue:'https://localhost:7241/api', multi: true},
-    provideHttpClient(withInterceptorsFromDi())
+    provideHttpClient(withInterceptorsFromDi()),
+    {provide: HTTP_INTERCEPTORS, useClass: HttpErrorHandlerInterceptorService, multi: true}
   ],
   bootstrap: [AppComponent]
 })
