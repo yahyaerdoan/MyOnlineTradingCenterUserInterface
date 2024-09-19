@@ -51,8 +51,7 @@ export class RegistersComponent implements OnInit {
         position: Position.TopRight});
       this.router.navigate(["/logIns"])
     }else{
-      const errorMessages =  result.errors;
-      this.toastifyService.message(errorMessages, "Error!", {
+      this.toastifyService.message(result.errors, "Error!", {
         messageType: MessageType.Error,
         position: Position.TopRight
       });
