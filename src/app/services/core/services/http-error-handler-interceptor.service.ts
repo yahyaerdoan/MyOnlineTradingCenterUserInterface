@@ -38,9 +38,9 @@ export class HttpErrorHandlerInterceptorService implements HttpInterceptor {
               break;
           }
         }
-        this.toastfyService.message(errorMessage, "", {
+        this.toastfyService.message(errorMessage, "Error!", {
           messageType: MessageType.Error,
-          position: Position.TopFullWidth
+          position: Position.BottomRight
         });
         return throwError(() => new Error(errorMessage));
       })
