@@ -2,13 +2,14 @@ import { HttpErrorResponse, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest
 import { Injectable } from '@angular/core';
 import { catchError, Observable, of, throwError } from 'rxjs';
 import { MessageType, Position, ToastrfyService } from '../../features/user/services/toastrfy.service';
+import { UserAuthService } from '../models/user-auth.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class HttpErrorHandlerInterceptorService implements HttpInterceptor {
 
-  constructor(private toastfyService: ToastrfyService) { }
+  constructor(private toastfyService: ToastrfyService, private userAuthService: UserAuthService) { }
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     return next.handle(req).pipe(
       catchError((error: HttpErrorResponse) => {
@@ -26,6 +27,10 @@ export class HttpErrorHandlerInterceptorService implements HttpInterceptor {
               break;
             case HttpStatusCode.Unauthorized:
               errorMessage = `Unauthorized: Please login again.`;
+              const refreshToken = localStorage.getItem("refreshToken") ?? '';
+              this.userAuthService.refreshTokenLogIn(refreshToken).then(data=>{
+                console.log(data.data?.token.refreshToken)
+              });
               break;
             case HttpStatusCode.NotFound:
               errorMessage = `Not Found: The resource does not exist.`;

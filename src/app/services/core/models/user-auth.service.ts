@@ -17,8 +17,10 @@ export class UserAuthService {
        action: "logIn"
      }, logInUser);
     const result = await firstValueFrom(observable) as LogInUserResponse;
-    if(result.isSuccessful && result.data && result.data.token.accessToken && result.data.token.expiration)
-       localStorage.setItem("accessToken", result.data.token.accessToken);
+    if(result?.isSuccessful && result?.data && result.data?.token?.accessToken && result.data.token.expiration){
+      localStorage.setItem("accessToken", result.data.token.accessToken);
+      localStorage.setItem("refreshToken", result.data.token.refreshToken);
+    }       
     if(callBackFunction)
        callBackFunction();
      return result;
@@ -30,10 +32,28 @@ export class UserAuthService {
        action: "googleLogIn"
      }, socialUser);
      const result = await firstValueFrom(observable) as LogInUserResponse;
-     if(result.isSuccessful && result.data && result.data.token.accessToken && result.data.token.expiration)
-       localStorage.setItem("accessToken",  result.data.token.accessToken);
+     if(result.isSuccessful && result.data && result.data.token.accessToken && result.data.token.expiration){
+      localStorage.setItem("accessToken",  result.data.token.accessToken);
+      localStorage.setItem("refreshToken",  result.data.token.refreshToken);
+     }
     if(callBackFunction)
        callBackFunction();
      return result;
    }
+
+   async refreshTokenLogIn(refreshToken: string, callBackFunction?: ()=> void): Promise<LogInUserResponse>{
+    const observable: Observable<LogInUserResponse | any> = this.httpClientService.post<LogInUserResponse | any>({
+      action: "RefreshTokenLogIn",
+      controller: "auths"
+    }, {refreshToken});
+    const result = await firstValueFrom(observable) as LogInUserResponse;
+    if(result?.isSuccessful && result?.data && result.data?.token?.accessToken && result.data.token.expiration){
+      localStorage.setItem("accessToken", result.data.token.accessToken);
+      localStorage.setItem("refreshToken", result.data.token.refreshToken);
+    } 
+    if(callBackFunction)
+      callBackFunction();
+    return result;
+  }
+   
 }
