@@ -9,4 +9,16 @@ import { Injectable } from '@angular/core';
 export class SignalRService {
 
   constructor() { }
+  
+  start(){
+
+  }
+
+  invoke(){
+
+  }
+
+  on(){
+
+  }
 }
