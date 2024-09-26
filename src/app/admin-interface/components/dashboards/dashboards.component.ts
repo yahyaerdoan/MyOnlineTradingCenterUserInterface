@@ -15,11 +15,13 @@ export class DashboardsComponent implements OnInit {
     signalRService.start(HubUrls.ProductsHub)
   }
   ngOnInit(): void {
+    debugger;
     this.signalRService.on(ReceivedFunctions.ReceivedProductAddedMessageFunction, message =>{
       this.alertfyService.message(message, {
       position: Position.BottomRight,
-      messageType: MessageType.Info
+      messageType: MessageType.Info,     
       })
+      console.log(message) 
     })
   }
 }

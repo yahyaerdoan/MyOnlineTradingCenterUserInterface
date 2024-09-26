@@ -6,6 +6,9 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { AlertifyService,  MessageType,  Position } from '../../../../services/features/admin/services/alertify.service';
 import { Router } from '@angular/router';
 import { FileUploadOptions } from '../../../../services/shared/components/file-upload/file-upload.component';
+import { SignalRService } from '../../../../services/core/services/signal-r.service';
+import { ReceivedFunctions } from '../../../../constants/received-functions';
+import { HubUrls } from '../../../../constants/hub-urls';
 
 @Component({
   selector: 'app-create-product',
@@ -15,11 +18,20 @@ import { FileUploadOptions } from '../../../../services/shared/components/file-u
 export class CreateProductComponent extends BasesComponent implements OnInit {
   constructor(spinner: NgxSpinnerService,
     private productService: ProductService,
-    private alertify: AlertifyService,
-    private router: Router
-  ) {super(spinner);}
+    private alertfyService: AlertifyService,
+    private router: Router,
+    private signalRService: SignalRService
+  ) {super(spinner); signalRService.start(HubUrls.ProductsHub);}
 
   ngOnInit(): void {
+    this.signalRService.on(ReceivedFunctions.ReceivedProductAddedMessageFunction, message =>{
+      this.alertfyService.message(message, {
+      position: Position.BottomCenter,
+      messageType: MessageType.Warning,     
+      })
+      console.log(message)
+    })
+    
   }
 
   @Output() fileUploadOptions: Partial<FileUploadOptions> = {
@@ -44,7 +56,7 @@ export class CreateProductComponent extends BasesComponent implements OnInit {
 
   await  this.productService.create(createProduct, () => {
       this.hideSpinner(SpinnerType.BallScaleMultiple);
-      this.alertify.message('Product created.', {        
+      this.alertfyService.message('Product created.', {        
         dismissOthers: true,
         messageType: MessageType.Success,
         position: Position.TopRight,
@@ -53,7 +65,7 @@ export class CreateProductComponent extends BasesComponent implements OnInit {
     });
 
     this.hideSpinner(SpinnerType.BallScaleMultiple);
-    this.alertify.message('Product not created.', {
+    this.alertfyService.message('Product not created.', {
       dismissOthers: true,
       messageType: MessageType.Error,
       position: Position.TopRight,
