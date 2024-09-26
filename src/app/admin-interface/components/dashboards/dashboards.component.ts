@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { AlertifyService, MessageType, Position } from '../../../services/features/admin/services/alertify.service';
 import { SignalRService } from '../../../services/core/services/signal-r.service';
+import { ReceivedFunctions } from '../../../constants/received-functions';
+import { HubUrls } from '../../../constants/hub-urls';
 
 @Component({
   selector: 'app-dashboards',
@@ -10,10 +12,10 @@ import { SignalRService } from '../../../services/core/services/signal-r.service
 export class DashboardsComponent implements OnInit {
 
   constructor(private alertfyService: AlertifyService, private signalRService: SignalRService){
-    signalRService.start("https://localhost:7241/products-hub")
+    signalRService.start(HubUrls.ProductsHub)
   }
   ngOnInit(): void {
-    this.signalRService.on("ReceivedProductAddedMessage", message =>{
+    this.signalRService.on(ReceivedFunctions.ReceivedProductAddedMessageFunction, message =>{
       this.alertfyService.message(message, {
       position: Position.BottomRight,
       messageType: MessageType.Info
