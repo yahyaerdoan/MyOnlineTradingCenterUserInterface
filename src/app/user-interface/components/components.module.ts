@@ -13,6 +13,7 @@ import { WhyChoosesModule } from './why-chooses/why-chooses.module';
 import { HomesModule } from './homes/homes.module';
 import { RegistersModule } from './registers/registers.module';
 import { LogInsModule } from './log-ins/log-ins.module';
+import { ShopsModule } from './shops/shops.module';
 
 
 
@@ -32,7 +33,8 @@ import { LogInsModule } from './log-ins/log-ins.module';
     WhyChoosesModule,
     HomesModule,
     RegistersModule,
-    LogInsModule
+    LogInsModule,
+    ShopsModule
   ]
 })
 export class ComponentsModule { }
