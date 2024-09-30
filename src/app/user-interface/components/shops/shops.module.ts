@@ -4,6 +4,7 @@ import { ShopsComponent } from './shops.component';
 import { RouterModule } from '@angular/router';
 import { HeadersModule } from '../headers/headers.module';
 import { FootersModule } from '../footers/footers.module';
+import { HerosModule } from '../heros/heros.module';
 
 
 
@@ -14,6 +15,7 @@ import { FootersModule } from '../footers/footers.module';
   imports: [
     CommonModule,
     HeadersModule,
+    HerosModule,
     FootersModule,
     RouterModule.forChild([
       {path: "shops", component:ShopsComponent}
