@@ -24,7 +24,7 @@ const routes: Routes = [
   { path: 'testimonials', loadChildren: () => import('./user-interface/components/testimonials/testimonials.module').then(m => m.TestimonialsModule) },
   { path: 'we-helps', loadChildren: () => import('./user-interface/components/we-helps/we-helps.module').then(m => m.WeHelpsModule) },
   { path: 'why-chooses', loadChildren: () => import('./user-interface/components/why-chooses/why-chooses.module').then(m => m.WhyChoosesModule) },
-  { path: 'shops', loadChildren: () => import('./user-interface/components/shops/shops.module').then(m => m.ShopsModule) }
+ // { path: 'shops', loadChildren: () => import('./user-interface/components/shops/shops.module').then(m => m.ShopsModule) }
 ];
 
 @NgModule({
