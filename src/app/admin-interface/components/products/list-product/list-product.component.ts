@@ -61,9 +61,9 @@ export class ListProductComponent extends BasesComponent implements OnInit {
             position: Position.TopRight,            
           })
       )
-      .then((data: { totalDataCount: number; products: ListProduct[] }) => {
+      .then((data: { totalProductCount: number; products: ListProduct[] }) => {
         this.dataSource = new MatTableDataSource<ListProduct>(data.products);
-        this.paginator.length = data.totalDataCount;
+        this.paginator.length = data.totalProductCount;
       }) .finally(() => {
         this.hideSpinner(SpinnerType.BallScaleMultiple);
       });

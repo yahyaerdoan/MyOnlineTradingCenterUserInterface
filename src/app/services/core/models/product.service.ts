@@ -45,9 +45,9 @@ export class ProductService {
     size: number = 5, 
     successCallBack?: () => void,
     errorCallBack?: (errorMessage: string) => void
-  ): Promise<{totalDataCount: number; products: ListProduct[]}> {
-    const promisData: Promise<{totalDataCount: number; products: ListProduct[]}> = firstValueFrom(
-      this.httpClientService.get<{totalDataCount: number; products: ListProduct[]}>({
+  ): Promise<{totalProductCount: number; products: ListProduct[]}> {
+    const promisData: Promise<{totalProductCount: number; products: ListProduct[]}> = firstValueFrom(
+      this.httpClientService.get<{totalProductCount: number; products: ListProduct[]}>({
         controller: 'products',
         queryString: `page=${page}&size=${size}`
       })

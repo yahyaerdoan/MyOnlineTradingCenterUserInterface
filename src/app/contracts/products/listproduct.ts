@@ -1,9 +1,9 @@
 export class ListProduct {
-    Id: string = '';
-    Name: string = '';
-    Description: string = '';
-    Stock: number = 0;
-    Price: number = 0;
-    CreatedDate: Date | null = null;
-    UpdatedDate: Date | null = null;
+    id: string = '';
+    name: string = '';
+    description: string = '';
+    stock: number = 0;
+    price: number = 0;
+    createdDate: Date | null = null;
+    updatedDate: Date | null = null;
 }
