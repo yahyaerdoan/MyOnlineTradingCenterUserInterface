@@ -16,17 +16,38 @@ export class ShopsComponent implements OnInit {
   }
 
   products!: ListProduct[];
+  totalProductCount!: number;
   currentPageNo!: number;
+  currentPageSize: number= 12;
+  totalPageCount!: number;
+  pageNumberList: number[] =[];
 
    getProducts() {
     this.activatedRouteService.params.subscribe(async params => {
       this.currentPageNo = parseInt(params["pageNo"] ?? 1);
-      const data: {totalProductCount: number, products: ListProduct[]} = await this.productService.read(this.currentPageNo -1, 12, () => {
+      const data: {totalProductCount: number, products: ListProduct[]} = await this.productService.read(
+        this.currentPageNo -1, this.currentPageSize, () => {
         //successCallback
       }, () => {
         //errorCallback
       });
       this.products = data.products;
+      this.totalProductCount = data.totalProductCount;
+      this.totalPageCount = Math.ceil(this.totalProductCount / this.currentPageSize);
+      this.pageNumberList = [];
+      
+      if (this.currentPageNo -4 <= 0)
+        for (let index = 1; index <= 9; index++)
+          this.pageNumberList.push(index);
+
+      else if(this.currentPageNo +4 >= this.totalPageCount)
+        for (let index = this.totalPageCount -8; index <= this.totalPageCount; index++)
+          this.pageNumberList.push(index);
+        
+      else
+      for (let index = this.currentPageNo -4; index <= this.currentPageNo +4; index++)
+        this.pageNumberList.push(index);
+     
 
     });   
   }
