@@ -18,7 +18,8 @@ import { HerosModule } from '../heros/heros.module';
     HerosModule,
     FootersModule,
     RouterModule.forChild([
-      {path: "shops", component:ShopsComponent}
+      {path: "shops", component:ShopsComponent},
+      {path: "shops/:pageNo", component:ShopsComponent}
     ])
   ],
   exports: [ShopsComponent]
