@@ -17,8 +17,8 @@ export class ShopsComponent implements OnInit {
 
   products!: ListProduct[];
   totalProductCount!: number;
-  currentPageNo!: number;
-  currentPageSize: number= 12;
+  currentPageNo: number = 1;
+  currentPageSize: number= 8;
   totalPageCount!: number;
   pageNumberList: number[] =[];
 
