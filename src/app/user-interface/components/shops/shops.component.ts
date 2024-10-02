@@ -60,6 +60,20 @@ export class ShopsComponent implements OnInit {
           }
         }
       }
+      // this code updated 
+     /*  if (this.currentPageNo -4 <= 0)
+        for (let index = 2; index <= Math.min(9, this.totalPageCount); index++)
+          this.pageNumberList.push(index);
+
+      else if(this.currentPageNo +4 >= this.totalPageCount)
+        for (let index = Math.max(2, this.totalPageCount -8); index < this.totalPageCount; index++)
+          this.pageNumberList.push(index);
+        
+      else
+      for (let index = this.currentPageNo -4; index <= this.currentPageNo +4; index++)
+        if(index > 1 && index < this.totalPageCount)
+          this.pageNumberList.push(index);    */
+
     });
   }
   
