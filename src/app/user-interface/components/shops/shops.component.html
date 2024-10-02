@@ -10,7 +10,6 @@
                     <h3 class="product-title">{{product.name}}</h3>
                     <p>Stock: {{product.stock}}</p>
                     <strong class="product-price">{{product.price | currency}}</strong>
-
                     <span class="icon-cross">
                         <img src="../../assets/furniture/images/cross.svg" class="img-fluid" />
                     </span>
@@ -23,20 +22,16 @@
                 <nav aria-label="Page navigation example">
                     <ul class="pagination">
                         <li class="page-item"><a class="page-link">{{currentPageNo}}/{{totalProductCount}}</a></li>
-
                         <li class="page-item" [class.disabled]="currentPageNo <= 1">
                             <a *ngIf="currentPageNo > 1" class="page-link" [routerLink]="['/shops', currentPageNo - 1]">Previous</a>
                             <span *ngIf="currentPageNo <= 1" class="page-link" style="cursor: not-allowed;">Previous</span>
                         </li>
                         <li class="page-item" *ngFor="let currentPageNo of pageNumberList" routerLinkActive="active"><a
-                                class="page-link" [routerLink]="['/shops', currentPageNo]">{{currentPageNo}}</a></li>
-
+                                class="page-link" [routerLink]="['/shops', currentPageNo]">{{currentPageNo}}</a>
+                        </li>
                         <li class="page-item" [class.disabled]="currentPageNo >= totalPageCount">
-                            <a *ngIf="currentPageNo < totalPageCount" class="page-link"
-                                [routerLink]="['/shops', currentPageNo + 1]">Next</a>
-                            <span *ngIf="currentPageNo >= totalPageCount" class="page-link"
-                                style="cursor: not-allowed;">Next
-                            </span>
+                            <a *ngIf="currentPageNo < totalPageCount" class="page-link" [routerLink]="['/shops', currentPageNo + 1]">Next</a>
+                            <span *ngIf="currentPageNo >= totalPageCount" class="page-link" style="cursor: not-allowed;">Next</span>
                         </li>
                     </ul>
                 </nav>
