@@ -10,7 +10,7 @@
             <p>{{image.name}}</p>
             
             <mat-card-actions style="margin-top: 2px; ">
-                <button mat-raised-button style="color: #1976d2; margin-right: 15px;">Deactive</button>
+                <button mat-raised-button style="color: #1976d2; margin-right: 15px;" (click)="showCase(image.id)">Deactive</button>
                 <button mat-raised-button style="color: hsl(0, 79%, 46%);" (click)="deleteImage(image.id)">Delete</button>
             </mat-card-actions>
         </mat-card>

@@ -52,23 +52,33 @@ export class AddProductImageDialogComponent extends BaseDialogModel<AddProductIm
   }
 
  async deleteImage(imageId: string ){
-
   this.dialogService.openDialog({
     componentType: DeleteDialogComponent,
     data: DeleteState.Yes,
     afterClosed: async () =>{
       this.spinnerService.show(SpinnerType.BallScaleMultiple)
       await this.productService.deleteImage(this.data as string, imageId, ()=> this.spinnerService.hide(SpinnerType.BallScaleMultiple))
-      this.images = this.images.filter(image => image.id !== imageId);
-      
+      this.images = this.images.filter(image => image.id !== imageId);      
     },
-  
-
-  })
-
-
-  
+   })  
   }
+
+  showCase(imageId: string){
+    //alert("ImageId: " + imageId + "- ProductId" + this.data)
+    this.spinnerService.show(SpinnerType.BallScaleMultiple);
+    this.productService.updateImageShowcase(imageId, this.data, () => {
+      this.spinnerService.hide(SpinnerType.BallScaleMultiple);
+      //console.log(this.data)
+    })
+  }
+
+
+
+
+
+
+
+
   
 }
 export enum AddProductImageDialogState {

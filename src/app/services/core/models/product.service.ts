@@ -106,4 +106,22 @@ export class ProductService {
     });    
     return await promiseData;
   }
+
+
+
+ async updateImageShowcase(imageId: string, productId: string, successCallback?: () => void): Promise<void> {
+    const updateImageShowcaseObserbable = this.httpClientService.get({
+      controller: "products",
+      action: "updateimageshowcase",
+      queryString:  `imageId=${imageId}&productId=${productId}`
+    });
+
+    await firstValueFrom(updateImageShowcaseObserbable);
+    successCallback?.();
+
+  }
+
+
+
+
 }
