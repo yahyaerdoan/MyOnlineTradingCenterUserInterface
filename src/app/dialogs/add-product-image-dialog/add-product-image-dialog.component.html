@@ -2,20 +2,29 @@
 <mat-dialog-content class="mat-typography">
     <app-file-upload [options]="options"></app-file-upload>
 
-    <div style="display: flex; flex-wrap: wrap; gap: 15px; justify-content: center; margin-top: 15px;">
+    <div style="
+      display: flex;
+      flex-wrap: wrap;
+      gap: 15px;
+      justify-content: center;
+      margin-top: 15px;
+    ">
         <mat-card *ngFor="let image of images" class="example-card" appearance="outlined"
-            style="border: 1px solid #ddd; max-width: 225px;" [@fadeOut]>
+            style="border: 1px solid #ddd; max-width: 225px" [@fadeOut]>
+            <img mat-card-image src="{{ image.path }}" style="width: 100%" />
+            <p>{{ image.name }}</p>
 
-            <img mat-card-image src={{image.path}} style="width: 100%;">
-            <p>{{image.name}}</p>
-            
-            <mat-card-actions style="margin-top: 2px; ">
-                <button mat-raised-button style="color: #1976d2; margin-right: 15px;" (click)="showCase(image.id)">Deactive</button>
-                <button mat-raised-button style="color: hsl(0, 79%, 46%);" (click)="deleteImage(image.id)">Delete</button>
+            <mat-card-actions style="margin-top: 2px">
+                <button mat-raised-button [style.color]="image.showcasePicture ? '#ff0000' : '#1976d2'"
+                    (click)="updateShowcasePicture(image)">
+                    {{ image.showcasePicture ? 'Deactive' : 'Active' }}
+                </button>
+                <button mat-raised-button style="color: hsl(0, 79%, 46%)" (click)="deleteImage(image.id)">
+                    Delete
+                </button>
             </mat-card-actions>
         </mat-card>
     </div>
-
 </mat-dialog-content>
 <mat-dialog-actions>
     <button mat-raised-button (click)="closeDialog()">No</button>

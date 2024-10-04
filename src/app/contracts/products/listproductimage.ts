@@ -3,4 +3,5 @@ export class ListProductImage {
     name:string = '';
     path:string = '';
     status:boolean = true;
+    showcasePicture:boolean = true;
 }

@@ -40,46 +40,42 @@ export class AddProductImageDialogComponent extends BaseDialogModel<AddProductIm
       isAdminPage: true,
       queryString:  `id=${this.data}`
     };
-    images: ListProductImage[] =[];
+    images: ListProductImage[] = [];
 
-  async ngOnInit(): Promise<void> {
-    this.spinnerService.show(SpinnerType.BallScaleMultiple)
-    this.images = await this.productService.readImages(this.data as string, ()=> this.spinnerService.hide(SpinnerType.BallScaleMultiple))
-    console.log(this.images)
-    const imada = this.images
-    console.log(imada)
-
-  }
-
- async deleteImage(imageId: string ){
-  this.dialogService.openDialog({
-    componentType: DeleteDialogComponent,
-    data: DeleteState.Yes,
-    afterClosed: async () =>{
-      this.spinnerService.show(SpinnerType.BallScaleMultiple)
-      await this.productService.deleteImage(this.data as string, imageId, ()=> this.spinnerService.hide(SpinnerType.BallScaleMultiple))
-      this.images = this.images.filter(image => image.id !== imageId);      
-    },
-   })  
-  }
-
-  showCase(imageId: string){
-    //alert("ImageId: " + imageId + "- ProductId" + this.data)
-    this.spinnerService.show(SpinnerType.BallScaleMultiple);
-    this.productService.updateImageShowcase(imageId, this.data, () => {
-      this.spinnerService.hide(SpinnerType.BallScaleMultiple);
-      //console.log(this.data)
-    })
-  }
-
-
-
-
-
-
-
-
+    ngOnInit(): void {
+      this.getAllProductImages();
+    }
   
+    async getAllProductImages(): Promise<void> {
+      this.spinnerService.show(SpinnerType.BallScaleMultiple);
+      this.images = await this.productService.readImages(this.data as string, () => {
+        this.spinnerService.hide(SpinnerType.BallScaleMultiple);
+      });
+    }
+  
+    async updateShowcasePicture(selectedImage: ListProductImage): Promise<void> {
+      this.spinnerService.show(SpinnerType.BallScaleMultiple);      
+      await this.productService.updateImageShowcase(selectedImage.id, this.data, () => {        
+        this.images.forEach(image => {
+          // Set the selected image to true, and all others to false
+          image.showcasePicture = (image.id === selectedImage.id);
+        });  
+        this.spinnerService.hide(SpinnerType.BallScaleMultiple);
+      });
+    }
+
+    async deleteImage(imageId: string): Promise<void> {
+    this.dialogService.openDialog({
+      componentType: DeleteDialogComponent,
+      data: DeleteState.Yes,
+      afterClosed: async () =>{
+        this.spinnerService.show(SpinnerType.BallScaleMultiple)
+        await this.productService.deleteImage(this.data as string, imageId, 
+          ()=> this.spinnerService.hide(SpinnerType.BallScaleMultiple))
+        this.images = this.images.filter(image => image.id !== imageId);      
+      },
+     })  
+    } 
 }
 export enum AddProductImageDialogState {
   Yes = 'Yes', 
