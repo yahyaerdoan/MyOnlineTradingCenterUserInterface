@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit, Output } from '@angular/core';
+import { ChangeDetectorRef, Component, Inject, OnInit, Output } from '@angular/core';
 import { BaseDialogModel } from '../bases/base-dialog-model';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { ProductService } from '../../services/core/models/product.service';
@@ -30,6 +30,7 @@ export class AddProductImageDialogComponent extends BaseDialogModel<AddProductIm
     private productService: ProductService,
     private spinnerService: NgxSpinnerService,
     private dialogService: DialogService,
+    private cd: ChangeDetectorRef,
     dialogRef: MatDialogRef<AddProductImageDialogComponent>) { super(dialogRef); }
 
     @Output() options: Partial<FileUploadOptions> ={
@@ -48,9 +49,11 @@ export class AddProductImageDialogComponent extends BaseDialogModel<AddProductIm
   
     async getAllProductImages(): Promise<void> {
       this.spinnerService.show(SpinnerType.BallScaleMultiple);
-      this.images = await this.productService.readImages(this.data as string, () => {
+      this.images = await this.productService.readImages(this.data as string, () => {      
         this.spinnerService.hide(SpinnerType.BallScaleMultiple);
       });
+      console.log("getAllProductImages",this.images);
+      //this.cd.detectChanges();
     }
   
     async updateShowcasePicture(selectedImage: ListProductImage): Promise<void> {
@@ -61,7 +64,9 @@ export class AddProductImageDialogComponent extends BaseDialogModel<AddProductIm
           image.showcasePicture = (image.id === selectedImage.id);
         });  
         this.spinnerService.hide(SpinnerType.BallScaleMultiple);
+        //this.cd.detectChanges();
       });
+      console.log("updateShowcasePicture",this.images);
     }
 
     async deleteImage(imageId: string): Promise<void> {
