@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ProductService } from '../../../services/core/models/product.service';
 import { ListProduct } from '../../../contracts/products/listproduct';
 import { ActivatedRoute } from '@angular/router';
+import { data } from 'jquery';
 
 @Component({
   selector: 'app-shops',
@@ -32,8 +33,44 @@ export class ShopsComponent implements OnInit {
         () => { /* successCallback */ }, 
         () => { /* errorCallback */ }
       );
-  
-      this.products = data.products;
+      console.log("products and images",data.products);  
+      this.products = data.products.map(product =>{
+        const imagePath = product.imageFiles.length
+        ? product.imageFiles.find(image => image.showcasePicture)?.path || "" : "";
+        return {...product, imagePath}
+      });
+      console.log("Mapped products with imagePath", this.products);
+
+
+/*       this.products = this.products.map<ListProduct>(product => {
+        const productListWithImages: ListProduct = { 
+          id: product.id,
+          name: product.name,
+          description: product.description,
+          price: product.price,
+          stock: product.stock,
+          createdDate: product.createdDate,
+          updatedDate: product.updatedDate,
+          imageFiles: product.imageFiles,
+          imagePath: product.imageFiles.length 
+            ? product.imageFiles.find(productImage => productImage.showcasePicture)?.path || "" 
+            : ""
+        };
+        return productListWithImages;       
+      }); */
+      
+     
+
+
+
+
+
+
+
+
+
+
+
       this.totalProductCount = data.totalProductCount;
       this.totalPageCount = Math.ceil(this.totalProductCount / this.currentPageSize);
       this.pageNumberList = [];
@@ -60,8 +97,9 @@ export class ShopsComponent implements OnInit {
           }
         }
       }
-      // this code updated 
-     /*  if (this.currentPageNo -4 <= 0)
+
+      //#region this code updated
+      /*  if (this.currentPageNo -4 <= 0)
         for (let index = 2; index <= Math.min(9, this.totalPageCount); index++)
           this.pageNumberList.push(index);
 
@@ -72,8 +110,8 @@ export class ShopsComponent implements OnInit {
       else
       for (let index = this.currentPageNo -4; index <= this.currentPageNo +4; index++)
         if(index > 1 && index < this.totalPageCount)
-          this.pageNumberList.push(index);    */
-
+          this.pageNumberList.push(index);    */ 
+      //#endregion
     });
   }
   

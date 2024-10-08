@@ -1,70 +1,72 @@
 <app-headers></app-headers>
 <app-heros></app-heros>
 <div class="untree_co-section product-section before-footer-section">
-    <div class="container">
-        <div class="row">
-            <!-- Start Column 1 -->
-            <div class="col-12 col-md-4 col-lg-3 mb-5" *ngFor="let product of products">
-                <a class="product-item" href="#">
-                    <img src="../../assets/furniture/images/product-3.png" class="img-fluid product-thumbnail" />
-                    <h3 class="product-title">{{product.name}}</h3>
-                    <p>Stock: {{product.stock}}</p>
-                    <strong class="product-price">{{product.price | currency}}</strong>
-                    <span class="icon-cross">
-                        <img src="../../assets/furniture/images/cross.svg" class="img-fluid" />
-                    </span>
-                </a>
-            </div>
-            <!-- End Column 1 -->
-        </div>
-        <div class="row">
-            <div class="col-12 d-flex justify-content-center">
-                <nav aria-label="Page navigation example">
-                  <ul class="pagination">
-              
-                    <!-- Previous Button -->
-                    <li class="page-item" [class.disabled]="currentPageNo <= 1">
-                      <a *ngIf="currentPageNo > 1" class="page-link" [routerLink]="['/shops', currentPageNo - 1]">Previous</a>
-                      <span *ngIf="currentPageNo <= 1" class="page-link" style="cursor: not-allowed;">Previous</span>
-                    </li>
-              
-                    <!-- Static Page 1 (Always visible) -->
-                    <li class="page-item" [class.active]="currentPageNo === 1">
-                      <a class="page-link" [routerLink]="['/shops', 1]">1</a>
-                    </li>
-              
-                    <!-- Ellipsis after Page 1 if needed -->
-                    <li class="page-item" *ngIf="currentPageNo > 4">
-                      <span class="page-link">...</span>
-                    </li>
-              
-                    <!-- Dynamic page numbers (starting from Page 2) -->
-                    <li class="page-item" *ngFor="let page of pageNumberList" [class.active]="page === currentPageNo">
-                      <a class="page-link" [routerLink]="['/shops', page]">{{ page }}</a>
-                    </li>
-              
-                    <!-- Ellipsis before the last page if needed -->
-                    <li class="page-item" *ngIf="currentPageNo < totalPageCount - 4">
-                      <span class="page-link">...</span>
-                    </li>
-              
-                    <!-- Last page (totalPageCount) -->
-                    <li class="page-item" [class.active]="currentPageNo === totalPageCount">
-                      <a class="page-link" [routerLink]="['/shops', totalPageCount]">{{ totalPageCount }}</a>
-                    </li>
-              
-                    <!-- Next Button -->
-                    <li class="page-item" [class.disabled]="currentPageNo >= totalPageCount">
-                      <a *ngIf="currentPageNo < totalPageCount" class="page-link" [routerLink]="['/shops', currentPageNo + 1]">Next</a>
-                      <span *ngIf="currentPageNo >= totalPageCount" class="page-link" style="cursor: not-allowed;">Next</span>
-                    </li>
-                    
-                  </ul>
-                </nav>
-              </div>
-              
-              
-        </div>
+  <div class="container">
+    <div class="row">
+      <!-- Start Column 1 -->
+      <div class="col-12 col-md-4 col-lg-3 mb-5" *ngFor="let product of products">
+        <a class="product-item" href="#">
+          <img [src]="product.imagePath || 'assets/furniture/images/default-image.jpeg'"
+            style="height: 230px; width: 230px; border-radius: 15px;" class="img-fluid product-thumbnail" />
+          <h3 class="product-title">{{product.name}}</h3>
+          <p>Stock: {{product.stock}}</p>
+          <strong class="product-price">{{product.price | currency}}</strong>
+          <span class="icon-cross">
+            <img src="../../assets/furniture/images/cross.svg" class="img-fluid" />
+          </span>
+        </a>
+      </div>
+      <!-- End Column 1 -->
     </div>
+    <div class="row">
+      <div class="col-12 d-flex justify-content-center">
+        <nav aria-label="Page navigation example">
+          <ul class="pagination">
+
+            <!-- Previous Button -->
+            <li class="page-item" [class.disabled]="currentPageNo <= 1">
+              <a *ngIf="currentPageNo > 1" class="page-link" [routerLink]="['/shops', currentPageNo - 1]">Previous</a>
+              <span *ngIf="currentPageNo <= 1" class="page-link" style="cursor: not-allowed;">Previous</span>
+            </li>
+
+            <!-- Static Page 1 (Always visible) -->
+            <li class="page-item" [class.active]="currentPageNo === 1">
+              <a class="page-link" [routerLink]="['/shops', 1]">1</a>
+            </li>
+
+            <!-- Ellipsis after Page 1 if needed -->
+            <li class="page-item" *ngIf="currentPageNo > 4">
+              <span class="page-link">...</span>
+            </li>
+
+            <!-- Dynamic page numbers (starting from Page 2) -->
+            <li class="page-item" *ngFor="let page of pageNumberList" [class.active]="page === currentPageNo">
+              <a class="page-link" [routerLink]="['/shops', page]">{{ page }}</a>
+            </li>
+
+            <!-- Ellipsis before the last page if needed -->
+            <li class="page-item" *ngIf="currentPageNo < totalPageCount - 4">
+              <span class="page-link">...</span>
+            </li>
+
+            <!-- Last page (totalPageCount) -->
+            <li class="page-item" [class.active]="currentPageNo === totalPageCount">
+              <a class="page-link" [routerLink]="['/shops', totalPageCount]">{{ totalPageCount }}</a>
+            </li>
+
+            <!-- Next Button -->
+            <li class="page-item" [class.disabled]="currentPageNo >= totalPageCount">
+              <a *ngIf="currentPageNo < totalPageCount" class="page-link"
+                [routerLink]="['/shops', currentPageNo + 1]">Next</a>
+              <span *ngIf="currentPageNo >= totalPageCount" class="page-link" style="cursor: not-allowed;">Next</span>
+            </li>
+
+          </ul>
+        </nav>
+      </div>
+
+
+    </div>
+  </div>
 </div>
 <app-footers></app-footers>
