@@ -14,7 +14,7 @@ const routes: Routes = [
     ], canActivate: [authenticationGuard]
   },
   { path: '', component: HomesComponent },
-  { path: 'baskets', loadChildren: () => import('./user-interface/components/baskets/baskets.module').then(m => m.BasketsModule) },
+  //{ path: 'baskets', loadChildren: () => import('./user-interface/components/baskets/baskets.module').then(m => m.BasketsModule) },
   { path: 'blogs', loadChildren: () => import('./user-interface/components/blogs/blogs.module').then(m => m.BlogsModule) },
   { path: 'footers', loadChildren: () => import('./user-interface/components/footers/footers.module').then(m => m.FootersModule) },
   { path: 'headers', loadChildren: () => import('./user-interface/components/headers/headers.module').then(m => m.HeadersModule) },
