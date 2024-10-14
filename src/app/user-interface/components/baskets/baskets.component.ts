@@ -38,17 +38,18 @@ export class BasketsComponent extends BasesComponent implements OnInit {
 
   async decreaseOrIncreaseQuantity(basketItemId: string, quantity: number): Promise<void> {
 
-    this.showSpinner(SpinnerType.BallScaleMultiple);
-  /*   const basketItem: UpdateBasketItem = {
+    const basketItemProperties: UpdateBasketItem = {
       basketItemId: basketItemId,
-      quantity: quantity,
-    } */
-    const basketItem = this.basketItems.findIndex(item => item.basketItemId === basketItemId);
-    await this.basketItemService.updateBasketItemQuantity({basketItemId, quantity})
-    this.hideSpinner(SpinnerType.BallScaleMultiple);
-
-    console.log("Basket Item ID:", basketItemId);
-    console.log("Basket Item:", basketItem);
+      quantity: quantity
+    };
+    const basketItem = this.basketItems.find(item => item.basketItemId === basketItemId);
+    if (basketItem) {
+      basketItem.isUpdating = true;
+      await new Promise(resolve => setTimeout(resolve, 300));
+      await this.basketItemService.updateBasketItemQuantity(basketItemProperties);
+      basketItem.quantity = quantity;
+      basketItem.isUpdating = false;
+    };
   };
 
   async deleteBasketItem(basketItemId: string) {
@@ -60,7 +61,6 @@ export class BasketsComponent extends BasesComponent implements OnInit {
 
     await this.basketItemService.deleteBasketItem({ basketItemId });
     this.hideSpinner(SpinnerType.BallScaleMultiple);
-    console.log("Basket Item ID:", basketItemId);
   };
 
 }
