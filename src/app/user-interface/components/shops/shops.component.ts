@@ -17,9 +17,9 @@ import { MessageType, Position, ToastrfyService, ToastrOptions } from '../../../
 export class ShopsComponent extends BasesComponent implements OnInit {
 
   constructor(private productService: ProductService, private activatedRouteService: ActivatedRoute,
-    private basketItemService: BasketItemService, private spinnerService: NgxSpinnerService, 
+    private basketItemService: BasketItemService, private spinnerService: NgxSpinnerService,
     private toastfyService: ToastrfyService
-  ) { super(spinnerService)}
+  ) { super(spinnerService) }
 
   ngOnInit(): void {
     this.getProducts();
@@ -28,47 +28,47 @@ export class ShopsComponent extends BasesComponent implements OnInit {
   products!: ListProduct[];
   totalProductCount!: number;
   currentPageNo: number = 1;
-  currentPageSize: number= 12;
+  currentPageSize: number = 12;
   totalPageCount!: number;
-  pageNumberList: number[] =[];
+  pageNumberList: number[] = [];
 
   getProducts() {
     this.activatedRouteService.params.subscribe(async params => {
       this.currentPageNo = parseInt(params["pageNo"] ?? 1);
-  
+
       const data: { totalProductCount: number, products: ListProduct[] } = await this.productService.read(
-        this.currentPageNo - 1, 
-        this.currentPageSize, 
-        () => { /* successCallback */ }, 
+        this.currentPageNo - 1,
+        this.currentPageSize,
+        () => { /* successCallback */ },
         () => { /* errorCallback */ }
       );
-      console.log("products and images",data.products);  
-      this.products = data.products.map(product =>{
+      console.log("products and images", data.products);
+      this.products = data.products.map(product => {
         const imagePath = product.imageFiles.length
-        ? product.imageFiles.find(image => image.showcasePicture)?.path || "" : "";
-        return {...product, imagePath}
+          ? product.imageFiles.find(image => image.showcasePicture)?.path || "" : "";
+        return { ...product, imagePath }
       });
       console.log("Mapped products with imagePath", this.products);
 
 
-/*       this.products = this.products.map<ListProduct>(product => {
-        const productListWithImages: ListProduct = { 
-          id: product.id,
-          name: product.name,
-          description: product.description,
-          price: product.price,
-          stock: product.stock,
-          createdDate: product.createdDate,
-          updatedDate: product.updatedDate,
-          imageFiles: product.imageFiles,
-          imagePath: product.imageFiles.length 
-            ? product.imageFiles.find(productImage => productImage.showcasePicture)?.path || "" 
-            : ""
-        };
-        return productListWithImages;       
-      }); */
-      
-     
+      /*       this.products = this.products.map<ListProduct>(product => {
+              const productListWithImages: ListProduct = { 
+                id: product.id,
+                name: product.name,
+                description: product.description,
+                price: product.price,
+                stock: product.stock,
+                createdDate: product.createdDate,
+                updatedDate: product.updatedDate,
+                imageFiles: product.imageFiles,
+                imagePath: product.imageFiles.length 
+                  ? product.imageFiles.find(productImage => productImage.showcasePicture)?.path || "" 
+                  : ""
+              };
+              return productListWithImages;       
+            }); */
+
+
 
 
 
@@ -83,10 +83,10 @@ export class ShopsComponent extends BasesComponent implements OnInit {
       this.totalProductCount = data.totalProductCount;
       this.totalPageCount = Math.ceil(this.totalProductCount / this.currentPageSize);
       this.pageNumberList = [];
-  
+
       // Static Page 1 is always shown, but exclude it from the dynamic range.
       // Don't add Page 1 to dynamic list to avoid duplication.
-  
+
       // Pagination logic starts from Page 2.
       if (this.currentPageNo - 4 <= 0) {
         // If current page is close to the beginning, show pages from 2 to 8 (if available)
@@ -119,7 +119,7 @@ export class ShopsComponent extends BasesComponent implements OnInit {
       else
       for (let index = this.currentPageNo -4; index <= this.currentPageNo +4; index++)
         if(index > 1 && index < this.totalPageCount)
-          this.pageNumberList.push(index);    */ 
+          this.pageNumberList.push(index);    */
       //#endregion
     });
   }
@@ -127,23 +127,21 @@ export class ShopsComponent extends BasesComponent implements OnInit {
   async addToBasket(product: ListProduct) {
     this.spinnerService.show(SpinnerType.BallScaleMultiple);
 
-    let basketItem: CreateBasketItem = new CreateBasketItem();
-    basketItem.productId = product.id;
-    basketItem.quantity = 1;
+    const basketItem: CreateBasketItem = {
+      productId: product.id,
+      quantity: 1
+    };
 
     await this.basketItemService.addBasketItem(basketItem);
 
     this.spinnerService.hide(SpinnerType.BallScaleMultiple);
-    
-    this.toastfyService.message("Product added to cart.", "Added to Cart!",{
+
+    this.toastfyService.message("Product added to cart.", "Added to Cart!", {
       messageType: MessageType.Success,
       position: Position.TopRight
     });
 
-
-
-    console.log(basketItem)
-
+    console.log(basketItem);
   };
-  
+
 }
