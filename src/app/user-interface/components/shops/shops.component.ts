@@ -3,15 +3,24 @@ import { ProductService } from '../../../services/core/models/product.service';
 import { ListProduct } from '../../../contracts/products/listproduct';
 import { ActivatedRoute } from '@angular/router';
 import { data } from 'jquery';
+import { BasketItemService } from '../../../services/core/models/basket-item.service';
+import { BasesComponent, SpinnerType } from '../../../bases/bases.component';
+import { NgxSpinnerService } from 'ngx-spinner';
+import { CreateBasketItem } from '../../../contracts/basketItems/create-basket-item';
+import { MessageType, Position, ToastrfyService, ToastrOptions } from '../../../services/features/user/services/toastrfy.service';
 
 @Component({
   selector: 'app-shops',
   templateUrl: './shops.component.html',
   styleUrl: './shops.component.scss'
 })
-export class ShopsComponent implements OnInit {
+export class ShopsComponent extends BasesComponent implements OnInit {
 
-  constructor(private productService: ProductService, private activatedRouteService: ActivatedRoute) { }
+  constructor(private productService: ProductService, private activatedRouteService: ActivatedRoute,
+    private basketItemService: BasketItemService, private spinnerService: NgxSpinnerService, 
+    private toastfyService: ToastrfyService
+  ) { super(spinnerService)}
+
   ngOnInit(): void {
     this.getProducts();
   }
@@ -114,5 +123,27 @@ export class ShopsComponent implements OnInit {
       //#endregion
     });
   }
+
+  async addToBasket(product: ListProduct) {
+    this.spinnerService.show(SpinnerType.BallScaleMultiple);
+
+    let basketItem: CreateBasketItem = new CreateBasketItem();
+    basketItem.productId = product.id;
+    basketItem.quantity = 1;
+
+    await this.basketItemService.addBasketItem(basketItem);
+
+    this.spinnerService.hide(SpinnerType.BallScaleMultiple);
+    
+    this.toastfyService.message("Product added to cart.", "Added to Cart!",{
+      messageType: MessageType.Success,
+      position: Position.TopRight
+    });
+
+
+
+    console.log(basketItem)
+
+  };
   
 }

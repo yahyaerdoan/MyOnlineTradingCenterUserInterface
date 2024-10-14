@@ -5,7 +5,7 @@
     <div class="row">
       <!-- Start Column 1 -->
       <div class="col-12 col-md-4 col-lg-3 mb-5" *ngFor="let product of products">
-        <a class="product-item" href="#">
+        <a class="product-item" (click)="addToBasket(product)">
           <img [src]="product.imagePath || 'assets/furniture/images/default-image.jpeg'"
             style="height: 230px; width: 230px; border-radius: 15px;" class="img-fluid product-thumbnail" />
           <h3 class="product-title">{{product.name}}</h3>
