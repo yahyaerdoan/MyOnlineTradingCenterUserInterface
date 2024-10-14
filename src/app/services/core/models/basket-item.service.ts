@@ -29,7 +29,7 @@ export class BasketItemService {
     return await firstValueFrom(observable);
   };
 
-  async updateBasketItem(basketItem: UpdateBasketItem): Promise<void> {
+  async updateBasketItemQuantity(basketItem: UpdateBasketItem): Promise<void> {
     const observable: Observable<any> = this.httpClientService.put({
       controller: "BasketItems"
     }, basketItem);

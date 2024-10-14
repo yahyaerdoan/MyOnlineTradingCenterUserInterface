@@ -1,6 +1,6 @@
 export class ListBasketItem {
 
-    baskettemId: string = "";
+    basketItemId: string = "";
     name: string = "";
     quantity: number = 0;
     price: number = 0;
