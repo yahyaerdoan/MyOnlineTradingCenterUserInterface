@@ -4,11 +4,21 @@ import { BasketItemService } from '../../../services/core/models/basket-item.ser
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ListBasketItem } from '../../../contracts/basketItems/list-basket-item';
 import { UpdateBasketItem } from '../../../contracts/basketItems/update-basket-item';
+import { DeleteBasketItem } from '../../../contracts/basketItems/delete-basket-item';
+import { animate, state, style, transition, trigger } from '@angular/animations';
 
 @Component({
   selector: 'app-baskets',
   templateUrl: './baskets.component.html',
-  styleUrl: './baskets.component.scss'
+  styleUrl: './baskets.component.scss',
+  animations: [
+    trigger('fadeOut', [
+      state('in', style({ opacity: 1 })),
+      transition('* => void', [
+        animate('500ms ease-out', style({ opacity: 0 }))
+      ])
+    ])
+  ]
 })
 export class BasketsComponent extends BasesComponent implements OnInit {
 
@@ -29,17 +39,28 @@ export class BasketsComponent extends BasesComponent implements OnInit {
   async decreaseOrIncreaseQuantity(basketItemId: string, quantity: number): Promise<void> {
 
     this.showSpinner(SpinnerType.BallScaleMultiple);
-    const basketItem: UpdateBasketItem = {
+  /*   const basketItem: UpdateBasketItem = {
       basketItemId: basketItemId,
       quantity: quantity,
-    }
-    await this.basketItemService.updateBasketItemQuantity(basketItem)
+    } */
+    const basketItem = this.basketItems.findIndex(item => item.basketItemId === basketItemId);
+    await this.basketItemService.updateBasketItemQuantity({basketItemId, quantity})
     this.hideSpinner(SpinnerType.BallScaleMultiple);
 
     console.log("Basket Item ID:", basketItemId);
     console.log("Basket Item:", basketItem);
+  };
 
+  async deleteBasketItem(basketItemId: string) {
 
+    const itemIndex = this.basketItems.findIndex(item => item.basketItemId === basketItemId);
+    this.showSpinner(SpinnerType.BallScaleMultiple);
+    this.basketItems.splice(itemIndex, 1);
+    await new Promise(resolve => setTimeout(resolve, 100));
+
+    await this.basketItemService.deleteBasketItem({ basketItemId });
+    this.hideSpinner(SpinnerType.BallScaleMultiple);
+    console.log("Basket Item ID:", basketItemId);
   };
 
 }
