@@ -14,14 +14,12 @@ import { HomesModule } from './homes/homes.module';
 import { RegistersModule } from './registers/registers.module';
 import { LogInsModule } from './log-ins/log-ins.module';
 import { ShopsModule } from './shops/shops.module';
-import { AboutUsComponent } from './about-us/about-us.component';
+import { AboutUsModule } from './about-us/about-us.module';
 
 
 
 @NgModule({
-  declarations: [
-    AboutUsComponent
-  ],
+  declarations: [],
   imports: [
     CommonModule,
     BasketsModule,
@@ -37,7 +35,8 @@ import { AboutUsComponent } from './about-us/about-us.component';
     HomesModule,
     RegistersModule,
     LogInsModule,
-    ShopsModule
+    ShopsModule,
+    AboutUsModule
   ]
 })
 export class ComponentsModule { }
