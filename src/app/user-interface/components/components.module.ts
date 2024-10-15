@@ -14,11 +14,14 @@ import { HomesModule } from './homes/homes.module';
 import { RegistersModule } from './registers/registers.module';
 import { LogInsModule } from './log-ins/log-ins.module';
 import { ShopsModule } from './shops/shops.module';
+import { AboutUsComponent } from './about-us/about-us.component';
 
 
 
 @NgModule({
-  declarations: [],
+  declarations: [
+    AboutUsComponent
+  ],
   imports: [
     CommonModule,
     BasketsModule,
