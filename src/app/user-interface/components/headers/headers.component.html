@@ -10,50 +10,41 @@
 
         <div class="collapse navbar-collapse" id="navbarsFurni">
             <ul class="custom-navbar-nav navbar-nav ms-auto mb-2 mb-md-0">
-                <li class="nav-item active">
-                    <a class="nav-link" routerLink="">Home</a>
-                </li>
-                <li><a class="nav-link" routerLink="/shops">Shop</a></li>
-                <li><a class="nav-link" routerLink="/about-us">About us</a></li>
-                <li><a class="nav-link" routerLink="/service">Service</a></li>
-                <li><a class="nav-link" routerLink="/blog">Blog</a></li>
-                <li><a class="nav-link" routerLink="/contact">Contact us</a></li>
+              <li class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+                <a class="nav-link" routerLink="/">Home</a>
+              </li>
+              <li class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: false }">
+                <a class="nav-link" routerLink="/shops">Shop</a>
+              </li>
+              <li class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+                <a class="nav-link" routerLink="/about-us">About us</a>
+              </li>
+              <li class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+                <a class="nav-link" routerLink="/service">Service</a>
+              </li>
+              <li class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+                <a class="nav-link" routerLink="/blog">Blog</a>
+              </li>
+              <li class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+                <a class="nav-link" routerLink="/contact">Contact us</a>
+              </li>
             </ul>
+          
             <ul class="custom-navbar-nav navbar-nav ms-auto mb-2 mb-md-0">
-                <li class="nav-item"><a class="nav-link" routerLink="/baskets">Cart</a></li>
-                <li *ngIf="!authService.isAuthenticated" class="nav-item"><a class="nav-link" routerLink="/logins">Log In</a></li>
-                <li *ngIf="authService.isAuthenticated" class="nav-item"><a class="nav-link" routerLink="" (click)="logOut()">Log Out</a></li>
-                <li *ngIf="authService.isAuthenticated" class="nav-item"><a class="nav-link" routerLink="/admin-interface">Admin</a></li>               
+              <li class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+                <a class="nav-link" routerLink="/baskets">Cart</a>
+              </li>
+              <li *ngIf="!authService.isAuthenticated" class="nav-item" routerLinkActive="active">
+                <a class="nav-link" routerLink="/logins">Log In</a>
+              </li>
+              <li *ngIf="authService.isAuthenticated" class="nav-item" routerLinkActive="active">
+                <a class="nav-link" (click)="logOut()">Log Out</a>
+              </li>
+              <li *ngIf="authService.isAuthenticated" class="nav-item" routerLinkActive="active">
+                <a class="nav-link" routerLink="/admin-interface">Admin</a>
+              </li>
             </ul>
-
-           <!--  <ul class="custom-navbar-cta navbar-nav mb-2 mb-md-0 ms-5">
-                <ul class="custom-navbar-cta navbar-nav mb-2 mb-md-0 ms-5">
-                    <li *ngIf="!authService.isAuthenticated">
-                        <a class="nav-link" routerLink="/logins">
-                            <i class="bi bi-person-check-fill fs-3"></i>
-                        </a>
-                    </li>
-                
-                    <li *ngIf="authService.isAuthenticated">
-                        <a class="nav-link" routerLink="" (click)="logOut()">
-                            <i class="bi bi-person-x fs-3"></i>
-                        </a>
-                    </li>
-                
-                    <li *ngIf="authService.isAuthenticated">
-                        <a class="nav-link" routerLink="/admin-interface">
-                            <i bu class="bi bi-universal-access fs-3"></i>
-                        </a>
-                    </li>
-                </ul>
-                
-                <li>
-                    <a class="nav-link" href="cart.html">
-                        <img src="../assets/furniture/images/cart.svg">
-                    </a>
-                </li>
-            </ul> -->
-        </div>
+          </div>
+          
     </div>
-
 </nav>
