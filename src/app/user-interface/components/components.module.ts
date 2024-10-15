@@ -15,6 +15,7 @@ import { RegistersModule } from './registers/registers.module';
 import { LogInsModule } from './log-ins/log-ins.module';
 import { ShopsModule } from './shops/shops.module';
 import { AboutUsModule } from './about-us/about-us.module';
+import { OurTeamsModule } from './our-teams/our-teams.module';
 
 
 
@@ -36,7 +37,8 @@ import { AboutUsModule } from './about-us/about-us.module';
     RegistersModule,
     LogInsModule,
     ShopsModule,
-    AboutUsModule
+    AboutUsModule,
+    OurTeamsModule
   ]
 })
 export class ComponentsModule { }

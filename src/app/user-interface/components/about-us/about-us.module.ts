@@ -7,6 +7,7 @@ import { HerosModule } from '../heros/heros.module';
 import { WhyChoosesModule } from '../why-chooses/why-chooses.module';
 import { FootersModule } from '../footers/footers.module';
 import { TestimonialsModule } from '../testimonials/testimonials.module';
+import { OurTeamsModule } from '../our-teams/our-teams.module';
 
 
 
@@ -17,7 +18,7 @@ import { TestimonialsModule } from '../testimonials/testimonials.module';
     HeadersModule,
     HerosModule,
     WhyChoosesModule,
-    //ourteams,
+    OurTeamsModule,
     TestimonialsModule,
     FootersModule,
     RouterModule.forChild([{path: "about-us", component: AboutUsComponent}])
