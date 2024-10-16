@@ -1,12 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClientService } from '../services/http-client.service';
-import { User } from '../../../entities/users/user';
+import { CreateUser } from '../../../entities/users/createuser';
 import { firstValueFrom, Observable } from 'rxjs';
-import { CreateUserResponse } from '../../../contracts/users/createuserresponse';
-import { LogInUser } from '../../../entities/users/loginuser';
-import { LogInUserResponse } from '../../../contracts/users/loginuserresponse';
-import { TokenResponse } from '../../../contracts/tokens/tokenResponse';
-import { SocialUser } from '@abacritt/angularx-social-login';
+import { FunctionResponse } from '../../../contracts/responses/functionResponse';
 
 @Injectable({
   providedIn: 'root'
@@ -15,10 +11,10 @@ export class UserService {
 
   constructor(private httpClientService: HttpClientService) { }
 
-  async create(user: User): Promise<CreateUserResponse>{
-   const observable: Observable<CreateUserResponse | User> = this.httpClientService.post<CreateUserResponse | User>({
+  async create(createUser: CreateUser): Promise<FunctionResponse<null>>{
+   const observable: Observable<FunctionResponse<null> | CreateUser> = this.httpClientService.post<FunctionResponse<null> | CreateUser>({
       controller: "users"
-    }, user);
-    return await firstValueFrom(observable) as CreateUserResponse;
+    }, createUser);
+    return await firstValueFrom(observable) as FunctionResponse<null>;
   }
 }

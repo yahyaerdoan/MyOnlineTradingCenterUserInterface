@@ -1,4 +1,4 @@
-export class User{
+export class CreateUser{
     firstName!: string; 
     lastName!: string; 
     userName!: string; 

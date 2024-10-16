@@ -4,11 +4,12 @@ import { LogInUser } from '../../../entities/users/loginuser';
 import { BasesComponent, SpinnerType } from '../../../bases/bases.component';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { MessageType, Position, ToastrfyService } from '../../../services/features/user/services/toastrfy.service';
-import { LogInUserResponse } from '../../../contracts/users/loginuserresponse';
 import { AuthService } from '../../../services/core/services/auth.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { SocialAuthService, SocialUser } from '@abacritt/angularx-social-login';
 import { UserAuthService } from '../../../services/core/models/user-auth.service';
+import { FunctionResponse } from '../../../contracts/responses/functionResponse';
+import { TokenResponse } from '../../../contracts/responses/tokenResponse';
 
 @Component({
   selector: 'app-log-ins',
@@ -46,7 +47,7 @@ export class LogInsComponent extends BasesComponent implements OnInit {
     if (this.formGroup.invalid)
       return;
     this.showSpinner(SpinnerType.BallScaleMultiple);
-    const result: LogInUserResponse = await this.userAuthService.logIn(logInUser, () => {
+    const result: FunctionResponse<TokenResponse> = await this.userAuthService.logIn(logInUser, () => {
       this.authService.identityCheck();
       this.hideSpinner(SpinnerType.BallScaleMultiple)
     });
@@ -64,7 +65,7 @@ export class LogInsComponent extends BasesComponent implements OnInit {
   async signInWithGoogle() {
     this.socialAuthService.authState.subscribe(async (user: SocialUser) => {
       this.showSpinner(SpinnerType.BallScaleMultiple);
-      const result = await this.userAuthService.logInWithGoogle(user, () =>{       
+      const result = await this.userAuthService.logInWithGoogle(user, () =>{   
         this.authService.identityCheck();
         this.hideSpinner(SpinnerType.BallScaleMultiple)})
         if (result.isSuccessful) {

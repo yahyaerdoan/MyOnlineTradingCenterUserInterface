@@ -29,7 +29,6 @@ export class HttpErrorHandlerInterceptorService implements HttpInterceptor {
               errorMessage = `Unauthorized: Please login again.`;
               const refreshToken = localStorage.getItem("refreshToken") ?? '';
               this.userAuthService.refreshTokenLogIn(refreshToken).then(data=>{
-                console.log(data.data?.token.refreshToken)
               });
               break;
             case HttpStatusCode.NotFound:

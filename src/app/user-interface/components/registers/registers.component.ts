@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
-import { User } from '../../../entities/users/user';
+import { CreateUser } from '../../../entities/users/createuser';
 import { UserService } from '../../../services/core/models/user.service';
 import { MessageType, Position, ToastrfyService } from '../../../services/features/user/services/toastrfy.service';
-import { CreateUserResponse } from '../../../contracts/users/createuserresponse';
 import { Router } from '@angular/router';
+import { FunctionResponse } from '../../../contracts/responses/functionResponse';
 
 @Component({
   selector: 'app-registers',
@@ -40,18 +40,24 @@ export class RegistersComponent implements OnInit {
     return this.formGroup.controls;
   }
 
-  async onSubmit(user: User){
+  async onSubmit(createUser: CreateUser){
     this.submitted = true;
     if(this.formGroup.invalid)
       return;
-    const result: CreateUserResponse =  await this.userService.create(user);
+    const result: FunctionResponse<null> =  await this.userService.create(createUser);
     if (result.isSuccessful) {
-      this.toastifyService.message(result.message, "Success!", {
+      const successMessage = `${result.message} You will be redirected to the login page, please log in.`;
+      this.toastifyService.message(successMessage, "Success!", {
         messageType: MessageType.Success,
-        position: Position.TopRight});
-      this.router.navigate(["/logIns"])
+        position: Position.TopRight
+      });
+
+    setTimeout(() => {
+      this.router.navigate(["/logins"]);
+    }, 1500);
     }else{
-      this.toastifyService.message(result.errors, "Error!", {
+      const errorMessage = result.errors ? result.errors.join(',') : 'An unknown error occured.'
+      this.toastifyService.message(errorMessage, "Error!", {
         messageType: MessageType.Error,
         position: Position.TopRight
       });
