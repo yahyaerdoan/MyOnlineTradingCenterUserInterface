@@ -3,12 +3,14 @@ import { CreateProduct } from '../../../../contracts/products/createproduct';
 import { ProductService } from '../../../../services/core/models/product.service';
 import { BasesComponent, SpinnerType } from '../../../../bases/bases.component';
 import { NgxSpinnerService } from 'ngx-spinner';
-import { AlertifyService,  MessageType,  Position } from '../../../../services/features/admin/services/alertify.service';
+import { AlertifyService, MessageType, Position } from '../../../../services/features/admin/services/alertify.service';
 import { Router } from '@angular/router';
 import { FileUploadOptions } from '../../../../services/shared/components/file-upload/file-upload.component';
 import { SignalRService } from '../../../../services/core/services/signal-r.service';
 import { ReceivedFunctions } from '../../../../constants/received-functions';
 import { HubUrls } from '../../../../constants/hub-urls';
+import { CreateProductRequest } from '../../../../contracts/product/requests/create-product-request.model';
+import { CreateProductResponse } from '../../../../contracts/product/responses/create-product-response.model';
 
 @Component({
   selector: 'app-create-product',
@@ -18,32 +20,66 @@ import { HubUrls } from '../../../../constants/hub-urls';
 export class CreateProductComponent extends BasesComponent implements OnInit {
   constructor(spinner: NgxSpinnerService,
     private productService: ProductService,
-    private alertfyService: AlertifyService,
+    private alertifyService: AlertifyService,
     private router: Router,
     private signalRService: SignalRService
-  ) {super(spinner); signalRService.start(HubUrls.ProductsHub);}
+  ) { super(spinner); signalRService.start(HubUrls.ProductsHub); }
 
   ngOnInit(): void {
-    this.signalRService.on(ReceivedFunctions.ReceivedProductAddedMessageFunction, message =>{
-      this.alertfyService.message(message, {
-      position: Position.BottomCenter,
-      messageType: MessageType.Warning,     
+    this.signalRService.on(ReceivedFunctions.ReceivedProductAddedMessageFunction, message => {
+      this.alertifyService.message(message, {
+        position: Position.BottomCenter,
+        messageType: MessageType.Warning,
       })
       console.log(message)
     })
-    
+
   }
 
   @Output() fileUploadOptions: Partial<FileUploadOptions> = {
-    action : "upload",
+    action: "upload",
     controller: "products",
     explanation: "Choose your file",
-    accept : '.png, .jpeg',
+    accept: '.png, .jpeg',
     isAdminPage: true
   }
 
+/*   async onCreateProduct(name: HTMLInputElement, description: HTMLTextAreaElement,
+    stock: HTMLInputElement,price: HTMLInputElement
+  ) {
+    const createProductRequest: CreateProductRequest = {
+      name: name.value,
+      description: description.value,
+      stock: parseInt(stock.value, 10),
+      price: parseFloat(price.value),
+    };
+    this.showSpinner(SpinnerType.BallScaleMultiple);
+    debugger;     
 
-  async createProduct(name: HTMLInputElement, description: HTMLTextAreaElement, stock: HTMLInputElement, price: HTMLInputElement) {
+    const result: CreateProductResponse = await this.productService.createProduct(createProductRequest);
+    console.log('Product Submission:', createProductRequest);
+    console.log('Product Response:', result);
+
+    if (result.isSuccessful) {
+      this.alertifyService.message(result.message || 'Yahya Product created successfully.', {
+        dismissOthers: true,
+        messageType: MessageType.Success,
+        position: Position.TopRight,
+        
+      });   
+    } else {
+      this.hideSpinner(SpinnerType.BallScaleMultiple);
+      const errorMessage = result.errors ? result.errors.join('. ') : 'Yahya Product not created.';
+      this.alertifyService.message(errorMessage, {
+        dismissOthers: true,
+        messageType: MessageType.Error,
+        position: Position.TopRight,
+      });   
+    }
+  }; */
+
+  //#region create Product old version
+  async onCreateProduct(name: HTMLInputElement, description: HTMLTextAreaElement, stock: HTMLInputElement, price: HTMLInputElement) {
 
     const createProduct: CreateProduct = {
       Name: name.value,
@@ -54,9 +90,9 @@ export class CreateProductComponent extends BasesComponent implements OnInit {
 
     this.showSpinner(SpinnerType.BallScaleMultiple);
 
-  await  this.productService.create(createProduct, () => {
+    await this.productService.create(createProduct, () => {
       this.hideSpinner(SpinnerType.BallScaleMultiple);
-      this.alertfyService.message('Product created.', {        
+      this.alertifyService.message('Product created.', {
         dismissOthers: true,
         messageType: MessageType.Success,
         position: Position.TopRight,
@@ -65,10 +101,11 @@ export class CreateProductComponent extends BasesComponent implements OnInit {
     });
 
     this.hideSpinner(SpinnerType.BallScaleMultiple);
-    this.alertfyService.message('Product not created.', {
+    this.alertifyService.message('Product not created.', {
       dismissOthers: true,
       messageType: MessageType.Error,
       position: Position.TopRight,
     });
   }
+  //#endregion
 }
