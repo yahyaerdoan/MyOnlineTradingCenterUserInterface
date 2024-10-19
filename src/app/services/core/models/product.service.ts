@@ -12,13 +12,15 @@ import { CreateProductResponse } from '../../../contracts/product/responses/crea
   providedIn: 'root',
 })
 export class ProductService {
+
   constructor(private httpClientService: HttpClientService) { }
 
- /*  async createProduct(product: CreateProductRequest,
+  async createProduct(createProductDto: CreateProductRequest,
     successCallBack?: (message?: string) => void,
     errorCallBack?: (errorMessage?: string) => void): Promise<CreateProductResponse> {
-    const observable: Observable<CreateProductRequest | CreateProductResponse> = this.httpClientService
-      .post<CreateProductRequest | CreateProductResponse>({ controller: 'products' }, product);
+
+    const observable: Observable<| CreateProductResponse | CreateProductRequest> = this.httpClientService
+      .post<CreateProductResponse | CreateProductRequest>({ controller: 'products' }, createProductDto);
 
     const result = await firstValueFrom(observable) as CreateProductResponse;
 
@@ -27,86 +29,12 @@ export class ProductService {
     } else {
       errorCallBack?.(this.formatErrorMessage(result.errors));
     }
+
     return result;
-  }formatErrorMessage(errors?: string[] | undefined): string | undefined {
+  }; private formatErrorMessage(errors?: string[] | undefined): string | undefined {
     return errors?.join('. ') || 'An unexpected error occured.'
-  }; */
+  };
 
-  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  //#region createProduct old version
-  async create(
-    product: CreateProduct,
-    successCallBack?: () => void,
-    errorCallBack?: (errorMessage?: string) => void
-  ): Promise<void> {
-    firstValueFrom(
-      this.httpClientService.post({ controller: 'products' }, product)
-    )
-      .then(() => {
-        if (successCallBack) {
-          successCallBack();
-        }
-      })
-      .catch((errorResponse: HttpErrorResponse) => {
-        const _error: Array<{ key: string; value: Array<string> }> =
-          errorResponse.error;
-        let message = '';
-        _error.forEach((values) => {
-          values.value.forEach((_value) => {
-            message += `${_value}<br>`;
-          });
-        });
-        if (errorCallBack) {
-          errorCallBack(message);
-        }
-      });
-  }
-
-  //#endregion
   async read(
     page: number = 0,
     size: number = 5,
@@ -120,23 +48,20 @@ export class ProductService {
       })
     );
 
-    promisData
-      .then((data) => {
-        if (successCallBack) successCallBack();
-      })
-      .catch((errorResponse: HttpErrorResponse) => {
-        if (errorCallBack) errorCallBack(errorResponse.message);
-      });
-
+    promisData.then((data) => {
+      if (successCallBack) successCallBack();
+    }).catch((errorResponse: HttpErrorResponse) => {
+      if (errorCallBack) errorCallBack(errorResponse.message);
+    });
     return await promisData;
-  }
+  };
 
   async delete(id: string) {
     const deleteProduct = this.httpClientService.delete({
       controller: "products"
     }, id)
     await firstValueFrom(deleteProduct)
-  }
+  };
 
   async readImages(id: string, successCallBack?: () => void, errorCallBack?: (error: string) => void): Promise<ListProductImage[]> {
     const getObservable: Observable<ListProductImage[]> = this.httpClientService.get<ListProductImage[]>({
@@ -153,7 +78,7 @@ export class ProductService {
         throw errorResponse;
       });
     return await promiseData;
-  }
+  };
 
   async deleteImage(id: string, imageId: string, successCallBack?: () => void, errorCallBack?: (error: string) => void) {
     const deleteObservable = this.httpClientService.delete({
@@ -172,9 +97,7 @@ export class ProductService {
         throw errorResponse;
       });
     return await promiseData;
-  }
-
-
+  };
 
   async updateImageShowcase(imageId: string, productId: string, successCallback?: () => void): Promise<void> {
     const updateImageShowcaseObserbable = this.httpClientService.get({
@@ -185,10 +108,29 @@ export class ProductService {
 
     await firstValueFrom(updateImageShowcaseObserbable);
     successCallback?.();
+  };
 
-  }
-
-
-
-
+  //#region createProduct old version
+  /*   async create(
+      product: CreateProduct,
+      successCallBack?: () => void,
+      errorCallBack?: (errorMessage?: string) => void
+    ): Promise<void> {
+      firstValueFrom(
+        this.httpClientService.post({ controller: 'products' }, product)
+      )
+        .then(() => {
+          successCallBack?.();
+        })
+        .catch((errorResponse: any) => {
+          let message = 'An unexpected error occurred.';
+          if (errorResponse.error && typeof errorResponse.error === 'object') {
+            message = Object.values(errorResponse.error)
+              .flat()
+              .join('<br>');
+          }
+          errorCallBack?.(message);
+        });
+    } */
+  //#endregion
 }

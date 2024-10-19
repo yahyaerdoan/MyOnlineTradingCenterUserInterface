@@ -44,68 +44,66 @@ export class CreateProductComponent extends BasesComponent implements OnInit {
     isAdminPage: true
   }
 
-/*   async onCreateProduct(name: HTMLInputElement, description: HTMLTextAreaElement,
-    stock: HTMLInputElement,price: HTMLInputElement
+  async onCreateProduct(name: HTMLInputElement, description: HTMLTextAreaElement,
+    stock: HTMLInputElement, price: HTMLInputElement
   ) {
-    const createProductRequest: CreateProductRequest = {
-      name: name.value,
-      description: description.value,
-      stock: parseInt(stock.value, 10),
-      price: parseFloat(price.value),
+    const createProductRequest = {
+      createProductDto: {
+        name: name.value,
+        description: description.value,
+        stock: parseInt(stock.value, 10),
+        price: parseFloat(price.value)
+      }
     };
     this.showSpinner(SpinnerType.BallScaleMultiple);
-    debugger;     
-
     const result: CreateProductResponse = await this.productService.createProduct(createProductRequest);
-    console.log('Product Submission:', createProductRequest);
-    console.log('Product Response:', result);
-
     if (result.isSuccessful) {
-      this.alertifyService.message(result.message || 'Yahya Product created successfully.', {
+      this.hideSpinner(SpinnerType.BallScaleMultiple);
+      this.alertifyService.message(result.message, {
         dismissOthers: true,
         messageType: MessageType.Success,
-        position: Position.TopRight,
-        
-      });   
+        position: Position.TopRight
+      });
+      //this.router.navigate(['/admin-interface/products']);
     } else {
       this.hideSpinner(SpinnerType.BallScaleMultiple);
-      const errorMessage = result.errors ? result.errors.join('. ') : 'Yahya Product not created.';
+      const errorMessage = result.errors ? result.errors.join('. ') : 'Product creation failed.';
       this.alertifyService.message(errorMessage, {
         dismissOthers: true,
         messageType: MessageType.Error,
-        position: Position.TopRight,
-      });   
+        position: Position.TopRight
+      });
     }
-  }; */
+  };
 
   //#region create Product old version
-  async onCreateProduct(name: HTMLInputElement, description: HTMLTextAreaElement, stock: HTMLInputElement, price: HTMLInputElement) {
-
-    const createProduct: CreateProduct = {
-      Name: name.value,
-      Description: description.value,
-      Stock: parseInt(stock.value, 10),
-      Price: parseFloat(price.value),
-    };
-
-    this.showSpinner(SpinnerType.BallScaleMultiple);
-
-    await this.productService.create(createProduct, () => {
+  /*   async onCreateProduct(name: HTMLInputElement, description: HTMLTextAreaElement, stock: HTMLInputElement, price: HTMLInputElement) {
+  
+      const createProduct: CreateProduct = {
+        name: name.value,
+        description: description.value,
+        stock: parseInt(stock.value, 10),
+        price: parseFloat(price.value),
+      };
+  
+      this.showSpinner(SpinnerType.BallScaleMultiple);
+  
+      await this.productService.create(createProduct, () => {
+        this.hideSpinner(SpinnerType.BallScaleMultiple);
+        this.alertifyService.message('Product created.', {
+          dismissOthers: true,
+          messageType: MessageType.Success,
+          position: Position.TopRight,
+        });
+        //this.router.navigate(['/admin-interface/products']);
+      });
+  
       this.hideSpinner(SpinnerType.BallScaleMultiple);
-      this.alertifyService.message('Product created.', {
+      this.alertifyService.message('Product not created.', {
         dismissOthers: true,
-        messageType: MessageType.Success,
+        messageType: MessageType.Error,
         position: Position.TopRight,
       });
-      //this.router.navigate(['/admin-interface/products']);
-    });
-
-    this.hideSpinner(SpinnerType.BallScaleMultiple);
-    this.alertifyService.message('Product not created.', {
-      dismissOthers: true,
-      messageType: MessageType.Error,
-      position: Position.TopRight,
-    });
-  }
+    } */
   //#endregion
 }

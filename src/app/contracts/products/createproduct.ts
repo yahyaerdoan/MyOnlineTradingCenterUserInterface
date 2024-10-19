@@ -1,6 +1,6 @@
 export class CreateProduct {
-    Name: string = '';
-    Description: string = '';
-    Stock: number = 0;
-    Price: number = 0;
+    name: string = '';
+    description: string = '';
+    stock: number = 0;
+    price: number = 0;
 }
