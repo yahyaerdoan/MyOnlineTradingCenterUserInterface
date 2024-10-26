@@ -1,6 +1,6 @@
-import { Injectable } from '@angular/core';
+import { Inject, Injectable } from '@angular/core';
 import { HubConnection, HubConnectionBuilder, HubConnectionState } from '@microsoft/signalr';
-import { error } from 'jquery';
+
 
 // npm i @microsoft/signalr
 // npm i @types/signalr
@@ -9,22 +9,25 @@ import { error } from 'jquery';
   providedIn: 'root'
 })
 export class SignalRService {
-  constructor() { }
 
   private _hubConnection! : HubConnection;
+
+  constructor(@Inject("signalRBaseUrl") private signalRBaseUrl: string) { }
+
   get connection(): HubConnection{
     return this._hubConnection;
   }
 
   start(hubUrl: string){
+    const fullHubUrl = `${this.signalRBaseUrl}/${hubUrl}`;
     if (!this.connection || this._hubConnection?.state == HubConnectionState.Disconnected) {
       const builder : HubConnectionBuilder = new HubConnectionBuilder();
-      const hubConnection : HubConnection = builder.withUrl(hubUrl)
+      const hubConnection : HubConnection = builder.withUrl(fullHubUrl)
       .withAutomaticReconnect().build();
 
       hubConnection.start()
       .then(() =>{console.log("Hub Connected");})
-      .catch(error => setTimeout(() => this.start(hubUrl), 2000));  
+      .catch(error => setTimeout(() => this.start(fullHubUrl), 2000));  
       this._hubConnection = hubConnection;    
     }
     this._hubConnection.onreconnected(connectionId => console.log("Hub Reconnected"));
