@@ -12,14 +12,13 @@ export class HeadersComponent {
 
   constructor(public authService: AuthService, private toastfyService:  ToastrfyService, private router: Router) { }
 
-  logOut(){
-    localStorage.removeItem("accessToken");
-    this.authService.identityCheck();
+  logOut(): void {
+    this.authService.logOut(); // Call the logout method in the AuthService to clear session
     this.router.navigate([""]);
-    this.toastfyService.message("Log out succesfully!", "Log Out!",{
+    this.toastfyService.message("Logged out successfully!", "Log Out!", {
       messageType: MessageType.Info,
       position: Position.TopRight
-    })
-    
+    });
   }
+  
 }
