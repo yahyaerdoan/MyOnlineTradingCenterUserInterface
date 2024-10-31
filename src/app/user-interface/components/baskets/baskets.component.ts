@@ -4,8 +4,11 @@ import { BasketItemService } from '../../../services/core/models/basket-item.ser
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ListBasketItem } from '../../../contracts/basketItems/list-basket-item';
 import { UpdateBasketItem } from '../../../contracts/basketItems/update-basket-item';
-import { DeleteBasketItem } from '../../../contracts/basketItems/delete-basket-item';
 import { animate, state, style, transition, trigger } from '@angular/animations';
+import { OrderService } from '../../../services/core/models/order.service';
+import { CreateOrderDto, CreateOrderRequest } from '../../../contracts/order/requests/create-order-request.model';
+import { MessageType, Position, ToastrfyService } from '../../../services/features/user/services/toastrfy.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-baskets',
@@ -22,7 +25,9 @@ import { animate, state, style, transition, trigger } from '@angular/animations'
 })
 export class BasketsComponent extends BasesComponent implements OnInit {
 
-  constructor(private basketItemService: BasketItemService, spinnerService: NgxSpinnerService) { super(spinnerService) }
+  constructor(private basketItemService: BasketItemService, spinnerService: NgxSpinnerService,
+    private orderService: OrderService, private toastfyService: ToastrfyService, private routerService: Router
+  ) { super(spinnerService) }
 
   ngOnInit(): void {
     this.getBasketItemList();
@@ -63,4 +68,21 @@ export class BasketsComponent extends BasesComponent implements OnInit {
     this.hideSpinner(SpinnerType.BallScaleMultiple);
   };
 
+  async proceedToCheckout() {
+    this.showSpinner(SpinnerType.BallScaleMultiple);
+
+    const createOrder = new CreateOrderRequest();
+    createOrder.createOrderDto.address = "Chicago";
+    createOrder.createOrderDto.description = "IL";
+
+    await this.orderService.createOrder(createOrder);
+    this.hideSpinner(SpinnerType.BallScaleMultiple);
+    this.toastfyService.message("Order created successfully.", "Success", {
+      messageType: MessageType.Success,
+      position: Position.TopCenter
+    });
+    setTimeout(() =>{
+      this.routerService.navigate(["/"]);
+    }, 1000);
+   };
 }

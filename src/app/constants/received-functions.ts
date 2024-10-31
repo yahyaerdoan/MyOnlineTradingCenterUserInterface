@@ -1,3 +1,4 @@
 export enum ReceivedFunctions {
-    ReceivedProductAddedMessageFunction = "ReceivedProductAddedMessage"
+    ReceivedProductAddedMessageFunction = "ReceivedProductAddedMessage",
+    ReceivedOrderAddedMessageFunction = "ReceivedOrderAddedMessage",
 }

@@ -11,17 +11,32 @@ import { HubUrls } from '../../../constants/hub-urls';
 })
 export class DashboardsComponent implements OnInit {
 
-  constructor(private alertfyService: AlertifyService, private signalRService: SignalRService){
-    signalRService.start(HubUrls.ProductsHub)
-  }
+  constructor(private alertfyService: AlertifyService, private signalRService: SignalRService){}
+
   ngOnInit(): void {
-    debugger;
+    this.startSignalRConnections();
+    this.setupSignalRReceivers();
+  }
+
+  private startSignalRConnections(): void {
+    this.signalRService.start(HubUrls.ProductsHub);
+    this.signalRService.start(HubUrls.OrdersHub);
+  }
+
+  private setupSignalRReceivers(): void {
+    
     this.signalRService.on(ReceivedFunctions.ReceivedProductAddedMessageFunction, message =>{
       this.alertfyService.message(message, {
       position: Position.BottomRight,
       messageType: MessageType.Info,     
-      })
-      console.log(message) 
-    })
-  }
+      });     
+    });
+
+    this.signalRService.on(ReceivedFunctions.ReceivedOrderAddedMessageFunction, message =>{
+      this.alertfyService.message(message, {
+      position: Position.BottomRight,
+      messageType: MessageType.Info,     
+      });     
+    });    
+  };
 }
