@@ -23,17 +23,9 @@ export class CreateProductComponent extends BasesComponent implements OnInit {
     private alertifyService: AlertifyService,
     private router: Router,
     private signalRService: SignalRService
-  ) { super(spinner); signalRService.start(HubUrls.ProductsHub); }
+  ) { super(spinner); }
 
   ngOnInit(): void {
-    this.signalRService.on(ReceivedFunctions.ReceivedProductAddedMessageFunction, message => {
-      this.alertifyService.message(message, {
-        position: Position.BottomCenter,
-        messageType: MessageType.Warning,
-      })
-      console.log(message)
-    })
-
   }
 
   @Output() fileUploadOptions: Partial<FileUploadOptions> = {

@@ -9,39 +9,41 @@ import { HubConnection, HubConnectionBuilder, HubConnectionState } from '@micros
   providedIn: 'root'
 })
 export class SignalRService {
-
-  private _hubConnection! : HubConnection;
+  private connections: Map<string, HubConnection> = new Map();
 
   constructor(@Inject("signalRBaseUrl") private signalRBaseUrl: string) { }
 
-  get connection(): HubConnection{
-    return this._hubConnection;
-  }
+  private ensureConnection(hubUrl: string): HubConnection {
+    if (!this.connections.has(hubUrl)) {
+      const fullHubUrl = `${this.signalRBaseUrl}/${hubUrl}`;
+      const connection = new HubConnectionBuilder()
+        .withUrl(fullHubUrl)
+        .withAutomaticReconnect()
+        .build();
 
-  start(hubUrl: string){
-    const fullHubUrl = `${this.signalRBaseUrl}/${hubUrl}`;
-    if (!this.connection || this._hubConnection?.state == HubConnectionState.Disconnected) {
-      const builder : HubConnectionBuilder = new HubConnectionBuilder();
-      const hubConnection : HubConnection = builder.withUrl(fullHubUrl)
-      .withAutomaticReconnect().build();
+      connection.start()
+        .then(() => console.log("Hub Connected: " + hubUrl))
+        .catch(error => console.error("Connection failed: " + hubUrl, error));
 
-      hubConnection.start()
-      .then(() =>{console.log("Hub Connected");})
-      .catch(error => setTimeout(() => this.start(fullHubUrl), 2000));  
-      this._hubConnection = hubConnection;    
+      connection.onreconnected(connectionId => console.log("Hub Reconnected: " + hubUrl));
+      connection.onreconnecting(error => console.log("Hub Reconnecting: " + hubUrl));
+      connection.onclose(error => console.log("Hub Connection Closed: " + hubUrl));
+
+      this.connections.set(hubUrl, connection);
     }
-    this._hubConnection.onreconnected(connectionId => console.log("Hub Reconnected"));
-    this._hubConnection.onreconnecting(error => console.log("Hub Reconnecting"));
-    this._hubConnection.onclose(error => console.log("Closed Hub Reconnection"));
+    return this.connections.get(hubUrl)!;
   }
 
-  invoke(procedureMethodName: string, message: any, successCallBack?: (value: unknown) => void,  
-  errorCallBack?: (value: unknown) => void ){
-    this.connection.invoke(procedureMethodName, message)
-    .then(successCallBack).catch(errorCallBack);
+  invoke(hubUrl: string, procedureMethodName: string, message: any, 
+    successCallBack?: (value: unknown) => void, errorCallBack?: (value: unknown) => void) {
+    const connection = this.ensureConnection(hubUrl);
+    connection.invoke(procedureMethodName, message)
+      .then(successCallBack)
+      .catch(errorCallBack);
   }
 
-  on(procedureMethodName: string, callBack: (...message: any[]) => void){
-    this.connection.on(procedureMethodName, callBack);
+  on(hubUrl: string, procedureMethodName: string, callBack: (...message: any) => void) {
+    const connection = this.ensureConnection(hubUrl);
+    connection.on(procedureMethodName, (...messages: any) => callBack(...messages));
   }
 }
