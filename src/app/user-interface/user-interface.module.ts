@@ -1,8 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ComponentsModule } from './components/components.module';
-import { HomesModule } from './components/homes/homes.module';
-
 
 
 @NgModule({
@@ -10,7 +8,6 @@ import { HomesModule } from './components/homes/homes.module';
   imports: [
     CommonModule,
     ComponentsModule,
-   /*  HomesModule */
   ]
 })
 export class UserInterfaceModule { }

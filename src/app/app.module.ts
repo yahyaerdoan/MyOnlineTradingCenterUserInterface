@@ -12,15 +12,9 @@ import { MatGridListModule } from '@angular/material/grid-list';
 import { MatButtonModule } from '@angular/material/button';
 import { ToastrModule } from 'ngx-toastr';
 import { NgxSpinnerModule } from "ngx-spinner";
-import {  HTTP_INTERCEPTORS, HttpClientModule, provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
+import {  HTTP_INTERCEPTORS, provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { JwtModule } from '@auth0/angular-jwt'
-import { CoreModule } from './services/core/core.module';
-import { AdminModule } from './services/features/admin/admin.module';
-import { UserModule } from './services/features/user/user.module';
-import { SharedModule } from './services/shared/shared.module';
 import { HttpErrorHandlerInterceptorService } from './services/core/services/http-error-handler-interceptor.service';
-
-
 
 @NgModule({
   declarations: [
@@ -40,11 +34,7 @@ import { HttpErrorHandlerInterceptorService } from './services/core/services/htt
     JwtModule.forRoot({ config: {
       tokenGetter: ()=> localStorage.getItem("accessToken"),
       allowedDomains: ["localhost:7241"],      
-    }}),
-    /*   CoreModule,
-      AdminModule,
-      UserModule,
-      SharedModule */
+    }})
   ],
   providers: [
     provideAnimationsAsync(),
