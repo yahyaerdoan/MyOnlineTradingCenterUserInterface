@@ -14,18 +14,17 @@ import { MatTableModule } from '@angular/material/table';
 import { MatIconModule } from '@angular/material/icon';
 import { FileUploadModule } from '../../../services/shared/components/file-upload/file-upload.module';
 import { DialogModule } from '../../../dialogs/dialog.module';
-import { DeleteDirective } from '../../../directives/admin/delete.directive';
+import { SharedModule } from '../../../services/shared/shared.module';
 
 
 
 @NgModule({
   declarations: [
     OrdersComponent,
-    OrderListComponent,
-    DeleteDirective
-  
+    OrderListComponent,  
   ],
   imports: [
+    SharedModule,
     CommonModule,
     MatCardModule,
     MatGridListModule,
@@ -36,7 +35,6 @@ import { DeleteDirective } from '../../../directives/admin/delete.directive';
     MatPaginator, MatPaginatorModule,
     MatTableModule,
     MatIconModule,
-   // MatDialogModule,
     FileUploadModule,
     DialogModule, 
     RouterModule.forChild([

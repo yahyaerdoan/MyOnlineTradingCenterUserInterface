@@ -15,11 +15,9 @@ import { ListProductComponent } from './list-product/list-product.component';
 import {MatPaginator, MatPaginatorModule} from '@angular/material/paginator';
 import {MatTableModule} from '@angular/material/table';
 import { MatIconModule } from '@angular/material/icon';
-import { DeleteDirective } from '../../../directives/admin/delete.directive';
-import { MatDialogModule } from '@angular/material/dialog';
-import { DeleteDialogComponent } from '../../../dialogs/delete-dialog/delete-dialog.component';
 import { DialogModule } from '../../../dialogs/dialog.module';
 import { FileUploadModule } from '../../../services/shared/components/file-upload/file-upload.module';
+import { SharedModule } from '../../../services/shared/shared.module';
 
 
 
@@ -30,15 +28,10 @@ import { FileUploadModule } from '../../../services/shared/components/file-uploa
     ProductsComponent,
     CreateProductComponent,
     ListProductComponent,
-    DeleteDirective,
-   // DeleteDialogComponent    
-
   ],
   imports: [
     CommonModule,
-    RouterModule.forChild([
-      {path: "", component: ProductsComponent}
-    ]),
+    SharedModule, 
     MatCardModule,
     MatGridListModule,
     MatButtonModule,
@@ -48,10 +41,11 @@ import { FileUploadModule } from '../../../services/shared/components/file-uploa
     MatPaginator, MatPaginatorModule,
     MatTableModule,
     MatIconModule,
-   // MatDialogModule,
     FileUploadModule,
-    DialogModule 
-
+    DialogModule,
+    RouterModule.forChild([
+      {path: "", component: ProductsComponent}
+    ])
   ]
 })
 export class ProductsModule { }
