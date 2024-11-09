@@ -3,9 +3,9 @@ import { BasesComponent, SpinnerType } from '../../../../bases/bases.component';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { NgxSpinnerService } from 'ngx-spinner';
-import { AlertifyService, MessageType, Position } from '../../../../services/features/admin/services/alertify.service';
-import { DialogService } from '../../../../services/shared/services/dialog.service';
-import { OrderService } from '../../../../services/core/models/order.service';
+import { AlertifyService, MessageType, Position } from '../../../../services/interface-services/admin/services/alertify.service';
+import { DialogService } from '../../../../services/shared-services/services/dialog.service';
+import { OrderService } from '../../../../services/core-services/feature-services/order.service';
 import { Order } from '../../../../contracts/order/models/order.model';
 
 

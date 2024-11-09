@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClientService } from '../services/http-client.service';
+import { HttpClientService } from '../general-services/http-client.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { ListProduct } from '../../../contracts/products/listproduct';
 import { firstValueFrom, Observable } from 'rxjs';

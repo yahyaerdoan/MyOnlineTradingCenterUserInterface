@@ -5,15 +5,15 @@ import {
   AlertifyService,
   MessageType as AlertifyMessageType,
   Position as AlertifyPosition,
-} from '../../../features/admin/services/alertify.service';
+} from '../../../interface-services/admin/services/alertify.service';
 import {
   ToastrfyService,
   MessageType as ToastrfyMessageType,
   Position as ToastrfyPosition,
-} from '../../../features/user/services/toastrfy.service';
+} from '../../../interface-services/user/services/toastrfy.service';
 import { MatDialog } from '@angular/material/dialog';
 import { NgxSpinnerService } from 'ngx-spinner';
-import { HttpClientService } from '../../../core/services/http-client.service';
+import { HttpClientService } from '../../../core-services/general-services/http-client.service';
 import { DialogService } from '../../services/dialog.service';
 import { FileUploadDialogComponent, FileUploadDialogState } from '../../../../dialogs/file-upload-dialog/file-upload-dialog.component';
 import { SpinnerType } from '../../../../bases/bases.component';

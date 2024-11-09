@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { AuthService } from '../../../services/core/services/auth.service';
-import { MessageType, Position, ToastrfyService } from '../../../services/features/user/services/toastrfy.service';
+import { AuthService } from '../../../services/core-services/general-services/auth.service';
+import { MessageType, Position, ToastrfyService } from '../../../services/interface-services/user/services/toastrfy.service';
 import { Router } from '@angular/router';
 
 @Component({

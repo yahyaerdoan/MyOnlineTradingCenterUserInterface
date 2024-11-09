@@ -1,8 +1,8 @@
 import { HttpErrorResponse, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest, HttpStatusCode } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError, Observable, of, throwError } from 'rxjs';
-import { MessageType, Position, ToastrfyService } from '../../features/user/services/toastrfy.service';
-import { UserAuthService } from '../models/user-auth.service';
+import { MessageType, Position, ToastrfyService } from '../../interface-services/user/services/toastrfy.service';
+import { UserAuthService } from '../feature-services/user-auth.service';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { BasesComponent, SpinnerType } from '../../../bases/bases.component';
 

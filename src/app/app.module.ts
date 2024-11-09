@@ -14,7 +14,7 @@ import { ToastrModule } from 'ngx-toastr';
 import { NgxSpinnerModule } from "ngx-spinner";
 import {  HTTP_INTERCEPTORS, provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { JwtModule } from '@auth0/angular-jwt'
-import { HttpErrorHandlerInterceptorService } from './services/core/services/http-error-handler-interceptor.service';
+import { HttpErrorHandlerInterceptorService } from './services/core-services/general-services/http-error-handler-interceptor.service';
 
 @NgModule({
   declarations: [

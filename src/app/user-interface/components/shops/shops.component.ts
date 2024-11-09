@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { ProductService } from '../../../services/core/models/product.service';
+import { ProductService } from '../../../services/core-services/feature-services/product.service';
 import { ListProduct } from '../../../contracts/products/listproduct';
 import { ActivatedRoute } from '@angular/router';
 import { data } from 'jquery';
-import { BasketItemService } from '../../../services/core/models/basket-item.service';
+import { BasketItemService } from '../../../services/core-services/feature-services/basket-item.service';
 import { BasesComponent, SpinnerType } from '../../../bases/bases.component';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { CreateBasketItem } from '../../../contracts/basketItems/create-basket-item';
-import { MessageType, Position, ToastrfyService, ToastrOptions } from '../../../services/features/user/services/toastrfy.service';
+import { MessageType, Position, ToastrfyService, ToastrOptions } from '../../../services/interface-services/user/services/toastrfy.service';
 
 @Component({
   selector: 'app-shops',

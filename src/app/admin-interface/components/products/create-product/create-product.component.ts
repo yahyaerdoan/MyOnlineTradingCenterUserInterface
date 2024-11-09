@@ -1,12 +1,12 @@
 import { Component, OnInit, Output } from '@angular/core';
 import { CreateProduct } from '../../../../contracts/products/createproduct';
-import { ProductService } from '../../../../services/core/models/product.service';
+import { ProductService } from '../../../../services/core-services/feature-services/product.service';
 import { BasesComponent, SpinnerType } from '../../../../bases/bases.component';
 import { NgxSpinnerService } from 'ngx-spinner';
-import { AlertifyService, MessageType, Position } from '../../../../services/features/admin/services/alertify.service';
+import { AlertifyService, MessageType, Position } from '../../../../services/interface-services/admin/services/alertify.service';
 import { Router } from '@angular/router';
-import { FileUploadOptions } from '../../../../services/shared/components/file-upload/file-upload.component';
-import { SignalRService } from '../../../../services/core/services/signal-r.service';
+import { FileUploadOptions } from '../../../../services/shared-services/components/file-upload/file-upload.component';
+import { SignalRService } from '../../../../services/core-services/general-services/signal-r.service';
 import { ReceivedFunctions } from '../../../../constants/received-functions';
 import { HubUrls } from '../../../../constants/hub-urls';
 import { CreateProductRequest } from '../../../../contracts/product/requests/create-product-request.model';

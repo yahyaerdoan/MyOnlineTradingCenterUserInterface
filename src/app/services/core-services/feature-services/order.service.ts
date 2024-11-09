@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClientService } from '../services/http-client.service';
+import { HttpClientService } from '../general-services/http-client.service';
 import { firstValueFrom, Observable } from 'rxjs';
 import { CreateOrderRequest } from '../../../contracts/order/requests/create-order-request.model';
 import { OrderListResponse } from '../../../contracts/order/responses/order-list-response.model';

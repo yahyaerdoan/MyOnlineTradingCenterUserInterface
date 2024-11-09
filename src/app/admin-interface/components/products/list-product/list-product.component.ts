@@ -1,16 +1,16 @@
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { ListProduct } from '../../../../contracts/products/listproduct';
-import { ProductService } from '../../../../services/core/models/product.service';
+import { ProductService } from '../../../../services/core-services/feature-services/product.service';
 import { BasesComponent, SpinnerType } from '../../../../bases/bases.component';
 import { NgxSpinnerService } from 'ngx-spinner';
 import {
   AlertifyService,
   MessageType,
   Position,
-} from '../../../../services/features/admin/services/alertify.service';
+} from '../../../../services/interface-services/admin/services/alertify.service';
 import { MatPaginator } from '@angular/material/paginator';
-import { DialogService } from '../../../../services/shared/services/dialog.service';
+import { DialogService } from '../../../../services/shared-services/services/dialog.service';
 import { AddProductImageDialogComponent } from '../../../../dialogs/add-product-image-dialog/add-product-image-dialog.component';
 
 @Component({

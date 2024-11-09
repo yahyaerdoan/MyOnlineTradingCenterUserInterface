@@ -1,5 +1,5 @@
 import { Injectable, OnInit } from '@angular/core';
-import { HttpClientService } from '../services/http-client.service';
+import { HttpClientService } from '../general-services/http-client.service';
 import { firstValueFrom, Observable } from 'rxjs';
 import { ListBasketItem } from '../../../contracts/basketItems/list-basket-item';
 import { CreateBasketItem } from '../../../contracts/basketItems/create-basket-item';

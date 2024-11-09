@@ -12,9 +12,9 @@ import { ProductsRoutingModule } from '../products/products-routing.module';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { MatTableModule } from '@angular/material/table';
 import { MatIconModule } from '@angular/material/icon';
-import { FileUploadModule } from '../../../services/shared/components/file-upload/file-upload.module';
+import { FileUploadModule } from '../../../services/shared-services/components/file-upload/file-upload.module';
 import { DialogModule } from '../../../dialogs/dialog.module';
-import { SharedModule } from '../../../services/shared/shared.module';
+import { SharedModule } from '../../../services/shared-services/shared.module';
 
 
 

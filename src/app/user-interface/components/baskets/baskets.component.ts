@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { BasesComponent, SpinnerType } from '../../../bases/bases.component';
-import { BasketItemService } from '../../../services/core/models/basket-item.service';
+import { BasketItemService } from '../../../services/core-services/feature-services/basket-item.service';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ListBasketItem } from '../../../contracts/basketItems/list-basket-item';
 import { UpdateBasketItem } from '../../../contracts/basketItems/update-basket-item';
 import { animate, state, style, transition, trigger } from '@angular/animations';
-import { OrderService } from '../../../services/core/models/order.service';
+import { OrderService } from '../../../services/core-services/feature-services/order.service';
 import { CreateOrderDto, CreateOrderRequest } from '../../../contracts/order/requests/create-order-request.model';
-import { MessageType, Position, ToastrfyService } from '../../../services/features/user/services/toastrfy.service';
+import { MessageType, Position, ToastrfyService } from '../../../services/interface-services/user/services/toastrfy.service';
 import { Router } from '@angular/router';
 
 @Component({

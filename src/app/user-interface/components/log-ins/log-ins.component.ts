@@ -3,11 +3,11 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { LogInUser } from '../../../entities/users/loginuser';
 import { BasesComponent, SpinnerType } from '../../../bases/bases.component';
 import { NgxSpinnerService } from 'ngx-spinner';
-import { MessageType, Position, ToastrfyService } from '../../../services/features/user/services/toastrfy.service';
-import { AuthService } from '../../../services/core/services/auth.service';
+import { MessageType, Position, ToastrfyService } from '../../../services/interface-services/user/services/toastrfy.service';
+import { AuthService } from '../../../services/core-services/general-services/auth.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { SocialAuthService, SocialUser } from '@abacritt/angularx-social-login';
-import { UserAuthService } from '../../../services/core/models/user-auth.service';
+import { UserAuthService } from '../../../services/core-services/feature-services/user-auth.service';
 import { FunctionResponse } from '../../../contracts/responses/functionResponse';
 import { TokenResponse } from '../../../contracts/responses/tokenResponse';
 

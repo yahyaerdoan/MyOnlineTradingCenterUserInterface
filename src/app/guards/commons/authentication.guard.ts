@@ -1,9 +1,9 @@
 import { inject } from '@angular/core';
 import { CanActivateFn, Router } from '@angular/router';
-import { MessageType, Position, ToastrfyService } from '../../services/features/user/services/toastrfy.service';
+import { MessageType, Position, ToastrfyService } from '../../services/interface-services/user/services/toastrfy.service';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { SpinnerType } from '../../bases/bases.component';
-import {  AuthService } from '../../services/core/services/auth.service';
+import {  AuthService } from '../../services/core-services/general-services/auth.service';
 
 
 

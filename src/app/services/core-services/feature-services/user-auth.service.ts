@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClientService } from '../services/http-client.service';
+import { HttpClientService } from '../general-services/http-client.service';
 import { firstValueFrom, Observable } from 'rxjs';
 import { LogInUser } from '../../../entities/users/loginuser';
 import { SocialUser } from '@abacritt/angularx-social-login';
