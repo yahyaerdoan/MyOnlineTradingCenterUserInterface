@@ -3,13 +3,15 @@ import { Injectable } from '@angular/core';
 import { catchError, Observable, of, throwError } from 'rxjs';
 import { MessageType, Position, ToastrfyService } from '../../features/user/services/toastrfy.service';
 import { UserAuthService } from '../models/user-auth.service';
+import { NgxSpinnerService } from 'ngx-spinner';
+import { BasesComponent, SpinnerType } from '../../../bases/bases.component';
 
 @Injectable({
   providedIn: 'root'
 })
-export class HttpErrorHandlerInterceptorService implements HttpInterceptor {
+export class HttpErrorHandlerInterceptorService extends BasesComponent implements HttpInterceptor {
 
-  constructor(private toastfyService: ToastrfyService, private userAuthService: UserAuthService) { }
+  constructor(private toastfyService: ToastrfyService, private userAuthService: UserAuthService, spinner: NgxSpinnerService,) {super(spinner) }
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     return next.handle(req).pipe(
       catchError((error: HttpErrorResponse) => {
@@ -38,14 +40,15 @@ export class HttpErrorHandlerInterceptorService implements HttpInterceptor {
               errorMessage = `Internal Server Error: Please try again later.`;
               break;
             default:
-              errorMessage = `Unknown Error: ${error.message}`;
+              errorMessage = `A server-related problem was encountered.`;
               break;
           }
         }
-        this.toastfyService.message(errorMessage, "Error!", {
+        this.toastfyService.message(errorMessage, "I'm sorry now!", {
           messageType: MessageType.Error,
           position: Position.BottomRight
         });
+        this.hideSpinner(SpinnerType.BallScaleMultiple);
         return throwError(() => new Error(errorMessage));
       })
     );

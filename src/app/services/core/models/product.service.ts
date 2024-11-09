@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { HttpClientService } from '../services/http-client.service';
-import { CreateProduct } from '../../../contracts/products/createproduct';
 import { HttpErrorResponse } from '@angular/common/http';
 import { ListProduct } from '../../../contracts/products/listproduct';
 import { firstValueFrom, Observable } from 'rxjs';
@@ -35,12 +34,8 @@ export class ProductService {
     return errors?.join('. ') || 'An unexpected error occured.'
   };
 
-  async read(
-    page: number = 0,
-    size: number = 5,
-    successCallBack?: () => void,
-    errorCallBack?: (errorMessage: string) => void
-  ): Promise<{ totalProductCount: number; products: ListProduct[] }> {
+  async read(page: number = 0,size: number = 5,
+    successCallBack?: () => void, errorCallBack?: (errorMessage: string) => void): Promise<{ totalProductCount: number; products: ListProduct[] }> {
     const promisData: Promise<{ totalProductCount: number; products: ListProduct[] }> = firstValueFrom(
       this.httpClientService.get<{ totalProductCount: number; products: ListProduct[] }>({
         controller: 'products',
