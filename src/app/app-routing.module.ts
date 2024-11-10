@@ -13,8 +13,7 @@ const routes: Routes = [
       { path: 'orders', loadChildren: () => import('./admin-interface/components/orders/orders.module').then(m => m.OrdersModule), canActivate: [authenticationGuard] },
     ], canActivate: [authenticationGuard]
   },
-  { path: '', component: HomesComponent },
-  //{ path: 'baskets', loadChildren: () => import('./user-interface/components/baskets/baskets.module').then(m => m.BasketsModule) },
+  { path: '', component: HomesComponent },  
   { path: 'blogs', loadChildren: () => import('./user-interface/components/blogs/blogs.module').then(m => m.BlogsModule) },
   { path: 'footers', loadChildren: () => import('./user-interface/components/footers/footers.module').then(m => m.FootersModule) },
   { path: 'headers', loadChildren: () => import('./user-interface/components/headers/headers.module').then(m => m.HeadersModule) },
@@ -24,7 +23,10 @@ const routes: Routes = [
   { path: 'testimonials', loadChildren: () => import('./user-interface/components/testimonials/testimonials.module').then(m => m.TestimonialsModule) },
   { path: 'we-helps', loadChildren: () => import('./user-interface/components/we-helps/we-helps.module').then(m => m.WeHelpsModule) },
   { path: 'why-chooses', loadChildren: () => import('./user-interface/components/why-chooses/why-chooses.module').then(m => m.WhyChoosesModule) },
+  //{path: 'reset-password', loadChildren: () => import('./user-interface/components/reset-passwords/reset-passwords.module').then(m => m.ResetPasswordsModule)}
+  //{ path: 'baskets', loadChildren: () => import('./user-interface/components/baskets/baskets.module').then(m => m.BasketsModule) },
  // { path: 'shops', loadChildren: () => import('./user-interface/components/shops/shops.module').then(m => m.ShopsModule) }
+
 ];
 
 @NgModule({

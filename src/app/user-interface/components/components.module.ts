@@ -16,6 +16,7 @@ import { LogInsModule } from './log-ins/log-ins.module';
 import { ShopsModule } from './shops/shops.module';
 import { AboutUsModule } from './about-us/about-us.module';
 import { OurTeamsModule } from './our-teams/our-teams.module';
+import { ResetPasswordsModule } from './reset-passwords/reset-passwords.module';
 
 
 
@@ -38,7 +39,8 @@ import { OurTeamsModule } from './our-teams/our-teams.module';
     LogInsModule,
     ShopsModule,
     AboutUsModule,
-    OurTeamsModule
+    OurTeamsModule,
+    ResetPasswordsModule
   ]
 })
 export class ComponentsModule { }

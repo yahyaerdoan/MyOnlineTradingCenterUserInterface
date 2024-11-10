@@ -6,17 +6,18 @@
                 <div class="card-body">
                     <h5 class="card-title text-center mb-4">Log In</h5>
                     <form [formGroup]="formGroup" (ngSubmit)="onSubmit(formGroup.value)">
-                    
+
                         <div class="mb-3">
                             <label for="userNameOrEmail" class="form-label">User Name or Email</label>
                             <input formControlName="userNameOrEmail"
                                 [ngClass]="{'is-invalid': submitted && validate.userNameOrEmail.errors}" type="text"
                                 class="form-control" id="userNameOrEmail" placeholder="Enter your user name or email">
                             <div *ngIf="submitted && validate.userNameOrEmail.errors" class="invalid-feedback">
-                                <div *ngIf="validate.userNameOrEmail.errors.required">User name or email is required.</div> 
+                                <div *ngIf="validate.userNameOrEmail.errors.required">User name or email is required.
+                                </div>
                             </div>
                         </div>
-                    
+
                         <div class="mb-3">
                             <label for="password" class="form-label">Password</label>
                             <input formControlName="password"
@@ -26,11 +27,15 @@
                                 <div *ngIf="validate.password.errors.required">Password is required.</div>
                             </div>
                         </div>
-                   
+
                         <button type="submit" class="btn btn-primary w-100" style="margin-bottom: 1rem;">Log In</button>
-                        <button type="submit" class="btn btn-primary w-100" style="margin-bottom: 1rem;" routerLink="/registers">Register</button>
-                        <asl-google-signin-button [width]='383' text="signin_with" type='standard' shape='circle' size='large'></asl-google-signin-button>
-                       
+                        <button type="submit" class="btn btn-primary w-100" style="margin-bottom: 1rem;" routerLink="/registers">Register</button>                     
+                        <asl-google-signin-button [width]='383' text="signin_with" type='standard' shape='circle'  size='large'></asl-google-signin-button>
+                        <div style="text-align: center; margin-top: 1rem;">
+                            <a style="font-size: 1rem; color: #336736; text-decoration: none;" routerLink="/reset-password">
+                                <i style="margin-right: 4px;" class="bi bi-lock"></i> I Forgot My Password
+                            </a>
+                        </div>
                     </form>
                 </div>
             </div>
