@@ -40,10 +40,10 @@
                 <td mat-cell *matCellDef="let element">
   
                   <button mat-raised-button color="primary"  style="margin-right: 10px;" (click)="openOrderDetailDialog(element.orderId)">
-                    <mat-icon>detail</mat-icon> Order Detail
+                    <mat-icon>description</mat-icon> Order Detail
                   </button>
   
-                  <button mat-raised-button color="success" (click)="updateProduct(element.orderId)" style="margin-right: 10px;">
+                  <button mat-raised-button color="success" (click)="updateOrder(element.orderId)" style="margin-right: 10px;">
                     <mat-icon>edit</mat-icon> Update
                   </button>  
   

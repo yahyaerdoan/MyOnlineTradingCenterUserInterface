@@ -9,45 +9,53 @@
             <!-- Order Number -->
             <tr>
               <td style="padding: 8px; font-weight: bold;">Order Number:</td>
-              <td style="padding: 8px;">12345</td>
+              <td style="padding: 8px;">{{ orderDetailResponse.orderNumber}}</td>
             </tr>
             
             <!-- User Name -->
             <tr>
               <td style="padding: 8px; font-weight: bold;">User Name:</td>
-              <td style="padding: 8px;">John Doe</td>
+              <td style="padding: 8px;">{{orderDetailResponse.userName}}</td>
             </tr>
             
             <!-- Address -->
             <tr>
               <td style="padding: 8px; font-weight: bold;">Address:</td>
-              <td style="padding: 8px;">123 Main St, Springfield</td>
+              <td style="padding: 8px;">{{orderDetailResponse.address}}</td>
             </tr>
             
             <!-- Description -->
             <tr>
               <td style="padding: 8px; font-weight: bold;">Description:</td>
-              <td style="padding: 8px;">This is a test order description.</td>
+              <td style="padding: 8px;">{{orderDetailResponse.description}}</td>
             </tr>
             
             <!-- Created Date -->
             <tr>
               <td style="padding: 8px; font-weight: bold;">Created Date:</td>
-              <td style="padding: 8px;">{{ '2024-10-25T10:00:00' | date:'short' }}</td>
+              <td style="padding: 8px;">{{ orderDetailResponse.createdDate | date:'short' }}</td>
             </tr>
             
             <!-- Subtotal, Tax, and Total Amount -->
             <tr>
               <td style="padding: 8px; font-weight: bold;">Subtotal:</td>
-              <td style="padding: 8px;">{{ 100 | currency }}</td>
+              <td style="padding: 8px;">{{ orderDetailResponse.subtotal | currency }}</td>
             </tr>
             <tr>
               <td style="padding: 8px; font-weight: bold;">Tax:</td>
-              <td style="padding: 8px;">{{ 10 | currency }}</td>
+              <td style="padding: 8px;">{{ orderDetailResponse.tax | currency }}</td>
+            </tr>
+            <tr>
+              <td style="padding: 8px; font-weight: bold;">WithTax:</td>
+              <td style="padding: 8px;">{{ orderDetailResponse.withTax | currency }}</td>
             </tr>
             <tr>
               <td style="padding: 8px; font-weight: bold;">Total Amount:</td>
-              <td style="padding: 8px;">{{ 110 | currency }}</td>
+              <td style="padding: 8px;">{{ orderDetailResponse.totalAmount| currency }}</td>
+            </tr>
+            <tr>
+              <td style="padding: 8px; font-weight: bold;">Order Status:</td>
+              <td style="padding: 8px;">{{ orderDetailResponse.status }}</td>
             </tr>
           </tbody>
         </table>
@@ -58,6 +66,7 @@
           <table class="order-items-table" style="width: 100%; border-collapse: collapse;">
             <thead>
               <tr>
+                <th style="padding: 8px; text-align: left; border-bottom: 1px solid #ccc;">Line</th>
                 <th style="padding: 8px; text-align: left; border-bottom: 1px solid #ccc;">Product Name</th>
                 <th style="padding: 8px; text-align: left; border-bottom: 1px solid #ccc;">Price</th>
                 <th style="padding: 8px; text-align: left; border-bottom: 1px solid #ccc;">Quantity</th>
@@ -66,24 +75,13 @@
             </thead>
             <tbody>
               <!-- Loop through order items -->
-              <tr>
-                <td style="padding: 8px;">Product A</td>
-                <td style="padding: 8px;">{{ 25 | currency }}</td>
-                <td style="padding: 8px;">2</td>
-                <td style="padding: 8px;">{{ 50 | currency }}</td>
-              </tr>
-              <tr>
-                <td style="padding: 8px;">Product B</td>
-                <td style="padding: 8px;">{{ 50 | currency }}</td>
-                <td style="padding: 8px;">1</td>
-                <td style="padding: 8px;">{{ 50 | currency }}</td>
-              </tr>
-              <tr>
-                <td style="padding: 8px;">Product B</td>
-                <td style="padding: 8px;">{{ 50 | currency }}</td>
-                <td style="padding: 8px;">1</td>
-                <td style="padding: 8px;">{{ 50 | currency }}</td>
-              </tr>
+              <tr *ngFor="let item of orderDetailResponse.orderItems; let i = index">
+                <td style="padding: 8px;">{{ i + 1 }}</td>
+                <td style="padding: 8px;">{{ item.productName }}</td>
+                <td style="padding: 8px;">{{ item.price| currency }}</td>
+                <td style="padding: 8px;">{{ item.quantity }}</td>
+                <td style="padding: 8px;">{{  item.subtotal | currency }}</td>
+              </tr>             
             </tbody>
           </table>
         </div>

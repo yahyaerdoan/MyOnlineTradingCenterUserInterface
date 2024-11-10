@@ -15,54 +15,48 @@ import { OrderDetailDialogComponent, OrderDetailDialogState } from '../../../../
   templateUrl: './order-list.component.html',
   styleUrl: './order-list.component.scss'
 })
-export class OrderListComponent  extends BasesComponent implements OnInit {
+export class OrderListComponent extends BasesComponent implements OnInit {
   displayedColumns: string[] = [
     'orderId', 'orderNumber', 'userName', 'createdDate', 'totalAmount', 'actions',
   ];
   dataSource: MatTableDataSource<Order> | null = null;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
-  constructor(
-    spinner: NgxSpinnerService,
-    private orderService: OrderService,
-    private alertifyService: AlertifyService,
-    private dialogService: DialogService
-  ) {
-    super(spinner);
-  }
- 
+  constructor(spinner: NgxSpinnerService, private orderService: OrderService,
+    private alertifyService: AlertifyService, private dialogService: DialogService) { super(spinner); }
+
   async ngOnInit() {
     await this.getOrders();
-  }
+  };
+
   async changePageAndData() {
     await this.getOrders();
-  }
+  };
+
   async getOrders() {
     this.showSpinner(SpinnerType.BallScaleMultiple);
     const result = await this.orderService.getOrders(
-        this.paginator ? this.paginator.pageIndex : 0,
-        this.paginator ? this.paginator.pageSize : 5,
-        (successMessage) => this.alertifyService.message(successMessage, { dismissOthers: true, messageType: MessageType.Success, position: Position.TopRight }),       
-        (errorMessage) => this.alertifyService.message(errorMessage, { dismissOthers: true, messageType: MessageType.Error, position: Position.TopRight })       
+      this.paginator ? this.paginator.pageIndex : 0,
+      this.paginator ? this.paginator.pageSize : 5,
+      (successMessage) => this.alertifyService.message(successMessage, { dismissOthers: true, messageType: MessageType.Success, position: Position.TopRight }),
+      (errorMessage) => this.alertifyService.message(errorMessage, { dismissOthers: true, messageType: MessageType.Error, position: Position.TopRight })
     );
     this.hideSpinner(SpinnerType.BallScaleMultiple)
     if (result) {
-        this.dataSource = new MatTableDataSource<Order>(result.resultData.orders);
-        this.paginator.length = result.resultData.totalOrderCount;
+      this.dataSource = new MatTableDataSource<Order>(result.resultData.orders);
+      this.paginator.length = result.resultData.totalOrderCount;
     }
     this.hideSpinner(SpinnerType.BallScaleMultiple);
-}
+  };
 
-
-  updateProduct(product: any) {
-    // Navigate to the update product page or open a dialog
-  }
-
-  openOrderDetailDialog(id: string){
+  openOrderDetailDialog(id: string) {
     this.dialogService.openDialog({
       componentType: OrderDetailDialogComponent,
       data: id,
     });
-    console.log("Order detail ID:", id);
-  }
+  };
+
+  updateOrder(order: any) { 
+
+  };
 }
