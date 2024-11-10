@@ -1,1 +1,96 @@
-<p>order-detail-dialog works!</p>
+<div class="dialog-container" style="display: flex; justify-content: center; align-items: center; height: 100vh; padding: 16px; box-sizing: border-box;">
+  <div class="dialog-card" style="width: 100%; max-width: 600px; background: #fff; padding: 16px; border-radius: 8px; box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);">
+    <h3 mat-dialog-title style=" color: crimson;">Order Details</h3>
+    <mat-dialog-content>
+      <div class="order-details" style="overflow-x: auto;">
+        <!-- Order Details Overview -->
+        <table class="order-summary-table" style="width: 100%; border-collapse: collapse; margin-bottom: 16px;">
+          <tbody>
+            <!-- Order Number -->
+            <tr>
+              <td style="padding: 8px; font-weight: bold;">Order Number:</td>
+              <td style="padding: 8px;">12345</td>
+            </tr>
+            
+            <!-- User Name -->
+            <tr>
+              <td style="padding: 8px; font-weight: bold;">User Name:</td>
+              <td style="padding: 8px;">John Doe</td>
+            </tr>
+            
+            <!-- Address -->
+            <tr>
+              <td style="padding: 8px; font-weight: bold;">Address:</td>
+              <td style="padding: 8px;">123 Main St, Springfield</td>
+            </tr>
+            
+            <!-- Description -->
+            <tr>
+              <td style="padding: 8px; font-weight: bold;">Description:</td>
+              <td style="padding: 8px;">This is a test order description.</td>
+            </tr>
+            
+            <!-- Created Date -->
+            <tr>
+              <td style="padding: 8px; font-weight: bold;">Created Date:</td>
+              <td style="padding: 8px;">{{ '2024-10-25T10:00:00' | date:'short' }}</td>
+            </tr>
+            
+            <!-- Subtotal, Tax, and Total Amount -->
+            <tr>
+              <td style="padding: 8px; font-weight: bold;">Subtotal:</td>
+              <td style="padding: 8px;">{{ 100 | currency }}</td>
+            </tr>
+            <tr>
+              <td style="padding: 8px; font-weight: bold;">Tax:</td>
+              <td style="padding: 8px;">{{ 10 | currency }}</td>
+            </tr>
+            <tr>
+              <td style="padding: 8px; font-weight: bold;">Total Amount:</td>
+              <td style="padding: 8px;">{{ 110 | currency }}</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <!-- Order Items -->
+        <div class="order-items" style="overflow-x: auto;">
+          <h6 style="margin-bottom: 16px; color: crimson;">Order Items</h6>
+          <table class="order-items-table" style="width: 100%; border-collapse: collapse;">
+            <thead>
+              <tr>
+                <th style="padding: 8px; text-align: left; border-bottom: 1px solid #ccc;">Product Name</th>
+                <th style="padding: 8px; text-align: left; border-bottom: 1px solid #ccc;">Price</th>
+                <th style="padding: 8px; text-align: left; border-bottom: 1px solid #ccc;">Quantity</th>
+                <th style="padding: 8px; text-align: left; border-bottom: 1px solid #ccc;">Subtotal</th>
+              </tr>
+            </thead>
+            <tbody>
+              <!-- Loop through order items -->
+              <tr>
+                <td style="padding: 8px;">Product A</td>
+                <td style="padding: 8px;">{{ 25 | currency }}</td>
+                <td style="padding: 8px;">2</td>
+                <td style="padding: 8px;">{{ 50 | currency }}</td>
+              </tr>
+              <tr>
+                <td style="padding: 8px;">Product B</td>
+                <td style="padding: 8px;">{{ 50 | currency }}</td>
+                <td style="padding: 8px;">1</td>
+                <td style="padding: 8px;">{{ 50 | currency }}</td>
+              </tr>
+              <tr>
+                <td style="padding: 8px;">Product B</td>
+                <td style="padding: 8px;">{{ 50 | currency }}</td>
+                <td style="padding: 8px;">1</td>
+                <td style="padding: 8px;">{{ 50 | currency }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </mat-dialog-content>
+    <mat-dialog-actions style="display: flex; justify-content: flex-end; margin-top: 16px;">
+      <button mat-raised-button color="primary" (click)="closeDialog()">Close</button>
+    </mat-dialog-actions>
+  </div>
+</div>

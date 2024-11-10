@@ -17,7 +17,6 @@ import { DialogModule } from '../../../dialogs/dialog.module';
 import { SharedModule } from '../../../services/shared-services/shared.module';
 
 
-
 @NgModule({
   declarations: [
     OrdersComponent,

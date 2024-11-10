@@ -7,6 +7,7 @@ import { AlertifyService, MessageType, Position } from '../../../../services/int
 import { DialogService } from '../../../../services/shared-services/services/dialog.service';
 import { OrderService } from '../../../../services/core-services/feature-services/order.service';
 import { Order } from '../../../../contracts/order/models/order.model';
+import { OrderDetailDialogComponent, OrderDetailDialogState } from '../../../../dialogs/order-detail-dialog/order-detail-dialog.component';
 
 
 @Component({
@@ -57,7 +58,11 @@ export class OrderListComponent  extends BasesComponent implements OnInit {
     // Navigate to the update product page or open a dialog
   }
 
-  getOrderDetail(id: any){
-    console.log("order detail id:", id)
+  openOrderDetailDialog(id: string){
+    this.dialogService.openDialog({
+      componentType: OrderDetailDialogComponent,
+      data: id,
+    });
+    console.log("Order detail ID:", id);
   }
 }
