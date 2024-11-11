@@ -12,6 +12,7 @@ import { TokenResponse } from '../../../contracts/responses/tokenResponse';
 export class UserAuthService {
 
   constructor(private httpClientService: HttpClientService) { }
+
   async logIn(logInUser: LogInUser, callBackFunction?: ()=> void): Promise<FunctionResponse<TokenResponse>>{
     const observable: Observable<FunctionResponse<TokenResponse> | LogInUser > = this.httpClientService.post<FunctionResponse<TokenResponse> | LogInUser>({
        controller: "auths",
@@ -25,7 +26,7 @@ export class UserAuthService {
     if(callBackFunction)
        callBackFunction();
      return result;
-   }
+   };
  
    async logInWithGoogle(socialUser: SocialUser, callBackFunction?: ()=> void): Promise<FunctionResponse<TokenResponse>>{
     const observable: Observable<FunctionResponse<TokenResponse> | SocialUser> = this.httpClientService.post<FunctionResponse<TokenResponse> | SocialUser>({
@@ -42,7 +43,7 @@ export class UserAuthService {
     if(callBackFunction)
        callBackFunction();
      return result;
-   }
+   };
 
    async refreshTokenLogIn(refreshToken: string, callBackFunction?: ()=> void): Promise<FunctionResponse<TokenResponse>>{
     const observable: Observable<FunctionResponse<TokenResponse> | any> = this.httpClientService.post<FunctionResponse<TokenResponse> | any>({
@@ -57,6 +58,18 @@ export class UserAuthService {
     if(callBackFunction)
       callBackFunction();
     return result;
-  }
+  };
+
+  async resetPassword(email: string, callBackFunction?: () => void) {
+    const observable: Observable<any> = this.httpClientService.post({
+      controller: 'auths',
+      action: 'ResetPassword'
+    }, email);
+    await firstValueFrom(observable);
+    debugger;
+    if (callBackFunction)
+      callBackFunction();
+    return observable;
+  };
    
 }

@@ -5,15 +5,20 @@ import { MessageType, Position, ToastrfyService } from '../../../../services/int
 import { Router } from '@angular/router';
 import { CreateUser } from '../../../../entities/users/createuser';
 import { FunctionResponse } from '../../../../contracts/responses/functionResponse';
+import { BasesComponent, SpinnerType } from '../../../../bases/bases.component';
+import { NgxSpinnerService } from 'ngx-spinner';
+import { AuthService } from '../../../../services/core-services/general-services/auth.service';
+import { UserAuthService } from '../../../../services/core-services/feature-services/user-auth.service';
 
 @Component({
   selector: 'app-reset-password',
   templateUrl: './reset-password.component.html',
   styleUrl: './reset-password.component.scss'
 })
-export class ResetPasswordComponent {
-  constructor(private formBuilder: FormBuilder, private userService: UserService, 
-    private toastifyService: ToastrfyService, private router: Router){}
+export class ResetPasswordComponent extends BasesComponent {
+  constructor(private formBuilder: FormBuilder, private userAuthService: UserAuthService, 
+    private toastifyService: ToastrfyService, private router: Router, 
+    private spinnerService: NgxSpinnerService){ super(spinnerService) }
 
   formGroup!: FormGroup;
   submitted: boolean = false;
@@ -34,27 +39,17 @@ export class ResetPasswordComponent {
     return this.formGroup.controls;
   }
 
-  async onSubmit(createUser: CreateUser){
+  async resetPassword(email: string){
     this.submitted = true;
     if(this.formGroup.invalid)
       return;
-    const result: FunctionResponse<null> =  await this.userService.create(createUser);
-    if (result.isSuccessful) {
-      const successMessage = `${result.message} You will be redirected to the login page, please log in.`;
-      this.toastifyService.message(successMessage, "Success!", {
+    this.spinnerService.show(SpinnerType.BallScaleMultiple);
+    this.userAuthService.resetPassword(email, () =>{
+      this.toastifyService.message("Mail sended your given mail address.", "Successfully", {
         messageType: MessageType.Success,
         position: Position.TopRight
       });
-
-    setTimeout(() => {
-      this.router.navigate(["/logins"]);
-    }, 1500);
-    }else{
-      const errorMessage = result.errors ? result.errors.join(',') : 'An unknown error occured.'
-      this.toastifyService.message(errorMessage, "Error!", {
-        messageType: MessageType.Error,
-        position: Position.TopRight
-      });
-    }
-  }
+      this.spinnerService.hide(SpinnerType.BallScaleMultiple);
+    });  
+  };
 }
