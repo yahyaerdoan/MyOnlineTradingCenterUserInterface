@@ -1,17 +1,17 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { UserService } from '../../../../services/core-services/feature-services/user.service';
+import { AbstractControl, FormBuilder, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 import { MessageType, Position, ToastrfyService } from '../../../../services/interface-services/user/services/toastrfy.service';
-import { Router } from '@angular/router';
-import { CreateUser } from '../../../../entities/users/createuser';
 import { FunctionResponse } from '../../../../contracts/responses/functionResponse';
+import { CreateUser } from '../../../../entities/users/createuser';
+import { Router } from '@angular/router';
+import { UserService } from '../../../../services/core-services/feature-services/user.service';
 
 @Component({
-  selector: 'app-reset-password',
-  templateUrl: './reset-password.component.html',
-  styleUrl: './reset-password.component.scss'
+  selector: 'app-update-password',
+  templateUrl: './update-password.component.html',
+  styleUrl: './update-password.component.scss'
 })
-export class ResetPasswordComponent {
+export class UpdatePasswordComponent {
   constructor(private formBuilder: FormBuilder, private userService: UserService, 
     private toastifyService: ToastrfyService, private router: Router){}
 
@@ -23,10 +23,12 @@ export class ResetPasswordComponent {
   }
 
   initializeForm() {
-    this.formGroup = this.formBuilder.group({
-      
+    this.formGroup = this.formBuilder.group({     
       email: ["", [Validators.required, Validators.maxLength(25), Validators.email]],
-     
+      password: ["", [Validators.required]],
+      confirmPassword: ["", [Validators.required]]
+    }, {
+      validator: mustMatch('password', 'confirmPassword')
     });
   }
 
@@ -57,4 +59,24 @@ export class ResetPasswordComponent {
       });
     }
   }
+
+}
+export function mustMatch(controlName: string, matchingControlName: string): ValidatorFn {
+
+  return (formGroup: AbstractControl): ValidationErrors | null => {
+    const control = formGroup.get(controlName);
+    const matchingControl = formGroup.get(matchingControlName);
+
+    if (matchingControl?.errors && !matchingControl.errors['mustMatch']) {
+      return null;
+    }
+
+    if (control?.value !== matchingControl?.value) {
+      matchingControl?.setErrors({ mustMatch: true });
+    } else {
+      matchingControl?.setErrors(null);
+    }
+
+    return null;
+  };
 }
