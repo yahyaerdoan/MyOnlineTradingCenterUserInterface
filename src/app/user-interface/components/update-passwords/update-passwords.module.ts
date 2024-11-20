@@ -17,7 +17,7 @@ import { RouterModule } from '@angular/router';
     HeadersModule,
     FootersModule,
     ReactiveFormsModule,
-    RouterModule.forChild([{path: "update-password/:userId/:resetToken", component: UpdatePasswordComponent}
+    RouterModule.forChild([{path: "update-password/:resetToken/:userId", component: UpdatePasswordComponent}
     ]),
   ]
 })

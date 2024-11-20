@@ -18,7 +18,7 @@ export class ProductService {
     successCallBack?: (message?: string) => void,
     errorCallBack?: (errorMessage?: string) => void): Promise<CreateProductResponse> {
 
-    const observable: Observable<| CreateProductResponse | CreateProductRequest> = this.httpClientService
+    const observable: Observable<CreateProductResponse | CreateProductRequest> = this.httpClientService
       .post<CreateProductResponse | CreateProductRequest>({ controller: 'products' }, createProductDto);
 
     const result = await firstValueFrom(observable) as CreateProductResponse;
@@ -103,29 +103,5 @@ export class ProductService {
 
     await firstValueFrom(updateImageShowcaseObserbable);
     successCallback?.();
-  };
-
-  //#region createProduct old version
-  /*   async create(
-      product: CreateProduct,
-      successCallBack?: () => void,
-      errorCallBack?: (errorMessage?: string) => void
-    ): Promise<void> {
-      firstValueFrom(
-        this.httpClientService.post({ controller: 'products' }, product)
-      )
-        .then(() => {
-          successCallBack?.();
-        })
-        .catch((errorResponse: any) => {
-          let message = 'An unexpected error occurred.';
-          if (errorResponse.error && typeof errorResponse.error === 'object') {
-            message = Object.values(errorResponse.error)
-              .flat()
-              .join('<br>');
-          }
-          errorCallBack?.(message);
-        });
-    } */
-  //#endregion
+  }; 
 }
