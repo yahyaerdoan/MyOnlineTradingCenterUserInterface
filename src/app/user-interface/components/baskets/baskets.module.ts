@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { BasketsComponent } from './baskets.component';
 import { RouterModule } from '@angular/router';
 import { HeadersModule } from '../headers/headers.module';
 import { HerosModule } from '../heros/heros.module';
 import { FootersModule } from '../footers/footers.module';
+import { BasketsComponent } from './basket/baskets.component';
 
 
 

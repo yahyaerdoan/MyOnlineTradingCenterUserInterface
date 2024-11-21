@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
-import { AuthService } from '../../../services/core-services/general-services/auth.service';
-import { MessageType, Position, ToastrfyService } from '../../../services/interface-services/user/services/toastrfy.service';
 import { Router } from '@angular/router';
+import { AuthService } from '../../../../services/core-services/general-services/auth.service';
+import { MessageType, Position, ToastrfyService } from '../../../../services/interface-services/user/services/toastrfy.service';
 
 @Component({
   selector: 'app-headers',

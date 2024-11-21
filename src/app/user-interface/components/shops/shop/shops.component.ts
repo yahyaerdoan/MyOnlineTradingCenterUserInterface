@@ -1,13 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { ProductService } from '../../../services/core-services/feature-services/product.service';
-import { ListProduct } from '../../../contracts/products/listproduct';
 import { ActivatedRoute } from '@angular/router';
-import { data } from 'jquery';
-import { BasketItemService } from '../../../services/core-services/feature-services/basket-item.service';
-import { BasesComponent, SpinnerType } from '../../../bases/bases.component';
 import { NgxSpinnerService } from 'ngx-spinner';
-import { CreateBasketItem } from '../../../contracts/basketItems/create-basket-item';
-import { MessageType, Position, ToastrfyService, ToastrOptions } from '../../../services/interface-services/user/services/toastrfy.service';
+import { BasesComponent, SpinnerType } from '../../../../bases/bases.component';
+import { CreateBasketItem } from '../../../../contracts/basketItems/create-basket-item';
+import { ListProduct } from '../../../../contracts/products/listproduct';
+import { BasketItemService } from '../../../../services/core-services/feature-services/basket-item.service';
+import { ProductService } from '../../../../services/core-services/feature-services/product.service';
+import { MessageType, Position, ToastrfyService } from '../../../../services/interface-services/user/services/toastrfy.service';
 
 @Component({
   selector: 'app-shops',
@@ -49,37 +48,6 @@ export class ShopsComponent extends BasesComponent implements OnInit {
         return { ...product, imagePath }
       });
       console.log("Mapped products with imagePath", this.products);
-
-
-      /*       this.products = this.products.map<ListProduct>(product => {
-              const productListWithImages: ListProduct = { 
-                id: product.id,
-                name: product.name,
-                description: product.description,
-                price: product.price,
-                stock: product.stock,
-                createdDate: product.createdDate,
-                updatedDate: product.updatedDate,
-                imageFiles: product.imageFiles,
-                imagePath: product.imageFiles.length 
-                  ? product.imageFiles.find(productImage => productImage.showcasePicture)?.path || "" 
-                  : ""
-              };
-              return productListWithImages;       
-            }); */
-
-
-
-
-
-
-
-
-
-
-
-
-
       this.totalProductCount = data.totalProductCount;
       this.totalPageCount = Math.ceil(this.totalProductCount / this.currentPageSize);
       this.pageNumberList = [];
@@ -106,21 +74,6 @@ export class ShopsComponent extends BasesComponent implements OnInit {
           }
         }
       }
-
-      //#region this code updated
-      /*  if (this.currentPageNo -4 <= 0)
-        for (let index = 2; index <= Math.min(9, this.totalPageCount); index++)
-          this.pageNumberList.push(index);
-
-      else if(this.currentPageNo +4 >= this.totalPageCount)
-        for (let index = Math.max(2, this.totalPageCount -8); index < this.totalPageCount; index++)
-          this.pageNumberList.push(index);
-        
-      else
-      for (let index = this.currentPageNo -4; index <= this.currentPageNo +4; index++)
-        if(index > 1 && index < this.totalPageCount)
-          this.pageNumberList.push(index);    */
-      //#endregion
     });
   }
 

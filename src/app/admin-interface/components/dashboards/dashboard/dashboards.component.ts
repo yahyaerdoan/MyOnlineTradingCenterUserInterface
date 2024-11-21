@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { AlertifyService, MessageType, Position } from '../../../services/interface-services/admin/services/alertify.service';
-import { SignalRService } from '../../../services/core-services/general-services/signal-r.service';
-import { ReceivedFunctions } from '../../../constants/received-functions';
-import { HubUrls } from '../../../constants/hub-urls';
+import { HubUrls } from '../../../../constants/hub-urls';
+import { ReceivedFunctions } from '../../../../constants/received-functions';
+import { SignalRService } from '../../../../services/core-services/general-services/signal-r.service';
+import { AlertifyService, MessageType, Position } from '../../../../services/interface-services/admin/services/alertify.service';
+
 
 @Component({
   selector: 'app-dashboards',

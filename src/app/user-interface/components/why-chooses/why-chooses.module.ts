@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { WhyChoosesComponent } from './why-chooses.component';
 import { RouterModule } from '@angular/router';
+import { WhyChoosesComponent } from './why-choose/why-chooses.component';
 
 
 

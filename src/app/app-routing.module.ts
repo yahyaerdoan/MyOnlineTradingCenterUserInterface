@@ -1,9 +1,9 @@
 import { NgModule  } from '@angular/core';
-import { LayoutComponent } from './admin-interface/layout/layout.component';
-import { DashboardsComponent } from './admin-interface/components/dashboards/dashboards.component';
-import { HomesComponent } from './user-interface/components/homes/homes.component';
 import { RouterModule, Routes } from '@angular/router';
 import { authenticationGuard } from './guards/commons/authentication.guard';
+import { DashboardsComponent } from './admin-interface/components/dashboards/dashboard/dashboards.component';
+import { HomesComponent } from './user-interface/components/homes/home/homes.component';
+import { LayoutComponent } from './admin-interface/layouts/components/layout/layout/layout.component';
 
 const routes: Routes = [
   { path: 'admin-interface', component: LayoutComponent, children: [

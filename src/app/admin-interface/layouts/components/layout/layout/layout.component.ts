@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { AlertifyService, MessageType, Position } from '../../services/interface-services/admin/services/alertify.service';
 import { delay } from 'rxjs';
+import { AlertifyService } from '../../../../../services/interface-services/admin/services/alertify.service';
 
 @Component({
   selector: 'app-layout',

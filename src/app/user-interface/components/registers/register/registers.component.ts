@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
-import { CreateUser } from '../../../entities/users/createuser';
-import { UserService } from '../../../services/core-services/feature-services/user.service';
-import { MessageType, Position, ToastrfyService } from '../../../services/interface-services/user/services/toastrfy.service';
 import { Router } from '@angular/router';
-import { FunctionResponse } from '../../../contracts/responses/functionResponse';
+import { MessageType, Position, ToastrfyService } from '../../../../services/interface-services/user/services/toastrfy.service';
+import { UserService } from '../../../../services/core-services/feature-services/user.service';
+import { CreateUser } from '../../../../entities/users/createuser';
+import { FunctionResponse } from '../../../../contracts/responses/functionResponse';
 
 @Component({
   selector: 'app-registers',
