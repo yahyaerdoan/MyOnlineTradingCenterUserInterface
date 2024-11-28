@@ -22,7 +22,6 @@ export class ProductService {
       .post<CreateProductResponse | CreateProductRequest>({ controller: 'products' }, createProductDto);
 
     const result = await firstValueFrom(observable) as CreateProductResponse;
-
     if (result.isSuccessful) {
       successCallBack?.();
     } else {

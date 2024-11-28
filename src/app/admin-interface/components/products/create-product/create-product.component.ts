@@ -1,15 +1,10 @@
 import { Component, OnInit, Output } from '@angular/core';
-import { CreateProduct } from '../../../../contracts/products/createproduct';
 import { ProductService } from '../../../../services/core-services/feature-services/product.service';
 import { BasesComponent, SpinnerType } from '../../../../bases/bases.component';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { AlertifyService, MessageType, Position } from '../../../../services/interface-services/admin/services/alertify.service';
 import { Router } from '@angular/router';
 import { FileUploadOptions } from '../../../../services/shared-services/components/file-upload/file-upload.component';
-import { SignalRService } from '../../../../services/core-services/general-services/signal-r.service';
-import { ReceivedFunctions } from '../../../../constants/received-functions';
-import { HubUrls } from '../../../../constants/hub-urls';
-import { CreateProductRequest } from '../../../../contracts/product/requests/create-product-request.model';
 import { CreateProductResponse } from '../../../../contracts/product/responses/create-product-response.model';
 
 @Component({
@@ -18,11 +13,8 @@ import { CreateProductResponse } from '../../../../contracts/product/responses/c
   styleUrl: './create-product.component.scss',
 })
 export class CreateProductComponent extends BasesComponent implements OnInit {
-  constructor(spinner: NgxSpinnerService,
-    private productService: ProductService,
-    private alertifyService: AlertifyService,
-    private router: Router,
-    private signalRService: SignalRService
+  constructor(spinner: NgxSpinnerService, private productService: ProductService,
+    private alertifyService: AlertifyService, private routerService: Router
   ) { super(spinner); }
 
   ngOnInit(): void {
@@ -47,8 +39,10 @@ export class CreateProductComponent extends BasesComponent implements OnInit {
         price: parseFloat(price.value)
       }
     };
+
     this.showSpinner(SpinnerType.BallScaleMultiple);
     const result: CreateProductResponse = await this.productService.createProduct(createProductRequest);
+
     if (result.isSuccessful) {
       this.hideSpinner(SpinnerType.BallScaleMultiple);
       this.alertifyService.message(result.message, {
@@ -56,46 +50,19 @@ export class CreateProductComponent extends BasesComponent implements OnInit {
         messageType: MessageType.Success,
         position: Position.TopRight
       });
-      //this.router.navigate(['/admin-interface/products']);
+
+      this.routerService.navigate(['/admin-interface/products']);
+
     } else {
       this.hideSpinner(SpinnerType.BallScaleMultiple);
+
       const errorMessage = result.errors ? result.errors.join('. ') : 'Product creation failed.';
+
       this.alertifyService.message(errorMessage, {
         dismissOthers: true,
         messageType: MessageType.Error,
         position: Position.TopRight
       });
     }
-  };
-
-  //#region create Product old version
-  /*   async onCreateProduct(name: HTMLInputElement, description: HTMLTextAreaElement, stock: HTMLInputElement, price: HTMLInputElement) {
-  
-      const createProduct: CreateProduct = {
-        name: name.value,
-        description: description.value,
-        stock: parseInt(stock.value, 10),
-        price: parseFloat(price.value),
-      };
-  
-      this.showSpinner(SpinnerType.BallScaleMultiple);
-  
-      await this.productService.create(createProduct, () => {
-        this.hideSpinner(SpinnerType.BallScaleMultiple);
-        this.alertifyService.message('Product created.', {
-          dismissOthers: true,
-          messageType: MessageType.Success,
-          position: Position.TopRight,
-        });
-        //this.router.navigate(['/admin-interface/products']);
-      });
-  
-      this.hideSpinner(SpinnerType.BallScaleMultiple);
-      this.alertifyService.message('Product not created.', {
-        dismissOthers: true,
-        messageType: MessageType.Error,
-        position: Position.TopRight,
-      });
-    } */
-  //#endregion
+  }; 
 }
