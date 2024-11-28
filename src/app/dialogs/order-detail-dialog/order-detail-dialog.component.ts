@@ -6,6 +6,8 @@ import { OrderDetailDto } from '../../contracts/order/models/order-detail.model'
 import { NgxSpinnerService } from 'ngx-spinner';
 import { AlertifyService, MessageType, Position } from '../../services/interface-services/admin/services/alertify.service';
 import { SpinnerType } from '../../bases/bases.component';
+import { DialogService } from '../../services/shared-services/services/dialog.service';
+import { CompleteThisOrderDialogComponent, CompleteThisOrderDialogState } from '../complete-this-order-dialog/complete-this-order-dialog.component';
 
 @Component({
   selector: 'app-order-detail-dialog',
@@ -18,7 +20,8 @@ export class OrderDetailDialogComponent extends BaseDialogModel<OrderDetailDialo
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: OrderDetailDialogState | string,
     dialogRef: MatDialogRef<OrderDetailDialogComponent>, private alertifyService: AlertifyService,
-    private orderService: OrderService, private spinnerService: NgxSpinnerService) { super(dialogRef); this.spinnerService = spinnerService; }
+    private orderService: OrderService, private spinnerService: NgxSpinnerService,
+    private dialogSrvice: DialogService) { super(dialogRef); this.spinnerService = spinnerService; }
 
   ngOnInit(): void {
     this.getOrderDetailById();
@@ -37,12 +40,18 @@ export class OrderDetailDialogComponent extends BaseDialogModel<OrderDetailDialo
   };
 
   completeThisOrderDialog(){
-    alert(this.data)
+   this.dialogSrvice.openDialog({
+    componentType: CompleteThisOrderDialogComponent,
+    data: CompleteThisOrderDialogState.ComplateThisOrder,
+    afterClosed: () => {
+      alert("Yahya")
+    }
+   })
 
   }
 }
 
 export enum OrderDetailDialogState {
   Close = 'Close',
-  CompleteThisOrder = 'ComplateThisOrder'
+  CompleteThisOrder = 'CompleteThisOrder'
 }

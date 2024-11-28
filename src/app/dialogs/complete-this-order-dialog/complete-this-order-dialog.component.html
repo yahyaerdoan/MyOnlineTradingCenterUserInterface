@@ -1,1 +1,12 @@
-<p>complete-this-order-dialog works!</p>
+<div class="dialog-container">
+    <div class="dialog-card">
+      <h2 mat-dialog-title>Alert!</h2>
+      <mat-dialog-content>
+        Are you sure, you want to delete this product?
+      </mat-dialog-content>
+      <mat-dialog-actions>
+        <button mat-raised-button (click)="closeDialog()">Close</button>
+        <button mat-raised-button color="warn" [mat-dialog-close]="data" (click)="completeTheOrder()">Complete</button>
+      </mat-dialog-actions>
+    </div>
+  </div>
