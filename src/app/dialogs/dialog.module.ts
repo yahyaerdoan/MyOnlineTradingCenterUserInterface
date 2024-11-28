@@ -7,6 +7,7 @@ import { AddProductImageDialogComponent } from './add-product-image-dialog/add-p
 import {MatCardModule} from '@angular/material/card';
 import { FileUploadModule } from '../services/shared-services/components/file-upload/file-upload.module';
 import { OrderDetailDialogComponent } from './order-detail-dialog/order-detail-dialog.component';
+import { CompleteThisOrderDialogComponent } from './complete-this-order-dialog/complete-this-order-dialog.component';
 
 
 
@@ -15,7 +16,8 @@ import { OrderDetailDialogComponent } from './order-detail-dialog/order-detail-d
   declarations: [
     DeleteDialogComponent,
     AddProductImageDialogComponent, 
-    OrderDetailDialogComponent],
+    OrderDetailDialogComponent, 
+    CompleteThisOrderDialogComponent],
   imports: [
     CommonModule,
     MatDialogModule, MatButtonModule, MatCardModule,

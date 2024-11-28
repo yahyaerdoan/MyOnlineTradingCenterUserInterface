@@ -35,6 +35,11 @@ export class OrderDetailDialogComponent extends BaseDialogModel<OrderDetailDialo
     }
     this.spinnerService.hide(SpinnerType.BallScaleMultiple);
   };
+
+  completeThisOrderDialog(){
+    alert(this.data)
+
+  }
 }
 
 export enum OrderDetailDialogState {
