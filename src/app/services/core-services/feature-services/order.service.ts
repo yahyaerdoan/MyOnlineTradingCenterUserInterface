@@ -4,6 +4,7 @@ import { firstValueFrom, Observable } from 'rxjs';
 import { CreateOrderRequest } from '../../../contracts/order/requests/create-order-request.model';
 import { OrderListResponse } from '../../../contracts/order/responses/order-list-response.model';
 import { OrderDetailResponse } from '../../../contracts/order/responses/order-detail-response.model';
+import { CompleteOrderRequest } from '../../../contracts/order/requests/complete-order-request.model';
 
 @Injectable({
   providedIn: 'root',
@@ -52,4 +53,13 @@ export class OrderService {
       return response;
     }
   };
+
+  async completeThisOrder(orderId: CompleteOrderRequest){
+
+    const observable: Observable<any> = this.httpClientService.post({
+      controller: 'completedorders',
+    }, orderId);
+    
+    await firstValueFrom(observable);   
+  }
 };

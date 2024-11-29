@@ -2,11 +2,11 @@
     <div class="dialog-card">
       <h2 mat-dialog-title>Alert!</h2>
       <mat-dialog-content>
-        Are you sure, you want to delete this product?
+        Are you sure, you want to coplete this order?
       </mat-dialog-content>
       <mat-dialog-actions>
-        <button mat-raised-button (click)="closeDialog()">Close</button>
-        <button mat-raised-button color="warn" [mat-dialog-close]="data" (click)="completeTheOrder()">Complete</button>
+        <button mat-raised-button  style="background-color: #b73a3a; color: #ffffff;" (click)="closeDialog()">Close</button>
+        <button mat-raised-button style="background-color: #3ab772; color: #ffffff;" [mat-dialog-close]="data" (click)="completeTheOrder()">Complete</button>
       </mat-dialog-actions>
     </div>
   </div>

@@ -16,14 +16,9 @@ export class CompleteThisOrderDialogComponent extends BaseDialogModel<CompleteTh
   dialogRef: MatDialogRef<CompleteThisOrderDialogComponent>, private alertifyService: AlertifyService,
   private orderService: OrderService, private spinnerService: NgxSpinnerService) { super(dialogRef); this.spinnerService = spinnerService; }
 
-  ngOnInit(): void {
-    throw new Error('Method not implemented.');
-  }
+  ngOnInit(): void {};
 
-  completeTheOrder(){
-    
-  }
-
+  completeTheOrder(){};
 }
 
 export enum CompleteThisOrderDialogState {

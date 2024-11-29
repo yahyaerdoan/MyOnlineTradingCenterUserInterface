@@ -8,6 +8,7 @@ import { AlertifyService, MessageType, Position } from '../../services/interface
 import { SpinnerType } from '../../bases/bases.component';
 import { DialogService } from '../../services/shared-services/services/dialog.service';
 import { CompleteThisOrderDialogComponent, CompleteThisOrderDialogState } from '../complete-this-order-dialog/complete-this-order-dialog.component';
+import { CompleteOrderRequest } from '../../contracts/order/requests/complete-order-request.model';
 
 @Component({
   selector: 'app-order-detail-dialog',
@@ -40,15 +41,22 @@ export class OrderDetailDialogComponent extends BaseDialogModel<OrderDetailDialo
   };
 
   completeThisOrderDialog(){
+
    this.dialogSrvice.openDialog({
     componentType: CompleteThisOrderDialogComponent,
     data: CompleteThisOrderDialogState.ComplateThisOrder,
-    afterClosed: () => {
-      alert("Yahya")
-    }
-   })
 
-  }
+    afterClosed: async () => {
+
+      const request = new CompleteOrderRequest();
+      request.CompleteOrderDto.orderId = this.data;
+
+      await this.orderService.completeThisOrder(request);
+    }
+   });
+  };
+
+  
 }
 
 export enum OrderDetailDialogState {
