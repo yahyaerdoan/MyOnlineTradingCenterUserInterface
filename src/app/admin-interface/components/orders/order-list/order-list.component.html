@@ -1,65 +1,65 @@
 <div class="mdc-layout-grid">
-    <div class="mdc-layout-grid__inner">
-      <div class="mdc-layout-grid__cell--span-12">
-        <div class="mdc-card">
-          <h6 class="card-title">Products Table</h6>
-          <div style="margin-top: 1rem; padding: 1rem;">
-            <button mat-raised-button color="primary" style="margin-right: 10px;" routerLink="create">
-              Create new product
-            </button>
-          </div>
-          <div class="mat-elevation-z8" style="width: 100%; margin-top: 20px;">
-            <table mat-table [dataSource]="dataSource ??  []" class="mat-elevation-z8">
-              <ng-container matColumnDef="orderId">
-                <th mat-header-cell *matHeaderCellDef>Order Id</th>
-                <td mat-cell *matCellDef="let element">{{ element.orderId }}</td>
-              </ng-container>
-  
-              <ng-container matColumnDef="orderNumber">
-                <th mat-header-cell *matHeaderCellDef>Order Number</th>
-                <td mat-cell *matCellDef="let element">{{ element.orderNumber }}</td>
-              </ng-container>
-  
-              <ng-container matColumnDef="userName">
-                <th mat-header-cell *matHeaderCellDef>User Name</th>
-                <td mat-cell *matCellDef="let element">{{ element.userName }}</td>
-              </ng-container>
-  
-              <ng-container matColumnDef="createdDate">
-                <th mat-header-cell *matHeaderCellDef>Created Date</th>
-                <td mat-cell *matCellDef="let element">{{ element.createdDate | date }}</td>
-              </ng-container>
-  
-              <ng-container matColumnDef="totalAmount">
-                <th mat-header-cell *matHeaderCellDef>Total Amount</th>
-                <td mat-cell *matCellDef="let element">{{ element.totalAmount | currency }}</td>
-              </ng-container>
-  
-              <ng-container matColumnDef="actions">
-                <th mat-header-cell *matHeaderCellDef>Actions</th>
-                <td mat-cell *matCellDef="let element">
-  
-                  <button mat-raised-button color="primary"  style="margin-right: 10px;" (click)="openOrderDetailDialog(element.orderId)">
-                    <mat-icon>description</mat-icon> Order Detail
-                  </button>
-  
-                  <button mat-raised-button color="success" (click)="updateOrder(element.orderId)" style="margin-right: 10px;">
-                    <mat-icon>edit</mat-icon> Update
-                  </button>  
-  
-                  <span appDelete [id]="element.orderId" controller="orders" (loadProductsBack)="getOrders()" ></span>
-                </td>
-              </ng-container>
-  
-              <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-              <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-            </table>
-  
-            <mat-paginator (page)="changePageAndData()" [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons aria-label="Select page of periodic elements">
-            </mat-paginator>
-          </div>
+  <div class="mdc-layout-grid__inner">
+    <div class="mdc-layout-grid__cell--span-12">
+      <div class="mdc-card">
+        <h6 class="card-title" style="font-size: 1.5rem; text-align: left;">Orders Table</h6>
+        
+        <div class="mat-elevation-z8" style="width: 100%; overflow-x: auto;">
+          <table mat-table [dataSource]="dataSource ?? []" class="mat-elevation-z8" style="width: 100%; min-width: 700px;">
+            
+            <!-- Order ID Column -->
+            <ng-container matColumnDef="orderId">
+              <th mat-header-cell *matHeaderCellDef>Order Id</th>
+              <td mat-cell *matCellDef="let element">{{ element.orderId }}</td>
+            </ng-container>
+
+            <!-- Order Number Column -->
+            <ng-container matColumnDef="orderNumber">
+              <th mat-header-cell *matHeaderCellDef>Order Number</th>
+              <td mat-cell *matCellDef="let element">{{ element.orderNumber }}</td>
+            </ng-container>
+
+            <!-- User Name Column -->
+            <ng-container matColumnDef="userName">
+              <th mat-header-cell *matHeaderCellDef>User Name</th>
+              <td mat-cell *matCellDef="let element">{{ element.userName }}</td>
+            </ng-container>
+
+            <!-- Created Date Column -->
+            <ng-container matColumnDef="createdDate">
+              <th mat-header-cell *matHeaderCellDef>Created Date</th>
+              <td mat-cell *matCellDef="let element">{{ element.createdDate | date }}</td>
+            </ng-container>
+
+            <!-- Total Amount Column -->
+            <ng-container matColumnDef="totalAmount">
+              <th mat-header-cell *matHeaderCellDef>Total Amount</th>
+              <td mat-cell *matCellDef="let element">{{ element.totalAmount | currency }}</td>
+            </ng-container>
+
+            <!-- Actions Column -->
+            <ng-container matColumnDef="actions">
+              <th mat-header-cell *matHeaderCellDef>Actions</th>
+              <td mat-cell *matCellDef="let element" style="white-space: nowrap;">
+                <button mat-raised-button color="primary" style="margin-right: 5px;" (click)="openOrderDetailDialog(element.orderId)">
+                  <mat-icon>description</mat-icon> Order Detail
+                </button>
+                <button mat-raised-button color="accent" style="margin-right: 5px;" (click)="updateOrder(element.orderId)">
+                  <mat-icon>edit</mat-icon> Update
+                </button>
+                <span appDelete [id]="element.orderId" controller="orders" (loadProductsBack)="getOrders()"></span>
+              </td>
+            </ng-container>
+
+            <!-- Table Header and Row Definitions -->
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+          </table>
+
+          <!-- Paginator -->
+          <mat-paginator (page)="changePageAndData()" [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons aria-label="Select page of periodic elements"></mat-paginator>
         </div>
       </div>
     </div>
   </div>
-  
+</div>

@@ -5,6 +5,7 @@ import { CreateOrderRequest } from '../../../contracts/order/requests/create-ord
 import { OrderListResponse } from '../../../contracts/order/responses/order-list-response.model';
 import { OrderDetailResponse } from '../../../contracts/order/responses/order-detail-response.model';
 import { CompleteOrderRequest } from '../../../contracts/order/requests/complete-order-request.model';
+import { UpdateOrderStatusRequest } from '../../../contracts/order/requests/update-order-status-request.model';
 
 @Injectable({
   providedIn: 'root',
@@ -61,5 +62,14 @@ export class OrderService {
     }, orderId);
     
     await firstValueFrom(observable);   
-  }
+  };
+
+ async updateOrderStatus(orderId:  UpdateOrderStatusRequest){
+
+    const observable: Observable<any> = this.httpClientService.put({
+      controller: 'orders'
+    }, orderId);
+     await firstValueFrom(observable);
+  };
+
 };

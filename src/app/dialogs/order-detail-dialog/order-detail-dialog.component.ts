@@ -9,6 +9,7 @@ import { SpinnerType } from '../../bases/bases.component';
 import { DialogService } from '../../services/shared-services/services/dialog.service';
 import { CompleteThisOrderDialogComponent, CompleteThisOrderDialogState } from '../complete-this-order-dialog/complete-this-order-dialog.component';
 import { CompleteOrderRequest } from '../../contracts/order/requests/complete-order-request.model';
+import { UpdateOrderStatusRequest } from '../../contracts/order/requests/update-order-status-request.model';
 
 @Component({
   selector: 'app-order-detail-dialog',
@@ -51,7 +52,12 @@ export class OrderDetailDialogComponent extends BaseDialogModel<OrderDetailDialo
       const request = new CompleteOrderRequest();
       request.CompleteOrderDto.orderId = this.data;
 
+      const updateRequest = new UpdateOrderStatusRequest();
+      updateRequest.updateOrderStatusDto.orderId = this.data;
+
+
       await this.orderService.completeThisOrder(request);
+      await this.orderService.updateOrderStatus(updateRequest)
     }
    });
   };
