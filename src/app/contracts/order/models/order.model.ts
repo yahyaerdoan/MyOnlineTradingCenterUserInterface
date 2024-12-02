@@ -4,6 +4,7 @@ export class Order {
     orderNumber!: string;
     userName!: string;
     createdDate!: Date;
+    status!: boolean;
     totalAmount!: number;
 }
 export class OrderListResult {

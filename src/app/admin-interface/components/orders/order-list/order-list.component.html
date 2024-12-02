@@ -3,10 +3,11 @@
     <div class="mdc-layout-grid__cell--span-12">
       <div class="mdc-card">
         <h6 class="card-title" style="font-size: 1.5rem; text-align: left;">Orders Table</h6>
-        
+
         <div class="mat-elevation-z8" style="width: 100%; overflow-x: auto;">
-          <table mat-table [dataSource]="dataSource ?? []" class="mat-elevation-z8" style="width: 100%; min-width: 700px;">
-            
+          <table mat-table [dataSource]="dataSource ?? []" class="mat-elevation-z8"
+            style="width: 100%; min-width: 700px;">
+
             <!-- Order ID Column -->
             <ng-container matColumnDef="orderId">
               <th mat-header-cell *matHeaderCellDef>Order Id</th>
@@ -41,8 +42,9 @@
             <ng-container matColumnDef="actions">
               <th mat-header-cell *matHeaderCellDef>Actions</th>
               <td mat-cell *matCellDef="let element" style="white-space: nowrap;">
-                <button mat-raised-button color="primary" style="margin-right: 5px;" (click)="openOrderDetailDialog(element.orderId)">
-                  <mat-icon>description</mat-icon> Order Detail
+                <button mat-raised-button color="primary" style="margin-right: 5px;" (click)="openOrderDetailDialog(element.orderId)" 
+                [ngStyle]="{'color': element.status ? 'green' : 'primary'}">
+                <mat-icon>{{ element.status ? 'check_circle' : 'description' }}</mat-icon> {{ element.status ? 'Completed' : 'Order Detail' }}
                 </button>
                 <button mat-raised-button color="accent" style="margin-right: 5px;" (click)="updateOrder(element.orderId)">
                   <mat-icon>edit</mat-icon> Update
@@ -57,7 +59,8 @@
           </table>
 
           <!-- Paginator -->
-          <mat-paginator (page)="changePageAndData()" [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons aria-label="Select page of periodic elements"></mat-paginator>
+          <mat-paginator (page)="changePageAndData()" [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons
+            aria-label="Select page of periodic elements"></mat-paginator>
         </div>
       </div>
     </div>

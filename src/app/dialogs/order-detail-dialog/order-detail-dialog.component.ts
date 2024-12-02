@@ -55,9 +55,8 @@ export class OrderDetailDialogComponent extends BaseDialogModel<OrderDetailDialo
       const updateRequest = new UpdateOrderStatusRequest();
       updateRequest.updateOrderStatusDto.orderId = this.data;
 
-
       await this.orderService.completeThisOrder(request);
-      await this.orderService.updateOrderStatus(updateRequest)
+      await this.orderService.updateOrderStatus(updateRequest);
     }
    });
   };
