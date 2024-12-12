@@ -11,6 +11,7 @@ const routes: Routes = [
       { path: 'products', loadChildren: () => import('./admin-interface/components/products/products.module').then(m => m.ProductsModule), canActivate: [authenticationGuard] },
       { path: 'customers', loadChildren: () => import('./admin-interface/components/customers/customers.module').then(m => m.CustomersModule), canActivate: [authenticationGuard] },
       { path: 'orders', loadChildren: () => import('./admin-interface/components/orders/orders.module').then(m => m.OrdersModule), canActivate: [authenticationGuard] },
+      { path: 'authorizationmenu', loadChildren: () => import('./admin-interface/components/authorization-menus/authorization-menus.module').then(m => m.AuthorizationMenusModule), canActivate: [authenticationGuard] },
     ], canActivate: [authenticationGuard]
   },
   { path: '', component: HomesComponent },  
@@ -22,11 +23,7 @@ const routes: Routes = [
   { path: 'products', loadChildren: () => import('./user-interface/components/products/products.module').then(m => m.ProductsModule) },
   { path: 'testimonials', loadChildren: () => import('./user-interface/components/testimonials/testimonials.module').then(m => m.TestimonialsModule) },
   { path: 'we-helps', loadChildren: () => import('./user-interface/components/we-helps/we-helps.module').then(m => m.WeHelpsModule) },
-  { path: 'why-chooses', loadChildren: () => import('./user-interface/components/why-chooses/why-chooses.module').then(m => m.WhyChoosesModule) },
-  //{path: 'reset-password', loadChildren: () => import('./user-interface/components/reset-passwords/reset-passwords.module').then(m => m.ResetPasswordsModule)}
-  //{ path: 'baskets', loadChildren: () => import('./user-interface/components/baskets/baskets.module').then(m => m.BasketsModule) },
- // { path: 'shops', loadChildren: () => import('./user-interface/components/shops/shops.module').then(m => m.ShopsModule) }
-
+  { path: 'why-chooses', loadChildren: () => import('./user-interface/components/why-chooses/why-chooses.module').then(m => m.WhyChoosesModule) }
 ];
 
 @NgModule({
