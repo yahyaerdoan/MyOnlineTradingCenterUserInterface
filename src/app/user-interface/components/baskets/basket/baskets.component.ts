@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { Router } from '@angular/router';
-import { BasketItemService } from '../../../../services/core-services/feature-services/basket-item.service';
+import { BasketItemService, SkyCatetories } from '../../../../services/core-services/feature-services/basket-item.service';
 import { BasesComponent, SpinnerType } from '../../../../bases/bases.component';
 import { MessageType, Position, ToastrfyService } from '../../../../services/interface-services/user/services/toastrfy.service';
 import { OrderService } from '../../../../services/core-services/feature-services/order.service';
@@ -31,9 +31,18 @@ export class BasketsComponent extends BasesComponent implements OnInit {
 
   ngOnInit(): void {
     this.getBasketItemList();
+    this.getSkyCategories();
   }
 
   basketItems: ListBasketItem[] = []
+  skyCategories: SkyCatetories[] = [];
+
+  async getSkyCategories(): Promise<void> {
+    this.showSpinner(SpinnerType.BallScaleMultiple);
+    this.skyCategories = await this.basketItemService.getSkyCategories();
+    console.log(this.skyCategories);
+    this.hideSpinner(SpinnerType.BallScaleMultiple);
+  };
 
   async getBasketItemList(): Promise<void> {
     this.showSpinner(SpinnerType.BallScaleMultiple);

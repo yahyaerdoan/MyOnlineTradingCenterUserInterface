@@ -21,6 +21,13 @@ export class BasketItemService {
     return await firstValueFrom(observable);
   };
 
+  async getSkyCategories(): Promise<SkyCatetories[]> {
+  const observable: Observable<SkyCatetories[]> = this.httpClientService.get({
+    fullEndPoint: "https://localhost:7113/api/categories"
+  });
+  return await firstValueFrom(observable);
+};
+
   async addBasketItem(basketItem: CreateBasketItem): Promise<void> {
     const observable: Observable<any> = this.httpClientService.post({
       controller: "BasketItems"
@@ -44,5 +51,12 @@ export class BasketItemService {
 
     return await firstValueFrom(observable);
   };
+
+}
+
+export class SkyCatetories {
+
+    title: string = "";
+    description: string = "";
 
 }
