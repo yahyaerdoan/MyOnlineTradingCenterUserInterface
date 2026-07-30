@@ -4,9 +4,10 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { HttpClientService } from '../../../../services/core-services/general-services/http-client.service';
 
 @Component({
-  selector: 'app-products',
-  templateUrl: './products.component.html',
-  styleUrl: './products.component.scss'
+    selector: 'app-products',
+    templateUrl: './products.component.html',
+    styleUrl: './products.component.scss',
+    standalone: false
 })
 export class ProductsComponent extends BasesComponent implements OnInit {
 

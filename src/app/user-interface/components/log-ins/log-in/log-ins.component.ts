@@ -12,9 +12,10 @@ import { FunctionResponse } from '../../../../contracts/responses/functionRespon
 import { TokenResponse } from '../../../../contracts/responses/tokenResponse';
 
 @Component({
-  selector: 'app-log-ins',
-  templateUrl: './log-ins.component.html',
-  styleUrl: './log-ins.component.scss'
+    selector: 'app-log-ins',
+    templateUrl: './log-ins.component.html',
+    styleUrl: './log-ins.component.scss',
+    standalone: false
 })
 export class LogInsComponent extends BasesComponent implements OnInit {
 

@@ -6,9 +6,10 @@ import { OrderService } from '../../services/core-services/feature-services/orde
 import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
-  selector: 'app-complete-this-order-dialog',
-  templateUrl: './complete-this-order-dialog.component.html',
-  styleUrl: './complete-this-order-dialog.component.scss'
+    selector: 'app-complete-this-order-dialog',
+    templateUrl: './complete-this-order-dialog.component.html',
+    styleUrl: './complete-this-order-dialog.component.scss',
+    standalone: false
 })
 export class CompleteThisOrderDialogComponent extends BaseDialogModel<CompleteThisOrderDialogComponent> implements OnInit {
 

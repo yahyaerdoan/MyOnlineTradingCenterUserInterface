@@ -8,9 +8,10 @@ import { FileUploadOptions } from '../../../../services/shared-services/componen
 import { CreateProductResponse } from '../../../../contracts/product/responses/create-product-response.model';
 
 @Component({
-  selector: 'app-create-product',
-  templateUrl: './create-product.component.html',
-  styleUrl: './create-product.component.scss',
+    selector: 'app-create-product',
+    templateUrl: './create-product.component.html',
+    styleUrl: './create-product.component.scss',
+    standalone: false
 })
 export class CreateProductComponent extends BasesComponent implements OnInit {
   constructor(spinner: NgxSpinnerService, private productService: ProductService,

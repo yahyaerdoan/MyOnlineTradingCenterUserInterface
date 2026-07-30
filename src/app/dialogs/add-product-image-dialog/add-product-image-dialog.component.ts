@@ -11,17 +11,18 @@ import { DeleteDialogComponent, DeleteState } from '../delete-dialog/delete-dial
 import { FileUploadOptions } from '../../services/shared-services/components/file-upload/file-upload.component';
 
 @Component({
-  selector: 'app-add-product-image-dialog',
-  templateUrl: './add-product-image-dialog.component.html',
-  styleUrl: './add-product-image-dialog.component.scss',
-  animations: [
-    trigger('fadeOut', [
-      state('in', style({ opacity: 1 })),
-      transition('* => void', [
-        animate('500ms ease-out', style({ opacity: 0 }))
-      ])
-    ])
-  ]
+    selector: 'app-add-product-image-dialog',
+    templateUrl: './add-product-image-dialog.component.html',
+    styleUrl: './add-product-image-dialog.component.scss',
+    animations: [
+        trigger('fadeOut', [
+            state('in', style({ opacity: 1 })),
+            transition('* => void', [
+                animate('500ms ease-out', style({ opacity: 0 }))
+            ])
+        ])
+    ],
+    standalone: false
 })
 export class AddProductImageDialogComponent extends BaseDialogModel<AddProductImageDialogComponent> implements OnInit{
 

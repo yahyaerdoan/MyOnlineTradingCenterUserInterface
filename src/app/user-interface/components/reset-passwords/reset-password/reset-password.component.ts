@@ -11,9 +11,10 @@ import { AuthService } from '../../../../services/core-services/general-services
 import { UserAuthService } from '../../../../services/core-services/feature-services/user-auth.service';
 
 @Component({
-  selector: 'app-reset-password',
-  templateUrl: './reset-password.component.html',
-  styleUrl: './reset-password.component.scss'
+    selector: 'app-reset-password',
+    templateUrl: './reset-password.component.html',
+    styleUrl: './reset-password.component.scss',
+    standalone: false
 })
 export class ResetPasswordComponent extends BasesComponent {
   constructor(private formBuilder: FormBuilder, private userAuthService: UserAuthService, 

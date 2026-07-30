@@ -6,9 +6,10 @@ import { AlertifyService, MessageType, Position } from '../../../../services/int
 
 
 @Component({
-  selector: 'app-dashboards',
-  templateUrl: './dashboards.component.html',
-  styleUrl: './dashboards.component.scss'
+    selector: 'app-dashboards',
+    templateUrl: './dashboards.component.html',
+    styleUrl: './dashboards.component.scss',
+    standalone: false
 })
 export class DashboardsComponent implements OnInit {
 

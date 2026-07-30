@@ -11,9 +11,10 @@ import { OrderDetailDialogComponent, OrderDetailDialogState } from '../../../../
 
 
 @Component({
-  selector: 'app-order-list',
-  templateUrl: './order-list.component.html',
-  styleUrl: './order-list.component.scss'
+    selector: 'app-order-list',
+    templateUrl: './order-list.component.html',
+    styleUrl: './order-list.component.scss',
+    standalone: false
 })
 export class OrderListComponent extends BasesComponent implements OnInit {
   displayedColumns: string[] = [

@@ -18,9 +18,10 @@ import { DialogService } from '../../services/dialog.service';
 import { FileUploadDialogComponent, FileUploadDialogState } from '../../../../dialogs/file-upload-dialog/file-upload-dialog.component';
 import { SpinnerType } from '../../../../bases/bases.component';
 @Component({
-  selector: 'app-file-upload',
-  templateUrl: './file-upload.component.html',
-  styleUrl: './file-upload.component.scss',
+    selector: 'app-file-upload',
+    templateUrl: './file-upload.component.html',
+    styleUrl: './file-upload.component.scss',
+    standalone: false
 })
 export class FileUploadComponent {
   constructor(

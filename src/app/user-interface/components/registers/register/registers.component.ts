@@ -7,9 +7,10 @@ import { CreateUser } from '../../../../entities/users/createuser';
 import { FunctionResponse } from '../../../../contracts/responses/functionResponse';
 
 @Component({
-  selector: 'app-registers',
-  templateUrl: './registers.component.html',
-  styleUrl: './registers.component.scss'
+    selector: 'app-registers',
+    templateUrl: './registers.component.html',
+    styleUrl: './registers.component.scss',
+    standalone: false
 })
 export class RegistersComponent implements OnInit {
 

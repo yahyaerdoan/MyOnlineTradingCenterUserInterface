@@ -9,7 +9,7 @@
   &.mdc-button--raised.mdc-ripple-upgraded,
   &.mdc-pagination li a.mdc-ripple-upgraded.active,
   &.mdc-button--unelevated.mdc-ripple-upgraded {
-    --mdc-ripple-fg-opacity: 0.32;
+    --mat-ripple-fg-opacity: 0.32;
   }
   &.shaped-button {
     @include border-radius(18px);

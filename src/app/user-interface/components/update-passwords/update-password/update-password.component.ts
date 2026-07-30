@@ -9,9 +9,10 @@ import { BasesComponent, SpinnerType } from '../../../../bases/bases.component';
 import { UpdatePasswordRequest } from '../../../../contracts/Auth/requests/update-password-request.model';
 
 @Component({
-  selector: 'app-update-password',
-  templateUrl: './update-password.component.html',
-  styleUrl: './update-password.component.scss'
+    selector: 'app-update-password',
+    templateUrl: './update-password.component.html',
+    styleUrl: './update-password.component.scss',
+    standalone: false
 })
 export class UpdatePasswordComponent extends BasesComponent {
   constructor(private formBuilder: FormBuilder, private userAuthService: UserAuthService, private userService: UserService,

@@ -14,9 +14,10 @@ import { DialogService } from '../../../../services/shared-services/services/dia
 import { AddProductImageDialogComponent } from '../../../../dialogs/add-product-image-dialog/add-product-image-dialog.component';
 
 @Component({
-  selector: 'app-list-product',
-  templateUrl: './list-product.component.html',
-  styleUrl: './list-product.component.scss',
+    selector: 'app-list-product',
+    templateUrl: './list-product.component.html',
+    styleUrl: './list-product.component.scss',
+    standalone: false
 })
 export class ListProductComponent extends BasesComponent implements OnInit {
   displayedColumns: string[] = [

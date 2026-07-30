@@ -11,17 +11,18 @@ import { UpdateBasketItem } from '../../../../contracts/basketItems/update-baske
 import { CreateOrderRequest } from '../../../../contracts/order/requests/create-order-request.model';
 
 @Component({
-  selector: 'app-baskets',
-  templateUrl: './baskets.component.html',
-  styleUrl: './baskets.component.scss',
-  animations: [
-    trigger('fadeOut', [
-      state('in', style({ opacity: 1 })),
-      transition('* => void', [
-        animate('500ms ease-out', style({ opacity: 0 }))
-      ])
-    ])
-  ]
+    selector: 'app-baskets',
+    templateUrl: './baskets.component.html',
+    styleUrl: './baskets.component.scss',
+    animations: [
+        trigger('fadeOut', [
+            state('in', style({ opacity: 1 })),
+            transition('* => void', [
+                animate('500ms ease-out', style({ opacity: 0 }))
+            ])
+        ])
+    ],
+    standalone: false
 })
 export class BasketsComponent extends BasesComponent implements OnInit {
 

@@ -12,9 +12,10 @@ import { CompleteOrderRequest } from '../../contracts/order/requests/complete-or
 import { UpdateOrderStatusRequest } from '../../contracts/order/requests/update-order-status-request.model';
 
 @Component({
-  selector: 'app-order-detail-dialog',
-  templateUrl: './order-detail-dialog.component.html',
-  styleUrl: './order-detail-dialog.component.scss',
+    selector: 'app-order-detail-dialog',
+    templateUrl: './order-detail-dialog.component.html',
+    styleUrl: './order-detail-dialog.component.scss',
+    standalone: false
 })
 export class OrderDetailDialogComponent extends BaseDialogModel<OrderDetailDialogComponent> implements OnInit {
 

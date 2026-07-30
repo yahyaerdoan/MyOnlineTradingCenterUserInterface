@@ -3,9 +3,10 @@ import { BaseDialogModel } from '../base-dialog/base-dialog-model';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 
 @Component({
-  selector: 'app-file-upload-dialog',
-  templateUrl: './file-upload-dialog.component.html',
-  styleUrl: './file-upload-dialog.component.scss'
+    selector: 'app-file-upload-dialog',
+    templateUrl: './file-upload-dialog.component.html',
+    styleUrl: './file-upload-dialog.component.scss',
+    standalone: false
 })
 export class FileUploadDialogComponent extends BaseDialogModel<FileUploadDialogComponent> {
 

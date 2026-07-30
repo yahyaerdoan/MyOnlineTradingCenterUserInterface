@@ -33,13 +33,13 @@ import { HttpErrorHandlerInterceptorService } from './services/core-services/gen
     NgxSpinnerModule,
     JwtModule.forRoot({ config: {
       tokenGetter: ()=> localStorage.getItem("accessToken"),
-      allowedDomains: ["localhost:7241"],      
+      allowedDomains: ["localhost:4200"],
     }})
   ],
   providers: [
     provideAnimationsAsync(),
-    {provide: 'baseUrl', useValue:'https://localhost:7241/api', multi: true},
-    {provide: 'signalRBaseUrl', useValue:'https://localhost:7241', multi: true},
+    {provide: 'baseUrl', useValue:'/api', multi: true},
+    {provide: 'signalRBaseUrl', useValue:'', multi: true},
     provideHttpClient(withInterceptorsFromDi()),
     {provide: HTTP_INTERCEPTORS, useClass: HttpErrorHandlerInterceptorService, multi: true}
   ],

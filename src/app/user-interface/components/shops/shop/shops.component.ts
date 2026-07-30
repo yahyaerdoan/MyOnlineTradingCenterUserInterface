@@ -9,9 +9,10 @@ import { ProductService } from '../../../../services/core-services/feature-servi
 import { MessageType, Position, ToastrfyService } from '../../../../services/interface-services/user/services/toastrfy.service';
 
 @Component({
-  selector: 'app-shops',
-  templateUrl: './shops.component.html',
-  styleUrl: './shops.component.scss'
+    selector: 'app-shops',
+    templateUrl: './shops.component.html',
+    styleUrl: './shops.component.scss',
+    standalone: false
 })
 export class ShopsComponent extends BasesComponent implements OnInit {
 

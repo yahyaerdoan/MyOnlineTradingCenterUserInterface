@@ -4,9 +4,10 @@ import { AuthService } from '../../../../services/core-services/general-services
 import { MessageType, Position, ToastrfyService } from '../../../../services/interface-services/user/services/toastrfy.service';
 
 @Component({
-  selector: 'app-headers',
-  templateUrl: './headers.component.html',
-  styleUrl: './headers.component.scss'
+    selector: 'app-headers',
+    templateUrl: './headers.component.html',
+    styleUrl: './headers.component.scss',
+    standalone: false
 })
 export class HeadersComponent {
 

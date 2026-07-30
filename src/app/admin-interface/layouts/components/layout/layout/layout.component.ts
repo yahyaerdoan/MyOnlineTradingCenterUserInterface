@@ -3,9 +3,10 @@ import { delay } from 'rxjs';
 import { AlertifyService } from '../../../../../services/interface-services/admin/services/alertify.service';
 
 @Component({
-  selector: 'app-layout',
-  templateUrl: './layout.component.html',
-  styleUrl: './layout.component.scss'
+    selector: 'app-layout',
+    templateUrl: './layout.component.html',
+    styleUrl: './layout.component.scss',
+    standalone: false
 })
 export class LayoutComponent implements OnInit {
 

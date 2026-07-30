@@ -9,7 +9,8 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 @Directive({
-  selector: '[appDelete]',
+    selector: '[appDelete]',
+    standalone: false
 })
 export class DeleteDirective implements OnInit {
   constructor( private element: ElementRef,
